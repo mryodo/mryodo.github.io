@@ -1,0 +1,77 @@
+---
+import '../styles/global.css';
+const {title = "home" } = Astro.props;
+---
+
+<nav>
+      <div class="flex-container">
+            <div class="flex-item-left">
+                  <span is-="badge" cap-="ribbon" variant-="teal"><a href="/">&#xe83d; tony</a></span> 
+<span is-="badge" cap-="ribbon" >{title}</span> 
+            </div>
+            <div class="flex-item-right">
+                  <span is-="badge" ><a href="/news">&#xf06b0;</a></span>
+              <span is-="badge" ><a href="/research">&#xeeac;</a></span>
+              <span is-="badge" ><a href="/papers">&#xf16c9;</a></span>
+              <span is-="badge" ><a href="/teaching">&#xf19c;</a></span>
+              <span is-="badge" variant-="teal" >menu</span>
+            </div>
+      </div>
+
+
+</nav>
+
+
+
+<style>
+      nav{
+            margin-bottom: 0.5rem;
+      }
+       [is-~="badge"] a{
+    text-decoration: none;
+    color: inherit;
+  }  
+  nav {
+      [is-~="badge"] {
+            &[cap-="ribbon"] {
+                  margin-right: -2.4rem;
+            }
+            &[cap-^="ribbon"]{
+                  &:not([variant-]):hover {
+                --badge-color: var(--foreground0);
+                  font-weight: 300;
+                  }
+            }
+      }
+      
+  }
+  nav{
+      .flex-item-right{
+           [is-~="badge"] {
+                  &:not([variant-])  {
+                         margin-left: -1.5rem;
+                  }
+                  &[variant-="teal"] {
+                        margin-left: -1.5rem;
+                        font-weight: 300;
+                  }
+           } 
+      }
+  }
+  nav{
+      .flex-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .flex-item-left {
+      flex: 30%;
+    }
+
+    .flex-item-right {
+      flex: 70%;
+      text-align: right;
+      padding-right: 0.5rem;
+    }
+  }
+</style>

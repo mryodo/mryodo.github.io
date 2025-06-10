@@ -1,0 +1,157 @@
+---
+import Layout from '../layouts/index.astro';
+import Navbar from '../components/navbar.astro';
+--- 
+<Layout title = "teach" >
+  <div slot = "index">
+      <div class = "center">
+            <Navbar title = "teach"/>
+            <div box-="square" shear-="both">
+                  <div class="header">
+                        <span> <h1> Updates </h1> </span>
+                  </div>
+                  <div class = "flex-container">
+                        <div class = "flex-item-left">
+                              <p> Please find the list of courses and thesis themes at RWTH that we are suggesting on our group website. </p>
+                              
+                              <br/>
+                              
+                              
+                        </div>
+                  <div class="flex-item-right">  
+                        <div box-="square" shear-="bottom">
+                              <img width = "200px" src = "/avatar.png" >
+                               <p><span is-="badge" cap-="slant-bottom" variant-="mauve"> Applied Math Researcher</span> </p>
+                <p> <span is-="badge" cap-="slant-top" variant-="peach">Network Science @ RWTH</span> </p>
+                <p>PostDoc</p>
+                <ul marker-="open tree">
+                  <li><button size-="small" variant-="rosewater"><a href ="https://github.com/mryodo">&#xf06cf; savostianov [at]</a></button></li>
+                <li><button size-="small" variant-="rosewater"><a href ="https://github.com/mryodo">&#xe65b; Github</a></button></li>
+                <li><button size-="small" variant-="rosewater"><a href ="https://scholar.google.com/citations?user=E0nt-XYAAAAJ&hl=en">&#xf1180; Scholar</a></button></li>
+                <li><button size-="small" variant-="rosewater"><a href ="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf">&#xedc2; ResearchGate</a></button></li>
+                <li><button size-="small" variant-="rosewater"><a href ="https://bsky.app/profile/mryodo.bsky.social">&#xe28e; Bluesky</a></button></li> 
+                  </ul> 
+                  <br/>
+                  
+                  <div class="header">
+                    <span> &#xf1ce; </span>
+                    <span is-="badge" cap-="triangle" variant-="teal"> contact </span>
+                  </div>
+                        </div>
+                  </div>
+                 
+                  </div>
+                   <div class="header">
+                    <span> &#xf19c; </span>
+                    <span class = "bottomnav"  is-="badge" cap-="triangle" variant-="teal" > <a href = "/">go home</a> </span>
+                  </div>
+            </div>
+      </div>
+  </div>
+</Layout>
+
+
+<style>
+      .current{
+            font-weight: 700;
+            color: var(--peach);
+      }
+      .old{
+            font-weight: 700;
+            color: var(--yellow);
+      } 
+      summary {
+            list-style-type: "\f0794";
+      }
+      details[open] > summary {
+             list-style-type: "\f0792";
+      } 
+
+     @layer utils { 
+        [is-~="badge"] a{
+                  text-decoration: none;
+                  color: inherit;
+      } 
+      } 
+      
+ .flex-container {
+         display: flex;
+      flex-wrap: wrap;
+    }
+
+    .flex-item-left {
+      padding: 1rem;
+      flex: 65%;
+    }
+
+    .flex-item-right {
+      flex: 35%;
+      text-align: center;
+    }
+[is-~="badge"] a{
+    text-decoration: none;
+    color: inherit;
+  }   
+  
+  ul {
+     display: inline-block;
+    text-align: left;
+  }
+  button a{
+    text-decoration: none;
+    color: inherit;
+  }
+    
+
+    
+    .flex-item-right > .box-square{
+      padding-top: 1rem;
+    }
+    
+    @media (max-width: 800px) {
+      .flex-item-right, .flex-item-left {
+        flex: 100%;
+      }
+    } 
+
+  .post {
+    strong {
+      color: var(--teal) !important;
+    }
+  }
+  .alert {
+    strong {
+      color: var(--peach) !important;
+    }
+  }
+            
+      @layer utils {
+            [box-~="square"] {
+                      --box-border-color: var(--background2);
+                      }
+            [box-~="square"] .post{
+                      --box-border-color: var(--background0);
+                      [is-~="badge"] a{
+                        text-decoration: none;
+                        color: inherit;
+                        }  
+                   [is-~="badge"]:hover{
+                        --badge-color: var(--foreground0);
+                        font-weight: 600;
+                  }    
+            }
+            [box-~="square"] .alert{
+                        margin-top: 0.5rem;
+                        margin-bottom: 0.5rem;
+                      --box-border-color: var(--peach);
+                      [is-~="badge"] a{
+                        text-decoration: none;
+                        color: inherit;
+                        }  
+                   [is-~="badge"]:hover{
+                        --badge-color: var(--foreground0);
+                        font-weight: 600;
+                  }    
+            }
+      }
+</style>

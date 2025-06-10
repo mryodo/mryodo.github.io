@@ -1,0 +1,20 @@
+---
+import '../styles/global.css';
+import '../styles/index.css';
+
+const {title = "Index" } = Astro.props;
+---
+
+<html lang="en" data-webtui-theme="catppuccin-mocha">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+	</head>
+	<body>
+	  <slot name = "index" />	
+	</body>
+	<footer> mryodo @ 2025 </footer>
+</html>
