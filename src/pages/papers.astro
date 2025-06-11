@@ -645,6 +645,23 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
         }
     }
 
+    @media (max-width: 600px) {
+        @layer components {
+            .journal [is-~="badge"] {
+                &[variant-="foreground0"],
+                &[variant-="mauve"] {
+                    font-size: 13px;
+                }
+            }
+            .preprint [is-~="badge"] {
+                &[variant-="foreground0"],
+                &[variant-="mauve"] {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+
     @layer utils {
         [box-~="square"] {
             --box-border-color: var(--background2);
@@ -664,18 +681,6 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
             --box-border-color: var(--mauve);
         }
 
-        @media (max-width: 600px) {
-            [box-~="square"] .journal &[variant-="foreground0"],
-            &[variant-="mauve"] {
-                font-size: 13px;
-            }
-            [box-~="square"] .preprint {
-                &[variant-="foreground0"],
-                &[variant-="mauve"] {
-                    font-size: 13px;
-                }
-            }
-        }
         [box-~="square"] .alert {
             margin-top: 0.5rem;
             margin-bottom: 0.5rem;
