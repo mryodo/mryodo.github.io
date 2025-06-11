@@ -27,9 +27,9 @@ pdf: https://arxiv.org/abs/2401.15492
 #       url: "https://pypi.org/project/py-raccoon/"
 links:
       - name: doi
-        url: "https://www.sciencedirect.com/science/article/pii/S016727891830201X" 
+        url: "https://www.sciencedirect.com/science/article/pii/S016727891830201X"
 
 
 ---
 
-Recent advances in the applications of the Kuramoto model to a wide range of real-life processes require the reconstruction of processes’ parameters from observations. This paper explores the inverse problem for the Kuramoto model of two nonlinear oscillators with slowly varying coupling in the form of a single-step function, sine-wave, and auto-regressive process with a view to deriving the basic properties of the reconstruction procedure, that is the connection of the reconstruction efficiency with the coupling strength and estimates of the time it takes for a system to phase-lock. By investigating the de-synchronization of the solar faculae series, which represent signals coming from the northern and southern solar hemispheres, we relate the de-synchronization of the series, which occurred in the early 1960s to the changes in the coupling of the underlying real oscillators.
+<small>Recent advances in the applications of the Kuramoto model to a wide range of real-life processes require the reconstruction of processes’ parameters from observations. This paper explores the inverse problem for the Kuramoto model of two nonlinear oscillators with slowly varying coupling in the form of a single-step function, sine-wave, and auto-regressive process with a view to deriving the basic properties of the reconstruction procedure, that is the connection of the reconstruction efficiency with the coupling strength and estimates of the time it takes for a system to phase-lock. By investigating the de-synchronization of the solar faculae series, which represent signals coming from the northern and southern solar hemispheres, we relate the de-synchronization of the series, which occurred in the early 1960s to the changes in the coupling of the underlying real oscillators.</small>

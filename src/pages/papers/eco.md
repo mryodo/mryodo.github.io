@@ -27,9 +27,9 @@ pdf: https://arxiv.org/abs/2401.15492
 #       url: "https://pypi.org/project/py-raccoon/"
 links:
       - name: doi
-        url: "https://link.springer.com/article/10.3103/S0278641917030050" 
+        url: "https://link.springer.com/article/10.3103/S0278641917030050"
 
 
 ---
 
-The two-species model of self-structured stationary biological communities proposed by U. Dieckmann and R. Law is considered. A way of investigating the system of integro-differential equations describing the model equilibrium is developed, nontrivial stationary points are found, and constraints on the model parameter space resulting in similar stationary points are studied. The results are applied to a number of widely known biological scenarios.
+<small>The two-species model of self-structured stationary biological communities proposed by U. Dieckmann and R. Law is considered. A way of investigating the system of integro-differential equations describing the model equilibrium is developed, nontrivial stationary points are found, and constraints on the model parameter space resulting in similar stationary points are studied. The results are applied to a number of widely known biological scenarios.</small>

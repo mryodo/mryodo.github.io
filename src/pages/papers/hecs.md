@@ -27,7 +27,7 @@ pdf: https://arxiv.org/abs/2401.15492
 #       url: "https://pypi.org/project/py-raccoon/"
 links:
       - name: doi
-        url: "https://doi.org/10.1137/23M1626396" 
+        url: "https://doi.org/10.1137/23M1626396"
       - name: arxiv
         url: "https://arxiv.org/abs/2401.15492"
       - name: github
@@ -35,5 +35,4 @@ links:
 
 ---
 
-Techniques based on k-th order Hodge Laplacian operators L_k are widely used to describe the topology as well as the governing dynamics of high-order systems modeled as simplicial complexes. In all of them, it is required to solve a number of least-squares problems with L_k as coefficient matrix, for example, in order to compute some portions of the spectrum or integrate the dynamical system, thus making a fast and efficient solver for the least-squares problems highly desirable. To this aim, we introduce the notion of an optimal weakly collapsible subcomplex used to construct an effective sparse Cholesky-like preconditioner for L_k that exploits the topological structure of the simplicial complex. The performance of the preconditioner is tested for the conjugate gradient method for least-squares problems (CGLS) on a variety of simplicial complexes with different dimensions and edge densities. We show that, for sparse simplicial complexes, the new preconditioner significantly reduces the condition number of L_k and performs better than the standard incomplete Cholesky factorization.
-
+<small>Techniques based on k-th order Hodge Laplacian operators L_k are widely used to describe the topology as well as the governing dynamics of high-order systems modeled as simplicial complexes. In all of them, it is required to solve a number of least-squares problems with L_k as coefficient matrix, for example, in order to compute some portions of the spectrum or integrate the dynamical system, thus making a fast and efficient solver for the least-squares problems highly desirable. To this aim, we introduce the notion of an optimal weakly collapsible subcomplex used to construct an effective sparse Cholesky-like preconditioner for L_k that exploits the topological structure of the simplicial complex. The performance of the preconditioner is tested for the conjugate gradient method for least-squares problems (CGLS) on a variety of simplicial complexes with different dimensions and edge densities. We show that, for sparse simplicial complexes, the new preconditioner significantly reduces the condition number of L_k and performs better than the standard incomplete Cholesky factorization.</small>

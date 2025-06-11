@@ -27,9 +27,9 @@ pdf: https://arxiv.org/abs/2401.15492
 #       url: "https://pypi.org/project/py-raccoon/"
 links:
       - name: doi
-        url: "https://www.mdpi.com/1099-4300/22/9/945" 
+        url: "https://www.mdpi.com/1099-4300/22/9/945"
 
 
 ---
 
-We establish the similarity in two model-based reconstructions of the coupling between the polar magnetic fields of the Sun represented by the solar faculae time series. The reconstructions are inferred from the pair of the coupled oscillators modelled with the Van der Pol and Kuramoto equations. They are associated with the substantial simplification of solar dynamo models and, respectively, a simple ad hoc model reproducing the phenomenon of synchronization. While the polar fields are synchronized, both of the reconstruction procedures restore couplings, which attain moderate values and follow each other rather accurately as the functions of time. We also estimate the evolution of the phase difference between the polar fields and claim that they tend to move apart more quickly than approach each other.
+<small>We establish the similarity in two model-based reconstructions of the coupling between the polar magnetic fields of the Sun represented by the solar faculae time series. The reconstructions are inferred from the pair of the coupled oscillators modelled with the Van der Pol and Kuramoto equations. They are associated with the substantial simplification of solar dynamo models and, respectively, a simple ad hoc model reproducing the phenomenon of synchronization. While the polar fields are synchronized, both of the reconstruction procedures restore couplings, which attain moderate values and follow each other rather accurately as the functions of time. We also estimate the evolution of the phase difference between the polar fields and claim that they tend to move apart more quickly than approach each other.</small>

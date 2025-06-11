@@ -565,6 +565,8 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
         margin: 0.5rem;
     }
     .abstractlabel {
+        font-size: 14px;
+        line-height: 0.8;
         font-weight: 600;
         color: var(--yellow);
     }
@@ -678,7 +680,11 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
             }
         }
         [box-~="square"] .journal {
+            margin-top: 0.5rem;
             --box-border-color: var(--mauve);
+        }
+        [box-~="square"] .preprint {
+            margin-top: 0.5rem;
         }
 
         [box-~="square"] .alert {
