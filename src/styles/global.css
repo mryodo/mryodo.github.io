@@ -23,19 +23,16 @@
     height:100%;
   }
   .center{
-    position: absolute;
-    margin: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    margin: 0 auto;
     width: min(80%, 1000px);
     max-height: 95%;
+    padding-bottom: 2rem;
   }
 
   
 
   footer {
+    margin-top: 1rem;
     position: fixed;
     inset: auto 0 0 0;
     text-align: center;
@@ -47,9 +44,7 @@
     .center{ 
       width: 95%;
     }
-    footer{
-      display: none;
-    }
+    
   }
 
   p,
