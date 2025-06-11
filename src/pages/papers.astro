@@ -669,9 +669,11 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
             &[variant-="mauve"] {
                 font-size: 13px;
             }
-            [box-~="square"] .preprint &[variant-="foreground0"],
-            &[variant-="mauve"] {
-                font-size: 13px;
+            [box-~="square"] .preprint {
+                &[variant-="foreground0"],
+                &[variant-="mauve"] {
+                    font-size: 13px;
+                }
             }
         }
         [box-~="square"] .alert {
