@@ -1,367 +1,691 @@
 ---
-import Layout from '../layouts/index.astro';
-import Navbar from '../components/navbar.astro';
-const posts = Object.values(import.meta.glob('./papers/*.md', { eager: true } ) );
-posts.sort((a, b) => Date.parse(b.frontmatter.sort) - Date.parse(a.frontmatter.sort));
-const posts2025 = posts.filter(post => post.frontmatter.year == "2025");
-const posts2024 = posts.filter(post => post.frontmatter.year == "2024");
-const posts2023 = posts.filter(post => post.frontmatter.year == "2023");
-const posts2020 = posts.filter(post => post.frontmatter.year == "2020");
-const posts2017 = posts.filter(post => post.frontmatter.year == "2017");
---- 
-<Layout title = "tony>papers" >
-  <div slot = "index">
-      <div class = "center">
-            <Navbar title = "papers"/>
+import Layout from "../layouts/index.astro";
+import Navbar from "../components/navbar.astro";
+const posts = Object.values(import.meta.glob("./papers/*.md", { eager: true }));
+posts.sort(
+    (a, b) => Date.parse(b.frontmatter.sort) - Date.parse(a.frontmatter.sort),
+);
+const posts2025 = posts.filter((post) => post.frontmatter.year == "2025");
+const posts2024 = posts.filter((post) => post.frontmatter.year == "2024");
+const posts2023 = posts.filter((post) => post.frontmatter.year == "2023");
+const posts2020 = posts.filter((post) => post.frontmatter.year == "2020");
+const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
+---
+
+<Layout title="tony>papers">
+    <div slot="index">
+        <div class="center">
+            <Navbar title="papers" />
             <div box-="square" shear-="both">
-                  <div class="header">
-                        <span> <h1> Papers </h1> </span>
-                  </div>
-                  <div class = "flex-container">
-                        <div class = "flex-item-left">
-                              <p> Here is the list of my publications. In case you are interested in my conferences talks, please search the archive page. </p>
-                              
-                              <br/>
-                              
-                              <p>You can also consult my pages in the indexing systems: <a href="https://scholar.google.it/citations?user=E0nt-XYAAAAJ&hl=en">Google Scholar</a>, <a href="https://orcid.org/0000-0003-0126-3059">OrCiD</a>, <a href="https://www.semanticscholar.org/author/Anton-Savostianov/2281743377">Semantic Scholar</a> and <a href="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6ImhvbWUiLCJwYWdlIjoiaG9tZSIsInBvc2l0aW9uIjoiZ2xvYmFsSGVhZGVyIn19">ResearchGate</a>. </p>
-                              
-                              <br/>
+                <div class="header">
+                    <span> <h1>Papers</h1> </span>
+                </div>
+                <div class="flex-container">
+                    <div class="flex-item-left">
+                        <p>
+                            Here is the list of my publications. In case you are
+                            interested in my conferences talks, please search
+                            the archive page.
+                        </p>
 
-                              <p><mark>Nota Bene</mark>: if you are searching for articles about PDEs with my name, you are probably looking for the work of my <a href="http://www.antonsavostianov.com/">namesake</a> from Upsalla! I claim authorship only for the articles listed on this page, and sorry for the confusion!</p>
+                        <br />
 
-                              <br/>
+                        <p>
+                            You can also consult my pages in the indexing
+                            systems: <a
+                                href="https://scholar.google.it/citations?user=E0nt-XYAAAAJ&hl=en"
+                                >Google Scholar</a
+                            >, <a href="https://orcid.org/0000-0003-0126-3059"
+                                >OrCiD</a
+                            >, <a
+                                href="https://www.semanticscholar.org/author/Anton-Savostianov/2281743377"
+                                >Semantic Scholar</a
+                            > and <a
+                                href="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6ImhvbWUiLCJwYWdlIjoiaG9tZSIsInBvc2l0aW9uIjoiZ2xvYmFsSGVhZGVyIn19"
+                                >ResearchGate</a
+                            >.
+                        </p>
 
-                              <details open>
-                              <summary class="current"> ## 2025 ({posts2025.length})</summary>
-                              {posts2025.map(post => 
-                                    <div box-="square" shear-="both" class={post.frontmatter.type}>
-                                          <div class="header">
-                                                <span is-="badge" variant-={ post.frontmatter.type == "preprint" ? "foreground0" : "mauve"}> {post.frontmatter.type} </span>
-                                          </div>
-                                          <div class="wrapper">
-                                          <b>{post.frontmatter.title}</b>
-                                          <br/>
-                                          
-                                          <span class="authors" set:html={post.frontmatter.authors.join(", ")}></span>
-                                          <br/>
-                                          &nbsp;&nbsp;{post.frontmatter.journal}({post.frontmatter.year})
-                                          </div>
-                                          <details class="abstract">
-                                                <summary class="abstractlabel">&nbsp;abstract</summary>
-                                                <div set:html={post.compiledContent()}/>
-                                          </details>
-                                          
-                                          <div class="header">
-                                                <span>{ post.frontmatter.decorator == "post" ? "" :  "~" }</span>
-                                                <span>
-                                                      {post.frontmatter.links.map(link => 
-                                                            <span is-="badge" variant-={ post.frontmatter.type == "preprint" ? "foreground0" : "mauve"}><a href={link.url}>{link.name}</a></span>
-                                                      )}
-                                                </span>
-                                          </div>
+                        <br />
+
+                        <p>
+                            <mark>Nota Bene</mark>: if you are searching for
+                            articles about PDEs with my name, you are probably
+                            looking for the work of my <a
+                                href="http://www.antonsavostianov.com/"
+                                >namesake</a
+                            > from Upsalla! I claim authorship only for the articles
+                            listed on this page, and sorry for the confusion!
+                        </p>
+
+                        <br />
+
+                        <details open>
+                            <summary class="current">
+                                ## 2025 ({posts2025.length})</summary
+                            >
+                            {
+                                posts2025.map((post) => (
+                                    <div
+                                        box-="square"
+                                        shear-="both"
+                                        class={post.frontmatter.type}
+                                    >
+                                        <div class="header">
+                                            <span
+                                                is-="badge"
+                                                variant-={
+                                                    post.frontmatter.type ==
+                                                    "preprint"
+                                                        ? "foreground0"
+                                                        : "mauve"
+                                                }
+                                            >
+                                                {" "}
+                                                {post.frontmatter.type}{" "}
+                                            </span>
+                                        </div>
+                                        <div class="wrapper">
+                                            <b>{post.frontmatter.title}</b>
+                                            <br />
+                                            <span
+                                                class="authors"
+                                                set:html={post.frontmatter.authors.join(
+                                                    ", ",
+                                                )}
+                                            />
+                                            <br />
+                                            &nbsp;&nbsp;
+                                            {post.frontmatter.journal}(
+                                            {post.frontmatter.year})
+                                        </div>
+                                        <details class="abstract">
+                                            <summary class="abstractlabel">
+                                                &nbsp;abstract
+                                            </summary>
+                                            <div
+                                                set:html={post.compiledContent()}
+                                            />
+                                        </details>
+
+                                        <div class="header">
+                                            <span>
+                                                {post.frontmatter.decorator ==
+                                                "post"
+                                                    ? ""
+                                                    : "~"}
+                                            </span>
+                                            <span>
+                                                {post.frontmatter.links.map(
+                                                    (link) => (
+                                                        <span
+                                                            is-="badge"
+                                                            variant-={
+                                                                post.frontmatter
+                                                                    .type ==
+                                                                "preprint"
+                                                                    ? "foreground0"
+                                                                    : "mauve"
+                                                            }
+                                                        >
+                                                            <a href={link.url}>
+                                                                {link.name}
+                                                            </a>
+                                                        </span>
+                                                    ),
+                                                )}
+                                            </span>
+                                        </div>
                                     </div>
-                                    
-                              )}
-                              </details>
+                                ))
+                            }
+                        </details>
 
-                              <details>
-                              <summary class="old"> ## 2024 ({posts2024.length})</summary>
-                              {posts2024.map(post => 
-                                    <div box-="square" shear-="both" class={post.frontmatter.type}>
-                                          <div class="header">
-                                                <span is-="badge" variant-={ post.frontmatter.type == "preprint" ? "foreground0" : "mauve"}> {post.frontmatter.type} </span>
-                                          </div>
-                                          <div class="wrapper">
-                                          <b>{post.frontmatter.title}</b>
-                                          <br/>
-                                          
-                                          <span class="authors" set:html={post.frontmatter.authors.join(", ")}></span>
-                                          <br/>
-                                          &nbsp;&nbsp;{post.frontmatter.journal}({post.frontmatter.year})
-                                          </div>
-                                          <details class="abstract">
-                                                <summary class="abstractlabel">&nbsp;abstract</summary>
-                                                <div set:html={post.compiledContent()}/>
-                                          </details>
-                                          
-                                          <div class="header">
-                                                <span>{ post.frontmatter.decorator == "post" ? "" :  "~" }</span>
-                                                <span>
-                                                      {post.frontmatter.links.map(link => 
-                                                            <span is-="badge" variant-={ post.frontmatter.type == "preprint" ? "foreground0" : "mauve"}><a href={link.url}>{link.name}</a></span>
-                                                      )}
-                                                </span>
-                                          </div>
+                        <details>
+                            <summary class="old">
+                                ## 2024 ({posts2024.length})</summary
+                            >
+                            {
+                                posts2024.map((post) => (
+                                    <div
+                                        box-="square"
+                                        shear-="both"
+                                        class={post.frontmatter.type}
+                                    >
+                                        <div class="header">
+                                            <span
+                                                is-="badge"
+                                                variant-={
+                                                    post.frontmatter.type ==
+                                                    "preprint"
+                                                        ? "foreground0"
+                                                        : "mauve"
+                                                }
+                                            >
+                                                {" "}
+                                                {post.frontmatter.type}{" "}
+                                            </span>
+                                        </div>
+                                        <div class="wrapper">
+                                            <b>{post.frontmatter.title}</b>
+                                            <br />
+                                            <span
+                                                class="authors"
+                                                set:html={post.frontmatter.authors.join(
+                                                    ", ",
+                                                )}
+                                            />
+                                            <br />
+                                            &nbsp;&nbsp;
+                                            {post.frontmatter.journal}(
+                                            {post.frontmatter.year})
+                                        </div>
+                                        <details class="abstract">
+                                            <summary class="abstractlabel">
+                                                &nbsp;abstract
+                                            </summary>
+                                            <div
+                                                set:html={post.compiledContent()}
+                                            />
+                                        </details>
+
+                                        <div class="header">
+                                            <span>
+                                                {post.frontmatter.decorator ==
+                                                "post"
+                                                    ? ""
+                                                    : "~"}
+                                            </span>
+                                            <span>
+                                                {post.frontmatter.links.map(
+                                                    (link) => (
+                                                        <span
+                                                            is-="badge"
+                                                            variant-={
+                                                                post.frontmatter
+                                                                    .type ==
+                                                                "preprint"
+                                                                    ? "foreground0"
+                                                                    : "mauve"
+                                                            }
+                                                        >
+                                                            <a href={link.url}>
+                                                                {link.name}
+                                                            </a>
+                                                        </span>
+                                                    ),
+                                                )}
+                                            </span>
+                                        </div>
                                     </div>
-                                    
-                              )}
-                              </details> 
+                                ))
+                            }
+                        </details>
 
-                               <details>
-                              <summary class="old"> ## 2023 ({posts2023.length})</summary>
-                              {posts2023.map(post => 
-                                    <div box-="square" shear-="both" class={post.frontmatter.type}>
-                                          <div class="header">
-                                                <span is-="badge" variant-={ post.frontmatter.type == "preprint" ? "foreground0" : "mauve"}> {post.frontmatter.type} </span>
-                                          </div>
-                                          <div class="wrapper">
-                                          <b>{post.frontmatter.title}</b>
-                                          <br/>
-                                          
-                                          <span class="authors" set:html={post.frontmatter.authors.join(", ")}></span>
-                                          <br/>
-                                          &nbsp;&nbsp;{post.frontmatter.journal}({post.frontmatter.year})
-                                          </div>
-                                          <details class="abstract">
-                                                <summary class="abstractlabel">&nbsp;abstract</summary>
-                                                <div set:html={post.compiledContent()}/>
-                                          </details>
-                                          
-                                          <div class="header">
-                                                <span>{ post.frontmatter.decorator == "post" ? "" :  "~" }</span>
-                                                <span>
-                                                      {post.frontmatter.links.map(link => 
-                                                            <span is-="badge" variant-={ post.frontmatter.type == "preprint" ? "foreground0" : "mauve"}><a href={link.url}>{link.name}</a></span>
-                                                      )}
-                                                </span>
-                                          </div>
+                        <details>
+                            <summary class="old">
+                                ## 2023 ({posts2023.length})</summary
+                            >
+                            {
+                                posts2023.map((post) => (
+                                    <div
+                                        box-="square"
+                                        shear-="both"
+                                        class={post.frontmatter.type}
+                                    >
+                                        <div class="header">
+                                            <span
+                                                is-="badge"
+                                                variant-={
+                                                    post.frontmatter.type ==
+                                                    "preprint"
+                                                        ? "foreground0"
+                                                        : "mauve"
+                                                }
+                                            >
+                                                {" "}
+                                                {post.frontmatter.type}{" "}
+                                            </span>
+                                        </div>
+                                        <div class="wrapper">
+                                            <b>{post.frontmatter.title}</b>
+                                            <br />
+                                            <span
+                                                class="authors"
+                                                set:html={post.frontmatter.authors.join(
+                                                    ", ",
+                                                )}
+                                            />
+                                            <br />
+                                            &nbsp;&nbsp;
+                                            {post.frontmatter.journal}(
+                                            {post.frontmatter.year})
+                                        </div>
+                                        <details class="abstract">
+                                            <summary class="abstractlabel">
+                                                &nbsp;abstract
+                                            </summary>
+                                            <div
+                                                set:html={post.compiledContent()}
+                                            />
+                                        </details>
+
+                                        <div class="header">
+                                            <span>
+                                                {post.frontmatter.decorator ==
+                                                "post"
+                                                    ? ""
+                                                    : "~"}
+                                            </span>
+                                            <span>
+                                                {post.frontmatter.links.map(
+                                                    (link) => (
+                                                        <span
+                                                            is-="badge"
+                                                            variant-={
+                                                                post.frontmatter
+                                                                    .type ==
+                                                                "preprint"
+                                                                    ? "foreground0"
+                                                                    : "mauve"
+                                                            }
+                                                        >
+                                                            <a href={link.url}>
+                                                                {link.name}
+                                                            </a>
+                                                        </span>
+                                                    ),
+                                                )}
+                                            </span>
+                                        </div>
                                     </div>
-                                    
-                              )}
-                              </details>
+                                ))
+                            }
+                        </details>
 
+                        <details>
+                            <summary class="old">
+                                ## 2020 ({posts2020.length})</summary
+                            >
+                            {
+                                posts2020.map((post) => (
+                                    <div
+                                        box-="square"
+                                        shear-="both"
+                                        class={post.frontmatter.type}
+                                    >
+                                        <div class="header">
+                                            <span
+                                                is-="badge"
+                                                variant-={
+                                                    post.frontmatter.type ==
+                                                    "preprint"
+                                                        ? "foreground0"
+                                                        : "mauve"
+                                                }
+                                            >
+                                                {" "}
+                                                {post.frontmatter.type}{" "}
+                                            </span>
+                                        </div>
+                                        <div class="wrapper">
+                                            <b>{post.frontmatter.title}</b>
+                                            <br />
+                                            <span
+                                                class="authors"
+                                                set:html={post.frontmatter.authors.join(
+                                                    ", ",
+                                                )}
+                                            />
+                                            <br />
+                                            &nbsp;&nbsp;
+                                            {post.frontmatter.journal}(
+                                            {post.frontmatter.year})
+                                        </div>
+                                        <details class="abstract">
+                                            <summary class="abstractlabel">
+                                                &nbsp;abstract
+                                            </summary>
+                                            <div
+                                                set:html={post.compiledContent()}
+                                            />
+                                        </details>
 
-                              <details>
-                              <summary class="old"> ## 2020 ({posts2020.length})</summary>
-                              {posts2020.map(post => 
-                                    <div box-="square" shear-="both" class={post.frontmatter.type}>
-                                          <div class="header">
-                                                <span is-="badge" variant-={ post.frontmatter.type == "preprint" ? "foreground0" : "mauve"}> {post.frontmatter.type} </span>
-                                          </div>
-                                          <div class="wrapper">
-                                          <b>{post.frontmatter.title}</b>
-                                          <br/>
-                                          
-                                          <span class="authors" set:html={post.frontmatter.authors.join(", ")}></span>
-                                          <br/>
-                                          &nbsp;&nbsp;{post.frontmatter.journal}({post.frontmatter.year})
-                                          </div>
-                                          <details class="abstract">
-                                                <summary class="abstractlabel">&nbsp;abstract</summary>
-                                                <div set:html={post.compiledContent()}/>
-                                          </details>
-                                          
-                                          <div class="header">
-                                                <span>{ post.frontmatter.decorator == "post" ? "" :  "~" }</span>
-                                                <span>
-                                                      {post.frontmatter.links.map(link => 
-                                                            <span is-="badge" variant-={ post.frontmatter.type == "preprint" ? "foreground0" : "mauve"}><a href={link.url}>{link.name}</a></span>
-                                                      )}
-                                                </span>
-                                          </div>
+                                        <div class="header">
+                                            <span>
+                                                {post.frontmatter.decorator ==
+                                                "post"
+                                                    ? ""
+                                                    : "~"}
+                                            </span>
+                                            <span>
+                                                {post.frontmatter.links.map(
+                                                    (link) => (
+                                                        <span
+                                                            is-="badge"
+                                                            variant-={
+                                                                post.frontmatter
+                                                                    .type ==
+                                                                "preprint"
+                                                                    ? "foreground0"
+                                                                    : "mauve"
+                                                            }
+                                                        >
+                                                            <a href={link.url}>
+                                                                {link.name}
+                                                            </a>
+                                                        </span>
+                                                    ),
+                                                )}
+                                            </span>
+                                        </div>
                                     </div>
-                                    
-                              )}
-                              </details>
+                                ))
+                            }
+                        </details>
 
+                        <details>
+                            <summary class="old">
+                                ## 2017 ({posts2017.length})</summary
+                            >
+                            {
+                                posts2017.map((post) => (
+                                    <div
+                                        box-="square"
+                                        shear-="both"
+                                        class={post.frontmatter.type}
+                                    >
+                                        <div class="header">
+                                            <span
+                                                is-="badge"
+                                                variant-={
+                                                    post.frontmatter.type ==
+                                                    "preprint"
+                                                        ? "foreground0"
+                                                        : "mauve"
+                                                }
+                                            >
+                                                {" "}
+                                                {post.frontmatter.type}{" "}
+                                            </span>
+                                        </div>
+                                        <div class="wrapper">
+                                            <b>{post.frontmatter.title}</b>
+                                            <br />
+                                            <span
+                                                class="authors"
+                                                set:html={post.frontmatter.authors.join(
+                                                    ", ",
+                                                )}
+                                            />
+                                            <br />
+                                            &nbsp;&nbsp;
+                                            {post.frontmatter.journal}(
+                                            {post.frontmatter.year})
+                                        </div>
+                                        <details class="abstract">
+                                            <summary class="abstractlabel">
+                                                &nbsp;abstract
+                                            </summary>
+                                            <div
+                                                set:html={post.compiledContent()}
+                                            />
+                                        </details>
 
-                              <details>
-                              <summary class="old"> ## 2017 ({posts2017.length})</summary>
-                              {posts2017.map(post => 
-                                    <div box-="square" shear-="both" class={post.frontmatter.type}>
-                                          <div class="header">
-                                                <span is-="badge" variant-={ post.frontmatter.type == "preprint" ? "foreground0" : "mauve"}> {post.frontmatter.type} </span>
-                                          </div>
-                                          <div class="wrapper">
-                                          <b>{post.frontmatter.title}</b>
-                                          <br/>
-                                          
-                                          <span class="authors" set:html={post.frontmatter.authors.join(", ")}></span>
-                                          <br/>
-                                          &nbsp;&nbsp;{post.frontmatter.journal}({post.frontmatter.year})
-                                          </div>
-                                          <details class="abstract">
-                                                <summary class="abstractlabel">&nbsp;abstract</summary>
-                                                <div set:html={post.compiledContent()}/>
-                                          </details>
-                                          
-                                          <div class="header">
-                                                <span>{ post.frontmatter.decorator == "post" ? "" :  "~" }</span>
-                                                <span>
-                                                      {post.frontmatter.links.map(link => 
-                                                            <span is-="badge" variant-={ post.frontmatter.type == "preprint" ? "foreground0" : "mauve"}><a href={link.url}>{link.name}</a></span>
-                                                      )}
-                                                </span>
-                                          </div>
+                                        <div class="header">
+                                            <span>
+                                                {post.frontmatter.decorator ==
+                                                "post"
+                                                    ? ""
+                                                    : "~"}
+                                            </span>
+                                            <span>
+                                                {post.frontmatter.links.map(
+                                                    (link) => (
+                                                        <span
+                                                            is-="badge"
+                                                            variant-={
+                                                                post.frontmatter
+                                                                    .type ==
+                                                                "preprint"
+                                                                    ? "foreground0"
+                                                                    : "mauve"
+                                                            }
+                                                        >
+                                                            <a href={link.url}>
+                                                                {link.name}
+                                                            </a>
+                                                        </span>
+                                                    ),
+                                                )}
+                                            </span>
+                                        </div>
                                     </div>
-                                    
-                              )}
-                              </details>
-                        </div>
-                  <div class="flex-item-right">  
+                                ))
+                            }
+                        </details>
+                    </div>
+                    <div class="flex-item-right">
                         <div box-="square" shear-="bottom">
-                              <img width = "200px" src = "/avatar.png" >
-                               <p><span is-="badge" cap-="slant-bottom" variant-="mauve"> Applied Math Researcher</span> </p>
-                <p> <span is-="badge" cap-="slant-top" variant-="peach">Network Science @ RWTH</span> </p>
-                <p>PostDoc</p>
-                <ul marker-="open tree">
-                  <li><button size-="small" variant-="rosewater"><a href ="https://github.com/mryodo">&#xf06cf; savostianov [at]</a></button></li>
-                <li><button size-="small" variant-="rosewater"><a href ="https://github.com/mryodo">&#xe65b; Github</a></button></li>
-                <li><button size-="small" variant-="rosewater"><a href ="https://scholar.google.com/citations?user=E0nt-XYAAAAJ&hl=en">&#xf1180; Scholar</a></button></li>
-                <li><button size-="small" variant-="rosewater"><a href ="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf">&#xedc2; ResearchGate</a></button></li>
-                <li><button size-="small" variant-="rosewater"><a href ="https://bsky.app/profile/mryodo.bsky.social">&#xe28e; Bluesky</a></button></li> 
-                  </ul> 
-                  <br/>
-                  
-                  <div class="header">
-                    <span> &#xf1ce; </span>
-                    <span is-="badge" cap-="triangle" variant-="teal"> contact </span>
-                  </div>
+                            <img width="200px" src="/avatar.png" />
+                            <p>
+                                <span
+                                    is-="badge"
+                                    cap-="slant-bottom"
+                                    variant-="mauve"
+                                >
+                                    Applied Math Researcher</span
+                                >
+                            </p>
+                            <p>
+                                <span
+                                    is-="badge"
+                                    cap-="slant-top"
+                                    variant-="peach"
+                                    >Network Science @ RWTH</span
+                                >
+                            </p>
+                            <p>PostDoc</p>
+                            <ul marker-="open tree">
+                                <li>
+                                    <button size-="small" variant-="rosewater"
+                                        ><a href="https://github.com/mryodo"
+                                            >&#xf06cf; savostianov [at]</a
+                                        ></button
+                                    >
+                                </li>
+                                <li>
+                                    <button size-="small" variant-="rosewater"
+                                        ><a href="https://github.com/mryodo"
+                                            >&#xe65b; Github</a
+                                        ></button
+                                    >
+                                </li>
+                                <li>
+                                    <button size-="small" variant-="rosewater"
+                                        ><a
+                                            href="https://scholar.google.com/citations?user=E0nt-XYAAAAJ&hl=en"
+                                            >&#xf1180; Scholar</a
+                                        ></button
+                                    >
+                                </li>
+                                <li>
+                                    <button size-="small" variant-="rosewater"
+                                        ><a
+                                            href="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf"
+                                            >&#xedc2; ResearchGate</a
+                                        ></button
+                                    >
+                                </li>
+                                <li>
+                                    <button size-="small" variant-="rosewater"
+                                        ><a
+                                            href="https://bsky.app/profile/mryodo.bsky.social"
+                                            >&#xe28e; Bluesky</a
+                                        ></button
+                                    >
+                                </li>
+                            </ul>
+                            <br />
+
+                            <div class="header">
+                                <span> &#xf1ce; </span>
+                                <span
+                                    is-="badge"
+                                    cap-="triangle"
+                                    variant-="teal"
+                                >
+                                    contact
+                                </span>
+                            </div>
                         </div>
-                  </div>
-                 
-                  </div>
-                   <div class="header">
+                    </div>
+                </div>
+                <div class="header">
                     <span> &#xf16c9; </span>
-                    <span class = "bottomnav"  is-="badge" cap-="triangle" variant-="teal" > <a href = "/">go home</a> </span>
-                  </div>
+                    <span
+                        class="bottomnav"
+                        is-="badge"
+                        cap-="triangle"
+                        variant-="teal"
+                    >
+                        <a href="/">go home</a>
+                    </span>
+                </div>
             </div>
-      </div>
-  </div>
+        </div>
+    </div>
 </Layout>
 
-
 <style>
-      .authors{
-            color: var(--blue);
-      }
-      .wrapper {
-            margin: 0.5rem;
-      }
-      .abstractlabel {
-            font-weight: 600;
-            color: var(--yellow);
-      }
-      .abstract {
-            margin: 0.5rem;
-            padding: 0.5rem;
-            background-color: var(--background2);
-      }
-      .current{
-            font-weight: 700;
-            color: var(--peach);
-      }
-      .old{
-            font-weight: 700;
-            color: var(--yellow);
-      } 
-      summary {
-            list-style-type: "\f0794";
-      }
-      details[open] > summary {
-             list-style-type: "\f0792";
-      } 
+    .authors {
+        color: var(--blue);
+    }
+    .wrapper {
+        margin: 0.5rem;
+    }
+    .abstractlabel {
+        font-weight: 600;
+        color: var(--yellow);
+    }
+    .abstract {
+        margin: 0.5rem;
+        padding: 0.5rem;
+        background-color: var(--background2);
+    }
+    .current {
+        font-weight: 700;
+        color: var(--peach);
+    }
+    .old {
+        font-weight: 700;
+        color: var(--yellow);
+    }
+    summary {
+        list-style-type: "\f0794";
+    }
+    details[open] > summary {
+        list-style-type: "\f0792";
+    }
 
-     @layer utils { 
-        [is-~="badge"] a{
-                  text-decoration: none;
-                  color: inherit;
-      } 
-      } 
-      
- .flex-container {
-         display: flex;
-      flex-wrap: wrap;
+    @layer utils {
+        [is-~="badge"] a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .flex-item-left {
-      padding: 1rem;
-      flex: 65%;
+        padding: 1rem;
+        flex: 65%;
     }
 
     .flex-item-right {
-      flex: 35%;
-      text-align: center;
+        flex: 35%;
+        text-align: center;
     }
-[is-~="badge"] a{
-    text-decoration: none;
-    color: inherit;
-  }   
-  
-  ul {
-     display: inline-block;
-    text-align: left;
-  }
-  button a{
-    text-decoration: none;
-    color: inherit;
-  }
-    
+    [is-~="badge"] a {
+        text-decoration: none;
+        color: inherit;
+    }
 
-    
-    .flex-item-right > .box-square{
-      padding-top: 1rem;
+    ul {
+        display: inline-block;
+        text-align: left;
     }
-    
+    button a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .flex-item-right > .box-square {
+        padding-top: 1rem;
+    }
+
     @media (max-width: 800px) {
-      .flex-item-right, .flex-item-left {
-        flex: 100%;
-      }
-    } 
-
-  .post {
-    strong {
-      color: var(--teal) !important;
+        .flex-item-right,
+        .flex-item-left {
+            flex: 100%;
+        }
     }
-  }
-  .alert {
-    strong {
-      color: var(--peach) !important;
+
+    .post {
+        strong {
+            color: var(--teal) !important;
+        }
     }
-  }
-            
-      @layer utils {
+    .alert {
+        strong {
+            color: var(--peach) !important;
+        }
+    }
 
-
-
-            [box-~="square"] {
-                      --box-border-color: var(--background2);
-                      }
-            [box-~="square"] .post{
-                      --box-border-color: var(--background0);
-                      [is-~="badge"] a{
-                        text-decoration: none;
-                        color: inherit;
-                        }  
-                   [is-~="badge"]:hover{
-                        --badge-color: var(--foreground0);
-                        font-weight: 600;
-                  }    
+    @layer utils {
+        [box-~="square"] {
+            --box-border-color: var(--background2);
+        }
+        [box-~="square"] .post {
+            --box-border-color: var(--background0);
+            [is-~="badge"] a {
+                text-decoration: none;
+                color: inherit;
             }
-             [box-~="square"] .journal{
-                      --box-border-color: var(--mauve);
-             }
-
-             @media (max-width: 800px) {
-                  [box-~="square"] .journal{
-                      font-size: 13px;
-                  }
-                  [box-~="square"] .preprint{
-                      font-size: 13px;
-                  }
-             }
-            [box-~="square"] .alert{
-                        margin-top: 0.5rem;
-                        margin-bottom: 0.5rem;
-                      --box-border-color: var(--peach);
-                      [is-~="badge"] a{
-                        text-decoration: none;
-                        color: inherit;
-                        }  
-                   [is-~="badge"]:hover{
-                        --badge-color: var(--foreground0);
-                        font-weight: 600;
-                  }    
+            [is-~="badge"]:hover {
+                --badge-color: var(--foreground0);
+                font-weight: 600;
             }
-      }
+        }
+        [box-~="square"] .journal {
+            --box-border-color: var(--mauve);
+        }
+
+        @media (max-width: 600px) {
+            [box-~="square"] .journal &[variant-="foreground0"],
+            &[variant-="mauve"] {
+                font-size: 13px;
+            }
+            [box-~="square"] .preprint &[variant-="foreground0"],
+            &[variant-="mauve"] {
+                font-size: 13px;
+            }
+        }
+        [box-~="square"] .alert {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            --box-border-color: var(--peach);
+            [is-~="badge"] a {
+                text-decoration: none;
+                color: inherit;
+            }
+            [is-~="badge"]:hover {
+                --badge-color: var(--foreground0);
+                font-weight: 600;
+            }
+        }
+    }
 </style>
