@@ -33,12 +33,23 @@
     max-height: 95%;
   }
 
+  
+
   footer {
     position: fixed;
     inset: auto 0 0 0;
     text-align: center;
     color: var(--background3);
     font-size: 13px;
+  }
+
+  @media (max-width: 600px){
+    .center{ 
+      width: 95%;
+    }
+    footer{
+      display: none;
+    }
   }
 
   p,

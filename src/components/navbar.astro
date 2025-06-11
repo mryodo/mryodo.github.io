@@ -6,7 +6,7 @@ const {title = "home" } = Astro.props;
 <nav>
       <div class="flex-container">
             <div class="flex-item-left">
-                  <span is-="badge" cap-="ribbon" variant-="teal"><a href="/">&#xe83d; tony</a></span> 
+                  <span is-="badge" cap-="ribbon" variant-="teal"><a href="/">&#xe83d; <span class="topname">tony</span></a></span> 
 <span is-="badge" cap-="ribbon" >{title}</span> 
             </div>
             <div class="flex-item-right">
@@ -24,6 +24,18 @@ const {title = "home" } = Astro.props;
 
 
 <style>
+      .topname {
+            background-color: var(--teal);
+            padding: 0;
+      }
+      .topname:hover {
+            background-color: var(--mauve);
+      }
+        @media (max-width: 600px){
+    .topname {
+        display: none;
+    }
+  }
       nav{
             margin-bottom: 0.5rem;
       }
