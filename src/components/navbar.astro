@@ -61,7 +61,14 @@ const {title = "home" } = Astro.props;
       .flex-item-right{
            [is-~="badge"] {
                   &:not([variant-])  {
+                        padding-left: -0.1rem;
                          margin-left: -1.5rem;
+                  }
+
+                  @media (max-width: 600px) {
+                        &:not([variant-])  {
+                         margin-left: -1.75rem;
+                  }
                   }
                   &[variant-="teal"] {
                         margin-left: -1.5rem;
