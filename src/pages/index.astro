@@ -1,169 +1,292 @@
 ---
-import Layout from '../layouts/index.astro';
-import Navbar from '../components/navbar.astro';
-const posts = await Astro.glob('./news/*.md');
-posts.sort((a, b) => Date.parse(b.frontmatter.sort) - Date.parse(a.frontmatter.sort));
-const posts2 = posts.filter(post => post.frontmatter.decorator == "alert").slice(0,3);
---- 
+import Layout from "../layouts/index.astro";
+import Navbar from "../components/navbar.astro";
+const posts = Object.values(import.meta.glob("./news/*.md", { eager: true }));
+posts.sort(
+    (a, b) => Date.parse(b.frontmatter.sort) - Date.parse(a.frontmatter.sort),
+);
+const posts2 = posts
+    .filter((post) => post.frontmatter.decorator == "alert")
+    .slice(0, 3);
+---
 
-<Layout title = "tony>" >
-  <div slot = "index">
-    <div class = "center">
-      <Navbar title = "home"/>
-      <div box-="square" shear-="top">
-          <div class="header">
-              <span> <h2> Hi </h2> </span>
-            </div>
-          
-       <div class = "flex-container">
-          <div class = "flex-item-left">
-            I am <strong> Tony Savostianov. </strong>
-            
-            <br/>
-            <br/>
-
-            <p>
-            Recently I've defended my PhD in <strong>Mathematics in Natural Science</strong> at <a href="https://gssi.it">Gran Sasso Science Institute</a> in <i> L'Aquila, Italy</i>.
-            </p>
-
-            <br/>
-
-            <p>
-            My current work is focuses on the numerical methods for <mark>Network Science</mark>.  My previous work included:
-
-            <ul marker-="open tree">
-              <li>&#xf1796; coupled (nonlinear) oscillators for modelling solar activity</li>
-              <li>&#xed7d; detection of 3D structure in chromatine via CV methods</li>
-              <li>&#xf019a; quasi stationary points in spatially-heterogeneous models of biocommuinites</li>
-            </ul>
-
-            <br/>
-           <br/> 
-            <p>
-              <span is-="badge" cap-="ribbon"><a href="/news">news</a></span>
-              <span is-="badge" cap-="ribbon"><a href="/research">research</a></span>
-              <span is-="badge" cap-="ribbon"><a href="/papers">papers</a></span>
-              <span is-="badge" cap-="ribbon"><a href="/teaching">teaching</a></span>
-            </p>
-
-            <br/> 
-
-            <div class="updates">
-            <h3> last updates </h3>
-
-                {posts2.map(post => 
-          <div box-="square" shear-="top" class={post.frontmatter.decorator}>
+<Layout title="tony>">
+    <div slot="index">
+        <div class="center">
+            <Navbar title="home" />
+            <div box-="square" shear-="top">
                 <div class="header">
-                      <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground0" : "background0"}> {post.frontmatter.date} </span>
-                      <span>
-                            {post.frontmatter.link.map(link => 
-                                  <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground0" : "background0"}><a href={link[0]}>{link[1]}</a></span>
-                            )}
-                      </span>
+                    <span> <h2>Hi</h2> </span>
                 </div>
-                <div set:html={post.compiledContent()}/>
-          </div>
-          
-        )}
-        </div>    
-          </div>
-          <div class="flex-item-right">  
-              <div box-="square" shear-="bottom">
-                <img width = "200px" src = "/avatar.png" >
-                <p><span is-="badge" cap-="slant-bottom" variant-="mauve"> Applied Math Researcher</span> </p>
-                <p> <span is-="badge" cap-="slant-top" variant-="peach">Network Science @ RWTH</span> </p>
-                <p>PostDoc</p>
-                <ul marker-="open tree">
-                  <li><button size-="small" variant-="rosewater"><a href ="https://github.com/mryodo">&#xf06cf; savostianov [at]</a></button></li>
-                <li><button size-="small" variant-="rosewater"><a href ="https://github.com/mryodo">&#xe65b; Github</a></button></li>
-                <li><button size-="small" variant-="rosewater"><a href ="https://scholar.google.com/citations?user=E0nt-XYAAAAJ&hl=en">&#xf1180; Scholar</a></button></li>
-                <li><button size-="small" variant-="rosewater"><a href ="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf">&#xedc2; ResearchGate</a></button></li>
-                <li><button size-="small" variant-="rosewater"><a href ="https://bsky.app/profile/mryodo.bsky.social">&#xe28e; Bluesky</a></button></li> 
-                  </ul> 
-                  <br/>
-                  
-                  <div class="header">
-                    <span> &#xf1ce; </span>
-                    <span is-="badge" cap-="triangle" variant-="teal"> contact </span>
-                  </div>
-                </div> 
-          </div>
-            
-        </div>      
 
-      </div>
-  </div>
-</Layout>
+                <div class="flex-container">
+                    <div class="flex-item-left">
+                        I am <strong> Tony Savostianov. </strong>
 
-<style>
-  .updates{
-    font-size: 13px;
-    background-color: var(--background1);
-    padding: 0.5rem;
-  }
-  
-  @layer utils {
-    [box-~="square"] .alert{ 
-      font-size: 13px;
-      margin-top: 0.5rem;
-      margin-bottom: 0.5rem;
-    --box-border-color: var(--background1);
-      [is-~="badge"] a{
-        text-decoration: none;
-        color: inherit;
-        }  
-      [is-~="badge"]:hover{
-          --badge-color: var(--foreground0);
-          font-weight: 600;
-    }    
-    }
-  }
-  
-    p,
-  blockquote,
-  li,
-  [is-~="typography-block"] {
-    strong {
-      color: var(--peach) !important;
-    }
-  }
-  [is-~="badge"] a{
-    text-decoration: none;
-    color: inherit;
-  }   
-  
-  ul {
-     display: inline-block;
-    text-align: left;
-  }
-  button a{
-    text-decoration: none;
-    color: inherit;
-  }
-    .flex-container {
-      display: flex;
-      flex-wrap: wrap;
-    }
+                        <br />
+                        <br />
 
-    .flex-item-left {
-      padding: 1rem;
-      flex: 65%;
-    }
+                        <p>
+                            Recently I've defended my PhD in <strong
+                                >Mathematics in Natural Science</strong
+                            > at <a href="https://gssi.it"
+                                >Gran Sasso Science Institute</a
+                            > in <i> L'Aquila, Italy</i>.
+                        </p>
 
-    .flex-item-right {
-      flex: 35%;
-      text-align: center;
-    }
+                        <br />
 
-    
+                        <p>
+                            My current work is focuses on the numerical methods
+                            for <mark>Network Science</mark>. My previous work
+                            included:
 
-    
-    .flex-item-right > .box-square{
-      padding-top: 1rem;
-    }
-    @media (max-width: 800px) {
-      .flex-item-right, .flex-item-left {
-        flex: 100%;
-      }
-    } 
-</style>
+                            <ul marker-="open tree">
+                                <li>
+                                    &#xf1796; coupled (nonlinear) oscillators
+                                    for modelling solar activity
+                                </li>
+                                <li>
+                                    &#xed7d; detection of 3D structure in
+                                    chromatine via CV methods
+                                </li>
+                                <li>
+                                    &#xf019a; quasi stationary points in
+                                    spatially-heterogeneous models of
+                                    biocommuinites
+                                </li>
+                            </ul>
+
+                            <br />
+                            <br />
+                            <p>
+                                <span is-="badge" cap-="ribbon"
+                                    ><a href="/news">news</a></span
+                                >
+                                <span is-="badge" cap-="ribbon"
+                                    ><a href="/research">research</a></span
+                                >
+                                <span is-="badge" cap-="ribbon"
+                                    ><a href="/papers">papers</a></span
+                                >
+                                <span is-="badge" cap-="ribbon"
+                                    ><a href="/teaching">teaching</a></span
+                                >
+                            </p>
+
+                            <br />
+
+                            <div class="updates">
+                                <h3>last updates</h3>
+
+                                {
+                                    posts2.map((post) => (
+                                        <div
+                                            box-="square"
+                                            shear-="top"
+                                            class={post.frontmatter.decorator}
+                                        >
+                                            <div class="header">
+                                                <span
+                                                    is-="badge"
+                                                    variant-={
+                                                        post.frontmatter
+                                                            .decorator == "post"
+                                                            ? "foreground0"
+                                                            : "background0"
+                                                    }
+                                                >
+                                                    {" "}
+                                                    {post.frontmatter.date}{" "}
+                                                </span>
+                                                <span>
+                                                    {post.frontmatter.link.map(
+                                                        (link) => (
+                                                            <span
+                                                                is-="badge"
+                                                                variant-={
+                                                                    post
+                                                                        .frontmatter
+                                                                        .decorator ==
+                                                                    "post"
+                                                                        ? "foreground0"
+                                                                        : "background0"
+                                                                }
+                                                            >
+                                                                <a
+                                                                    href={
+                                                                        link[0]
+                                                                    }
+                                                                >
+                                                                    {link[1]}
+                                                                </a>
+                                                            </span>
+                                                        ),
+                                                    )}
+                                                </span>
+                                            </div>
+                                            <div
+                                                set:html={post.compiledContent()}
+                                            />
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </p>
+                        <div class="flex-item-right">
+                            <div box-="square" shear-="bottom">
+                                <img width="200px" src="/avatar.png" />
+                                <p>
+                                    <span
+                                        is-="badge"
+                                        cap-="slant-bottom"
+                                        variant-="mauve"
+                                    >
+                                        Applied Math Researcher</span
+                                    >
+                                </p>
+                                <p>
+                                    <span
+                                        is-="badge"
+                                        cap-="slant-top"
+                                        variant-="peach"
+                                        >Network Science @ RWTH</span
+                                    >
+                                </p>
+                                <p>PostDoc</p>
+                                <ul marker-="open tree">
+                                    <li>
+                                        <button
+                                            size-="small"
+                                            variant-="rosewater"
+                                            ><a href="https://github.com/mryodo"
+                                                >&#xf06cf; savostianov [at]</a
+                                            ></button>
+                                    </li>
+                                    <li>
+                                        <button
+                                            size-="small"
+                                            variant-="rosewater"
+                                            ><a href="https://github.com/mryodo"
+                                                >&#xe65b; Github</a
+                                            ></button>
+                                    </li>
+                                    <li>
+                                        <button
+                                            size-="small"
+                                            variant-="rosewater"
+                                            ><a
+                                                href="https://scholar.google.com/citations?user=E0nt-XYAAAAJ&hl=en"
+                                                >&#xf1180; Scholar</a
+                                            ></button>
+                                    </li>
+                                    <li>
+                                        <button
+                                            size-="small"
+                                            variant-="rosewater"
+                                            ><a
+                                                href="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf"
+                                                >&#xedc2; ResearchGate</a
+                                            ></button>
+                                    </li>
+                                    <li>
+                                        <button
+                                            size-="small"
+                                            variant-="rosewater"
+                                            ><a
+                                                href="https://bsky.app/profile/mryodo.bsky.social"
+                                                >&#xe28e; Bluesky</a
+                                            ></button>
+                                    </li>
+                                </ul>
+                                <br />
+
+                                <div class="header">
+                                    <span> &#xf1ce; </span>
+                                    <span
+                                        is-="badge"
+                                        cap-="triangle"
+                                        variant-="teal"
+                                    >
+                                        contact
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .updates {
+                font-size: 13px;
+                background-color: var(--background1);
+                padding: 0.5rem;
+            }
+
+            @layer utils {
+                [box-~="square"] .alert {
+                    font-size: 13px;
+                    margin-top: 0.5rem;
+                    margin-bottom: 0.5rem;
+                    --box-border-color: var(--background1);
+                    [is-~="badge"] a {
+                        text-decoration: none;
+                        color: inherit;
+                    }
+                    [is-~="badge"]:hover {
+                        --badge-color: var(--foreground0);
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            p,
+            blockquote,
+            li,
+            [is-~="typography-block"] {
+                strong {
+                    color: var(--peach) !important;
+                }
+            }
+            [is-~="badge"] a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            ul {
+                display: inline-block;
+                text-align: left;
+            }
+            button a {
+                text-decoration: none;
+                color: inherit;
+            }
+            .flex-container {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .flex-item-left {
+                padding: 1rem;
+                flex: 65%;
+            }
+
+            .flex-item-right {
+                flex: 35%;
+                text-align: center;
+            }
+
+            .flex-item-right > .box-square {
+                padding-top: 1rem;
+            }
+            @media (max-width: 800px) {
+                .flex-item-right,
+                .flex-item-left {
+                    flex: 100%;
+                }
+            }
+        </style>
+    </div></Layout
+>
