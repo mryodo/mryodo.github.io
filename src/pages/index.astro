@@ -161,7 +161,8 @@ const posts2 = posts
                                             variant-="rosewater"
                                             ><a href="https://github.com/mryodo"
                                                 >&#xf06cf; savostianov [at]</a
-                                            ></button>
+                                            ></button
+                                        >
                                     </li>
                                     <li>
                                         <button
@@ -169,7 +170,8 @@ const posts2 = posts
                                             variant-="rosewater"
                                             ><a href="https://github.com/mryodo"
                                                 >&#xe65b; Github</a
-                                            ></button>
+                                            ></button
+                                        >
                                     </li>
                                     <li>
                                         <button
@@ -178,7 +180,8 @@ const posts2 = posts
                                             ><a
                                                 href="https://scholar.google.com/citations?user=E0nt-XYAAAAJ&hl=en"
                                                 >&#xf1180; Scholar</a
-                                            ></button>
+                                            ></button
+                                        >
                                     </li>
                                     <li>
                                         <button
@@ -187,7 +190,8 @@ const posts2 = posts
                                             ><a
                                                 href="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf"
                                                 >&#xedc2; ResearchGate</a
-                                            ></button>
+                                            ></button
+                                        >
                                     </li>
                                     <li>
                                         <button
@@ -196,7 +200,8 @@ const posts2 = posts
                                             ><a
                                                 href="https://bsky.app/profile/mryodo.bsky.social"
                                                 >&#xe28e; Bluesky</a
-                                            ></button>
+                                            ></button
+                                        >
                                     </li>
                                 </ul>
                                 <br />
@@ -217,76 +222,76 @@ const posts2 = posts
                 </div>
             </div>
         </div>
+    </div>
+</Layout>
 
-        <style>
-            .updates {
-                font-size: 13px;
-                background-color: var(--background1);
-                padding: 0.5rem;
-            }
+<style>
+    .updates {
+        font-size: 13px;
+        background-color: var(--background1);
+        padding: 0.5rem;
+    }
 
-            @layer utils {
-                [box-~="square"] .alert {
-                    font-size: 13px;
-                    margin-top: 0.5rem;
-                    margin-bottom: 0.5rem;
-                    --box-border-color: var(--background1);
-                    [is-~="badge"] a {
-                        text-decoration: none;
-                        color: inherit;
-                    }
-                    [is-~="badge"]:hover {
-                        --badge-color: var(--foreground0);
-                        font-weight: 600;
-                    }
-                }
-            }
-
-            p,
-            blockquote,
-            li,
-            [is-~="typography-block"] {
-                strong {
-                    color: var(--peach) !important;
-                }
-            }
+    @layer utils {
+        [box-~="square"] .alert {
+            font-size: 13px;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            --box-border-color: var(--background1);
             [is-~="badge"] a {
                 text-decoration: none;
                 color: inherit;
             }
+            [is-~="badge"]:hover {
+                --badge-color: var(--foreground0);
+                font-weight: 600;
+            }
+        }
+    }
 
-            ul {
-                display: inline-block;
-                text-align: left;
-            }
-            button a {
-                text-decoration: none;
-                color: inherit;
-            }
-            .flex-container {
-                display: flex;
-                flex-wrap: wrap;
-            }
+    p,
+    blockquote,
+    li,
+    [is-~="typography-block"] {
+        strong {
+            color: var(--peach) !important;
+        }
+    }
+    [is-~="badge"] a {
+        text-decoration: none;
+        color: inherit;
+    }
 
-            .flex-item-left {
-                padding: 1rem;
-                flex: 65%;
-            }
+    ul {
+        display: inline-block;
+        text-align: left;
+    }
+    button a {
+        text-decoration: none;
+        color: inherit;
+    }
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
-            .flex-item-right {
-                flex: 35%;
-                text-align: center;
-            }
+    .flex-item-left {
+        padding: 1rem;
+        flex: 65%;
+    }
 
-            .flex-item-right > .box-square {
-                padding-top: 1rem;
-            }
-            @media (max-width: 800px) {
-                .flex-item-right,
-                .flex-item-left {
-                    flex: 100%;
-                }
-            }
-        </style>
-    </div></Layout
->
+    .flex-item-right {
+        flex: 35%;
+        text-align: center;
+    }
+
+    .flex-item-right > .box-square {
+        padding-top: 1rem;
+    }
+    @media (max-width: 800px) {
+        .flex-item-right,
+        .flex-item-left {
+            flex: 100%;
+        }
+    }
+</style>
