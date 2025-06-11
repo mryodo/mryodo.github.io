@@ -78,6 +78,9 @@ const {title = "home" } = Astro.props;
                         font-weight: 300;
                   }
                   @media (max-width: 600px) {
+                        &[variant-="teal"] {
+                              margin-right: -1rem;
+                        }
                         &[variant-="teal"]:before,&[variant-="teal"]:after {
                               width: 0.5ch;
                         }
