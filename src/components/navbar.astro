@@ -14,7 +14,7 @@ const {title = "home" } = Astro.props;
               <span is-="badge" ><a href="/research">&#xeeac;</a></span>
               <span is-="badge" ><a href="/papers">&#xf16c9;</a></span>
               <span is-="badge" ><a href="/teaching">&#xf19c;</a></span>
-              <span is-="badge" variant-="teal" >menu</span>
+              <span is-="badge" variant-="teal">menu</span>
             </div>
       </div>
 
@@ -61,18 +61,25 @@ const {title = "home" } = Astro.props;
       .flex-item-right{
            [is-~="badge"] {
                   &:not([variant-])  {
-                        padding-left: -0.1rem;
                          margin-left: -1.5rem;
                   }
 
                   @media (max-width: 600px) {
                         &:not([variant-])  {
-                         margin-left: -1.75rem;
-                  }
+                         margin-left: -1.75rem; 
+                        }
+                        &:not([variant-])::before{
+                              width: 0.6ch;
+                        }
                   }
                   &[variant-="teal"] {
                         margin-left: -1.5rem;
                         font-weight: 300;
+                  }
+                  @media (max-width: 600px) {
+                        &[variant-="teal"]:before,&[variant-="teal"]:after {
+                              width: 0.5ch;
+                        }
                   }
            } 
       }
