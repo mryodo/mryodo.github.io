@@ -12,6 +12,8 @@
     "@webtui/css": "^0.1.1",
     "@webtui/plugin-nf": "^0.1.1",
     "@webtui/theme-catppuccin": "^0.0.3",
+    "@webtui/theme-everforest": "^0.0.3",
+    "@webtui/theme-gruvbox": "^0.0.1",
     "astro": "^5.9.0"
   }
 }

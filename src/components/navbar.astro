@@ -6,15 +6,15 @@ const {title = "home" } = Astro.props;
 <nav>
       <div class="flex-container">
             <div class="flex-item-left">
-                  <span is-="badge" cap-="ribbon" variant-="teal"><a href="/">&#xe83d; <span class="topname">tony</span></a></span> 
-<span is-="badge" cap-="ribbon" >{title}</span> 
+                  <span is-="badge" cap-="ribbon" variant-="blue"><a href="/">&#xe83d; <span class="topname">tony</span></a></span> 
+<span is-="badge" cap-="ribbon"  variant-="foreground0">{title}</span> 
             </div>
             <div class="flex-item-right">
-                  <span is-="badge" ><a href="/news">&#xf06b0;</a></span>
-              <span is-="badge" ><a href="/research">&#xeeac;</a></span>
-              <span is-="badge" ><a href="/papers">&#xf16c9;</a></span>
-              <span is-="badge" ><a href="/teaching">&#xf19c;</a></span>
-              <span is-="badge" variant-="teal">menu</span>
+                  <span is-="badge" variant-="foreground0" ><a href="/news">&#xf06b0;</a></span>
+              <span is-="badge"  variant-="foreground0"><a href="/research">&#xeeac;</a></span>
+              <span is-="badge"  variant-="foreground0"><a href="/papers">&#xf16c9;</a></span>
+              <span is-="badge"  variant-="foreground0"><a href="/teaching">&#xf19c;</a></span>
+              <span is-="badge" variant-="purple">menu</span>
             </div>
       </div>
 
@@ -29,7 +29,7 @@ const {title = "home" } = Astro.props;
             padding: 0;
       }
       .topname:hover {
-            background-color: var(--mauve);
+            background-color: inherit;
       }
         @media (max-width: 600px){
     .topname {
@@ -63,7 +63,10 @@ const {title = "home" } = Astro.props;
            [is-~="badge"] {
                   &:not([variant-])  {
                          margin-left: -1.5rem;
-                  }
+            }
+            &[variant-="foreground0"]{
+                margin-left: -1.5rem;
+            }
 
                   @media (max-width: 600px) {
                         &:not([variant-])  {

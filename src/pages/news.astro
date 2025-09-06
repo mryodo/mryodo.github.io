@@ -32,14 +32,14 @@ const posts2022 = posts.filter(post => post.frontmatter.year == "2022");
                               {posts2025.map(post => 
                                     <div box-="square" shear-="both" class={post.frontmatter.decorator}>
                                           <div class="header">
-                                                <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground0" : "peach"}> {post.frontmatter.date} </span>
+                                                <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground1" : "green"}> {post.frontmatter.date} </span>
                                           </div>
                                           <div class="mdtext" set:html={post.compiledContent()}/>
                                           <div class="header">
                                                 <span>{ post.frontmatter.decorator == "post" ? "" :  "~" }</span>
                                                 <span>
                                                       {post.frontmatter.link.map(link => 
-                                                            <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground0" : "peach"}><a href={link[0]}>{link[1]}</a></span>
+                                                            <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground1" : "green"}><a href={link[0]}>{link[1]}</a></span>
                                                       )}
                                                 </span>
                                           </div>
@@ -55,14 +55,14 @@ const posts2022 = posts.filter(post => post.frontmatter.year == "2022");
                               {posts2024.map(post => 
                                     <div box-="square" shear-="both" class={post.frontmatter.decorator}>
                                           <div class="header">
-                                                <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground0" : "peach"}> {post.frontmatter.date} </span>
+                                                <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground1" : "green"}> {post.frontmatter.date} </span>
                                           </div>
                                           <div class="mdtext" set:html={post.compiledContent()}/>
                                           <div class="header">
                                                 <span>{ post.frontmatter.decorator == "post" ? "" :  "~" }</span>
                                                 <span>
                                                       {post.frontmatter.link.map(link => 
-                                                            <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground0" : "peach"}><a href={link[0]}>{link[1]}</a></span>
+                                                            <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground1" : "green"}><a href={link[0]}>{link[1]}</a></span>
                                                       )}
                                                 </span>
                                           </div>
@@ -76,14 +76,14 @@ const posts2022 = posts.filter(post => post.frontmatter.year == "2022");
                               {posts2023.map(post => 
                                     <div box-="square" shear-="both" class={post.frontmatter.decorator}>
                                           <div class="header">
-                                                <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground0" : "peach"}> {post.frontmatter.date} </span>
+                                                <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground1" : "green"}> {post.frontmatter.date} </span>
                                           </div>
                                           <div class="mdtext" set:html={post.compiledContent()}/>
                                           <div class="header">
                                                 <span>{ post.frontmatter.decorator == "post" ? "" :  "~" }</span>
                                                 <span>
                                                       {post.frontmatter.link.map(link => 
-                                                            <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground0" : "peach"}><a href={link[0]}>{link[1]}</a></span>
+                                                            <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground1" : "green"}><a href={link[0]}>{link[1]}</a></span>
                                                       )}
                                                 </span>
                                           </div>
@@ -97,14 +97,14 @@ const posts2022 = posts.filter(post => post.frontmatter.year == "2022");
                               {posts2022.map(post => 
                                     <div box-="square" shear-="both" class={post.frontmatter.decorator}>
                                           <div class="header">
-                                                <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground0" : "peach"}> {post.frontmatter.date} </span>
+                                                <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground1" : "green"}> {post.frontmatter.date} </span>
                                           </div>
                                           <div class="mdtext" set:html={post.compiledContent()}/>
                                           <div class="header">
                                                 <span>{ post.frontmatter.decorator == "post" ? "" :  "~" }</span>
                                                 <span>
                                                       {post.frontmatter.link.map(link => 
-                                                            <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground0" : "peach"}><a href={link[0]}>{link[1]}</a></span>
+                                                            <span is-="badge" variant-={ post.frontmatter.decorator == "post" ? "foreground1" : "green"}><a href={link[0]}>{link[1]}</a></span>
                                                       )}
                                                 </span>
                                           </div>
@@ -116,21 +116,21 @@ const posts2022 = posts.filter(post => post.frontmatter.year == "2022");
                   <div class="flex-item-right">  
                         <div box-="square" shear-="bottom">
                               <img width = "200px" src = "/avatar.png" >
-                               <p><span is-="badge" cap-="slant-bottom" variant-="mauve"> Applied Math Researcher</span> </p>
-                <p> <span is-="badge" cap-="slant-top" variant-="peach">Network Science @ RWTH</span> </p>
+                               <p><span is-="badge" cap-="slant-bottom" variant-="blue"> Applied Math Researcher</span> </p>
+                <p> <span is-="badge" cap-="slant-top" variant-="green">Network Science @ RWTH</span> </p>
                 <p>PostDoc</p>
                 <ul marker-="open tree">
-                  <li><button size-="small" variant-="rosewater"><a href ="https://github.com/mryodo">&#xf06cf; savostianov [at]</a></button></li>
-                <li><button size-="small" variant-="rosewater"><a href ="https://github.com/mryodo">&#xe65b; Github</a></button></li>
-                <li><button size-="small" variant-="rosewater"><a href ="https://scholar.google.com/citations?user=E0nt-XYAAAAJ&hl=en">&#xf1180; Scholar</a></button></li>
-                <li><button size-="small" variant-="rosewater"><a href ="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf">&#xedc2; ResearchGate</a></button></li>
-                <li><button size-="small" variant-="rosewater"><a href ="https://bsky.app/profile/antsav.me">&#xe28e; Bluesky</a></button></li> 
+                  <li><button size-="small" variant-="foreground1"><a href ="https://github.com/mryodo">&#xf06cf; savostianov [at]</a></button></li>
+                <li><button size-="small" variant-="foreground1"><a href ="https://github.com/mryodo">&#xe65b; Github</a></button></li>
+                <li><button size-="small" variant-="foreground1"><a href ="https://scholar.google.com/citations?user=E0nt-XYAAAAJ&hl=en">&#xf1180; Scholar</a></button></li>
+                <li><button size-="small" variant-="foreground1"><a href ="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf">&#xedc2; ResearchGate</a></button></li>
+                <li><button size-="small" variant-="foreground1"><a href ="https://bsky.app/profile/antsav.me">&#xe28e; Bluesky</a></button></li> 
                   </ul> 
                   <br/>
                   
                   <div class="header">
                     <span> &#xf1ce; </span>
-                    <span is-="badge" cap-="triangle" variant-="teal"> contact </span>
+                    <span is-="badge" cap-="triangle" variant-="purple"> contact </span>
                   </div>
                         </div>
                   </div>
@@ -138,7 +138,7 @@ const posts2022 = posts.filter(post => post.frontmatter.year == "2022");
                   </div>
                    <div class="header">
                     <span> &#xf06b0; </span>
-                    <span class = "bottomnav"  is-="badge" cap-="triangle" variant-="teal" > <a href = "/">go home</a> </span>
+                    <span class = "bottomnav"  is-="badge" cap-="triangle" variant-="aqua" > <a href = "/">go home</a> </span>
                   </div>
             </div>
       </div>
@@ -149,11 +149,11 @@ const posts2022 = posts.filter(post => post.frontmatter.year == "2022");
 <style>
       .current{
             font-weight: 700;
-            color: var(--peach);
+            color: var(--purple);
       }
       .old{
             font-weight: 700;
-            color: var(--yellow);
+            color: var(--foreground0);
       } 
       summary {
             list-style-type: "\f0794";
@@ -211,12 +211,12 @@ const posts2022 = posts.filter(post => post.frontmatter.year == "2022");
 
   .post {
     strong {
-      color: var(--teal) !important;
+      color: var(--foreground1) !important;
     }
   }
   .alert {
     strong {
-      color: var(--peach) !important;
+      color: var(--green) !important;
     }
   }
             
@@ -238,7 +238,7 @@ const posts2022 = posts.filter(post => post.frontmatter.year == "2022");
             [box-~="square"] .alert{
                         margin-top: 0.5rem;
                         margin-bottom: 0.5rem;
-                      --box-border-color: var(--peach);
+                      --box-border-color: var(--green);
                       [is-~="badge"] a{
                         text-decoration: none;
                         color: inherit;
