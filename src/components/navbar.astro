@@ -6,15 +6,15 @@ const {title = "home" } = Astro.props;
 <nav>
       <div class="flex-container">
             <div class="flex-item-left">
-                  <span is-="badge" cap-="ribbon" variant-="blue"><a href="/">&#xe83d; <span class="topname">tony</span></a></span> 
+                  <span is-="badge" cap-="ribbon" variant-="nord10"><a href="/">&#xe83d; <span class="topname">tony</span></a></span> 
 <span is-="badge" cap-="ribbon"  variant-="foreground0">{title}</span> 
             </div>
             <div class="flex-item-right">
-                  <span is-="badge" variant-="foreground0" ><a href="/news">&#xf06b0;</a></span>
-              <span is-="badge"  variant-="foreground0"><a href="/research">&#xeeac;</a></span>
-              <span is-="badge"  variant-="foreground0"><a href="/papers">&#xf16c9;</a></span>
-              <span is-="badge"  variant-="foreground0"><a href="/teaching">&#xf19c;</a></span>
-              <span is-="badge" variant-="purple">menu</span>
+              <span is-="badge" variant-="nord8" ><a href="/news">&#xf06b0;</a></span>
+              <span is-="badge"  variant-="nord8"><a href="/research">&#xeeac;</a></span>
+              <span is-="badge"  variant-="nord8"><a href="/papers">&#xf16c9;</a></span>
+              <span is-="badge"  variant-="nord8"><a href="/teaching">&#xf19c;</a></span>
+              <span is-="badge" variant-="nord6">menu</span>
             </div>
       </div>
 
@@ -64,7 +64,7 @@ const {title = "home" } = Astro.props;
                   &:not([variant-])  {
                          margin-left: -1.5rem;
             }
-            &[variant-="foreground0"]{
+            &[variant-="nord8"]{
                 margin-left: -1.5rem;
             }
 
@@ -98,7 +98,8 @@ const {title = "home" } = Astro.props;
     }
 
     .flex-item-left {
-      flex: 40%;
+          flex: 40%;
+          color: var(--nord5);
     }
 
     .flex-item-right {

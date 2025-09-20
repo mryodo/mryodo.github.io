@@ -17,7 +17,7 @@ const posts2 = posts.filter(post => post.frontmatter.decorator == "alert").slice
           
        <div class = "flex-container">
           <div class = "flex-item-left">
-            <p>I am <strong> Tony Savostianov. </strong> I am a PostDoc at the <strong>Computational Network Science</strong> at <span is-="badge" variant-="blue">RWTH Aachen</span> in <i>Aachen, Germany</i>.
+            <p>I am <strong> Tony Savostianov. </strong> I am a PostDoc at the <strong>Computational Network Science</strong> at <span is-="badge" variant-="nord10">RWTH Aachen</span> in <i>Aachen, Germany</i>.
             </p>
             <p style="color: var(--background3);">Recently I've defended my PhD in <strong style="color: var(--foreground2) !important ;">Mathematics in Natural Science</strong> at <a href="https://gssi.it"style="color: var(--foreground2) !important;">Gran Sasso Science Institute</a> in <i> L'Aquila, Italy</i>.
             </p>
@@ -66,9 +66,9 @@ const posts2 = posts.filter(post => post.frontmatter.decorator == "alert").slice
           <div class="flex-item-right">  
               <div box-="square" shear-="bottom" class="my-box">
                 <img width = "200px" src = "/avatar.png" >
-                <p><span is-="badge" cap-="slant-bottom" variant-="blue"> Applied Math Researcher</span> </p>
-                <p> <span is-="badge" cap-="slant-top" variant-="green">Network Science @ RWTH</span> </p>
-                <p>PostDoc</p>
+                <p><span is-="badge" cap-="slant-bottom" variant-="nord2"> Applied Math Researcher</span> </p>
+                <p> <span is-="badge" cap-="slant-top" variant-="nord9">Network Science @ RWTH</span> </p>
+                <p><strong>PostDoc</strong></p>
                 <ul marker-="open tree">
                   <li><button size-="small" variant-="foreground1"><a href ="https://github.com/mryodo">&#xf06cf; savostianov [at]</a></button></li>
                 <li><button size-="small" variant-="foreground1"><a href ="https://github.com/mryodo">&#xe65b; Github</a></button></li>
@@ -81,7 +81,7 @@ const posts2 = posts.filter(post => post.frontmatter.decorator == "alert").slice
                   
                   <div class="header">
                     <span> &#xf1ce; </span>
-                    <span is-="badge" cap-="triangle" variant-="purple"> contact </span>
+                    <span is-="badge" cap-="triangle" variant-="nord7"> contact </span>
                   </div>
                 </div> 
           </div>
@@ -121,7 +121,7 @@ const posts2 = posts.filter(post => post.frontmatter.decorator == "alert").slice
   li,
   [is-~="typography-block"] {
     strong {
-      color: var(--peach) !important;
+      color: var(--nord13) !important;
     }
   }
   [is-~="badge"] a{
@@ -153,7 +153,17 @@ const posts2 = posts.filter(post => post.frontmatter.decorator == "alert").slice
       text-align: center;
     }
 
-    
+  .flex-container .flex-item-left p{
+    [is-~="badge"]{   
+    &[variant-="nord10"] {
+        --badge-text: var(--nord4);
+        padding-left: 0.5ch;
+        margin-left: -1ch;
+        padding-right: 0.5ch;
+        margin-right: -1ch;
+    }
+    }
+  } 
 
     
     .flex-item-right > .box-square{

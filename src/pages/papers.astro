@@ -61,9 +61,7 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
                         <br />
 
                         <details open>
-                            <summary class="current">
-                                ## 2025 ({posts2025.length})</summary
-                            >
+                            <summary class="current"> ## 2025 ({posts2025.length})</summary>
                             {
                                 posts2025.map((post) => (
                                     <div
@@ -77,8 +75,8 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
                                                 variant-={
                                                     post.frontmatter.type ==
                                                     "preprint"
-                                                        ? "foreground1"
-                                                        : "green"
+                                                        ? "nord4"
+                                                        : "nord10"
                                                 }
                                             >
                                                 {" "}
@@ -96,8 +94,7 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
                                             />
                                             <br />
                                             &nbsp;&nbsp;
-                                            {post.frontmatter.journal}(
-                                            {post.frontmatter.year})
+                                            {post.frontmatter.journal}({post.frontmatter.year})
                                         </div>
                                         <details class="abstract">
                                             <summary class="abstractlabel">
@@ -124,8 +121,8 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
                                                                 post.frontmatter
                                                                     .type ==
                                                                 "preprint"
-                                                                    ? "foreground1"
-                                                                    : "green"
+                                                                    ? "nord4"
+                                                                    : "nord10"
                                                             }
                                                         >
                                                             <a href={link.url}>
@@ -158,8 +155,8 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
                                                 variant-={
                                                     post.frontmatter.type ==
                                                     "preprint"
-                                                        ? "foreground1"
-                                                        : "green"
+                                                        ? "nord4"
+                                                        : "nord10"
                                                 }
                                             >
                                                 {" "}
@@ -205,8 +202,8 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
                                                                 post.frontmatter
                                                                     .type ==
                                                                 "preprint"
-                                                                    ? "foreground1"
-                                                                    : "green"
+                                                                    ? "nord4"
+                                                                    : "nord10"
                                                             }
                                                         >
                                                             <a href={link.url}>
@@ -239,8 +236,8 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
                                                 variant-={
                                                     post.frontmatter.type ==
                                                     "preprint"
-                                                        ? "foreground1"
-                                                        : "green"
+                                                        ? "nord4"
+                                                        : "nord10"
                                                 }
                                             >
                                                 {" "}
@@ -286,8 +283,8 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
                                                                 post.frontmatter
                                                                     .type ==
                                                                 "preprint"
-                                                                    ? "foreground1"
-                                                                    : "green"
+                                                                    ? "nord4"
+                                                                    : "nord10"
                                                             }
                                                         >
                                                             <a href={link.url}>
@@ -320,8 +317,8 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
                                                 variant-={
                                                     post.frontmatter.type ==
                                                     "preprint"
-                                                        ? "foreground1"
-                                                        : "green"
+                                                        ? "nord4"
+                                                        : "nord10"
                                                 }
                                             >
                                                 {" "}
@@ -367,8 +364,8 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
                                                                 post.frontmatter
                                                                     .type ==
                                                                 "preprint"
-                                                                    ? "foreground1"
-                                                                    : "green"
+                                                                    ? "nord4"
+                                                                    : "nord10"
                                                             }
                                                         >
                                                             <a href={link.url}>
@@ -401,8 +398,8 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
                                                 variant-={
                                                     post.frontmatter.type ==
                                                     "preprint"
-                                                        ? "foreground1"
-                                                        : "green"
+                                                        ? "nord4"
+                                                        : "nord10"
                                                 }
                                             >
                                                 {" "}
@@ -448,8 +445,8 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
                                                                 post.frontmatter
                                                                     .type ==
                                                                 "preprint"
-                                                                    ? "foreground1"
-                                                                    : "green"
+                                                                    ? "nord4"
+                                                                    : "nord10"
                                                             }
                                                         >
                                                             <a href={link.url}>
@@ -465,81 +462,27 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
                             }
                         </details>
                     </div>
-                    <div class="flex-item-right">
+                  <div class="flex-item-right">  
                         <div box-="square" shear-="bottom">
-                            <img width="200px" src="/avatar.png" />
-                            <p>
-                                <span
-                                    is-="badge"
-                                    cap-="slant-bottom"
-                                    variant-="blue"
-                                >
-                                    Applied Math Researcher</span
-                                >
-                            </p>
-                            <p>
-                                <span
-                                    is-="badge"
-                                    cap-="slant-top"
-                                    variant-="green"
-                                    >Network Science @ RWTH</span
-                                >
-                            </p>
-                            <p>PostDoc</p>
-                            <ul marker-="open tree">
-                                <li>
-                                    <button size-="small" variant-="foreground1"
-                                        ><a href="https://github.com/mryodo"
-                                            >&#xf06cf; savostianov [at]</a
-                                        ></button
-                                    >
-                                </li>
-                                <li>
-                                    <button size-="small" variant-="foreground1"
-                                        ><a href="https://github.com/mryodo"
-                                            >&#xe65b; Github</a
-                                        ></button
-                                    >
-                                </li>
-                                <li>
-                                    <button size-="small" variant-="foreground1"
-                                        ><a
-                                            href="https://scholar.google.com/citations?user=E0nt-XYAAAAJ&hl=en"
-                                            >&#xf1180; Scholar</a
-                                        ></button
-                                    >
-                                </li>
-                                <li>
-                                    <button size-="small" variant-="foreground1"
-                                        ><a
-                                            href="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf"
-                                            >&#xedc2; ResearchGate</a
-                                        ></button
-                                    >
-                                </li>
-                                <li>
-                                    <button size-="small" variant-="foreground1"
-                                        ><a
-                                            href="https://bsky.app/profile/antsav.me"
-                                            >&#xe28e; Bluesky</a
-                                        ></button
-                                    >
-                                </li>
-                            </ul>
-                            <br />
-
-                            <div class="header">
-                                <span> &#xf1ce; </span>
-                                <span
-                                    is-="badge"
-                                    cap-="triangle"
-                                    variant-="purple"
-                                >
-                                    contact
-                                </span>
-                            </div>
+                              <img width = "200px" src = "/avatar.png" >
+                               <p><span is-="badge" cap-="slant-bottom" variant-="nord2"> Applied Math Researcher</span> </p>
+                <p> <span is-="badge" cap-="slant-top" variant-="nord9">Network Science @ RWTH</span> </p>
+              <p><strong>PostDoc</strong></p>
+                <ul marker-="open tree">
+                  <li><button size-="small" variant-="foreground1"><a href ="https://github.com/mryodo">&#xf06cf; savostianov [at]</a></button></li>
+                <li><button size-="small" variant-="foreground1"><a href ="https://github.com/mryodo">&#xe65b; Github</a></button></li>
+                <li><button size-="small" variant-="foreground1"><a href ="https://scholar.google.com/citations?user=E0nt-XYAAAAJ&hl=en">&#xf1180; Scholar</a></button></li>
+                <li><button size-="small" variant-="foreground1"><a href ="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf">&#xedc2; ResearchGate</a></button></li>
+                <li><button size-="small" variant-="foreground1"><a href ="https://bsky.app/profile/antsav.me">&#xe28e; Bluesky</a></button></li> 
+                  </ul> 
+                  <br/>
+                  
+                  <div class="header">
+                    <span> &#xf1ce; </span>
+                    <span is-="badge" cap-="triangle" variant-="nord7"> contact </span>
+                  </div>
                         </div>
-                    </div>
+                  </div>
                 </div>
                 <div class="header">
                     <span> &#xf16c9; </span>
@@ -547,7 +490,7 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
                         class="bottomnav"
                         is-="badge"
                         cap-="triangle"
-                        variant-="aqua"
+                        variant-="nord7"
                     >
                         <a href="/">go home</a>
                     </span>
@@ -558,8 +501,11 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
 </Layout>
 
 <style>
+      .flex-item-right strong{
+        color: var(--nord13);
+      }
     .authors {
-        color: var(--purple);
+        color: var(--nord9);
     }
     .wrapper {
         margin: 0.5rem;
@@ -568,20 +514,20 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
         font-size: 14px;
         line-height: 0.8;
         font-weight: 600;
-        color: var(--fg0);
+        color: var(--nord4);
     }
     .abstract {
         margin: 0.5rem;
         padding: 0.5rem;
-        background-color: var(--background2);
+        background-color: var(--nord1);
     }
     .current {
         font-weight: 700;
-        color: var(--purple);
+        color: var(--nord13);
     }
     .old {
         font-weight: 700;
-        color: var(--fg0);
+        color: var(--nord4);
     }
     summary {
         list-style-type: "\f0794";
@@ -664,14 +610,14 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
             --box-border-color: var(--background2);
         }
         [box-~="square"] .post {
-            --box-border-color: var(--background0);
+            --box-border-color: var(--nord1);
             [is-~="badge"] a {
                 text-decoration: none;
                 color: inherit;
             }
          [box-~="square"] .preprint {
             strong {
-                color: var(--aqua) !important;
+                color: var(--nord7) !important;
             }
         }
             [is-~="badge"]:hover {
@@ -681,7 +627,7 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
         }
         [box-~="square"] .journal {
             margin-top: 0.5rem;
-            --box-border-color: var(--green);
+            --box-border-color: var(--nord10);
         }
         [box-~="square"] .preprint {
             margin-top: 0.5rem;
@@ -690,7 +636,7 @@ const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
         [box-~="square"] .alert {
             margin-top: 0.5rem;
             margin-bottom: 0.5rem;
-            --box-border-color: var(--orange);
+            --box-border-color: var(--nord12);
             [is-~="badge"] a {
                 text-decoration: none;
                 color: inherit;

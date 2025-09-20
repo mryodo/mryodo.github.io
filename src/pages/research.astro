@@ -26,9 +26,9 @@ import Navbar from '../components/navbar.astro';
                   <div class="flex-item-right">  
                         <div box-="square" shear-="bottom">
                               <img width = "200px" src = "/avatar.png" >
-                               <p><span is-="badge" cap-="slant-bottom" variant-="blue"> Applied Math Researcher</span> </p>
-                <p> <span is-="badge" cap-="slant-top" variant-="green">Network Science @ RWTH</span> </p>
-                <p>PostDoc</p>
+                               <p><span is-="badge" cap-="slant-bottom" variant-="nord2"> Applied Math Researcher</span> </p>
+                <p> <span is-="badge" cap-="slant-top" variant-="nord9">Network Science @ RWTH</span> </p>
+              <p><strong>PostDoc</strong></p>
                 <ul marker-="open tree">
                   <li><button size-="small" variant-="foreground1"><a href ="https://github.com/mryodo">&#xf06cf; savostianov [at]</a></button></li>
                 <li><button size-="small" variant-="foreground1"><a href ="https://github.com/mryodo">&#xe65b; Github</a></button></li>
@@ -40,14 +40,14 @@ import Navbar from '../components/navbar.astro';
                   
                   <div class="header">
                     <span> &#xf1ce; </span>
-                    <span is-="badge" cap-="triangle" variant-="purple"> contact </span>
+                    <span is-="badge" cap-="triangle" variant-="nord7"> contact </span>
                   </div>
                         </div>
                   </div>
                   </div>
                    <div class="header">
                     <span> &#xeeac; </span>
-                    <span class = "bottomnav"  is-="badge" cap-="triangle" variant-="aqua" > <a href = "/">go home</a> </span>
+                    <span class = "bottomnav"  is-="badge" cap-="triangle" variant-="nord7" > <a href = "/">go home</a> </span>
                   </div>
             </div>
       </div>
@@ -56,6 +56,9 @@ import Navbar from '../components/navbar.astro';
 
 
 <style>
+      .flex-item-right strong{
+        color: var(--nord13);
+      }
       .current{
             font-weight: 700;
             color: var(--peach);

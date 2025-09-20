@@ -10,10 +10,11 @@
 
 @import "@webtui/theme-catppuccin";
 /*@import "@webtui/theme-gruvbox";*/
-@import "@webtui/theme-everforest";
+/* @import "@webtui/theme-everforest"; */
+@import "@webtui/theme-nord";
 
 .my-box {
-  --box-border-color: var(--bg3);
+  --box-border-color: var(--nord2);
 }
 
 @layer base {
@@ -34,7 +35,7 @@
 
   .center {
     margin: 0 auto;
-    width: min(80%, 1000px);
+    width: min(85%, 1000px);
     max-height: 95%;
     padding-bottom: 2rem;
   }
@@ -44,7 +45,7 @@
     position: fixed;
     inset: auto 0 0 0;
     text-align: center;
-    color: var(--background3);
+    color: var(--nord5);
     font-size: 13px;
   }
 
@@ -63,10 +64,10 @@
   li,
   [is-~="typography-block"] {
     mark {
-      background-color: var(--background1) !important;
-      color: var(--purple) !important;
-      padding-left: 1ch;
-      padding-right: 1ch;
+      background-color: var(--nord1) !important;
+      color: var(--nord9);
+      padding-left: 0.5ch;
+      padding-right: 0.5ch;
     }
   }
 }
@@ -75,7 +76,7 @@
   .header {
     display: flex;
     justify-content: space-between;
-    color: var(--yellow);
+    color: var(--nord13);
   }
 
   span {
@@ -105,6 +106,10 @@
     &:not([variant-]) {
       --badge-color: var(--foreground0);
       --badge-text: var(--background0);
+    }
+
+    &[variant-="nord10"] {
+      --badge-text: var(--nord5);
     }
 
     &[variant-="foreground1"] {
@@ -214,7 +219,7 @@
     }
 
     &[cap-^="ribbon"]:hover {
-      --badge-color: var(--orange);
+      --badge-color: var(--nord14);
       font-weight: 600;
     }
   }
