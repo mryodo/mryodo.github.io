@@ -9,12 +9,15 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource/maple-mono": "^5.2.6",
     "@webtui/css": "^0.1.1",
     "@webtui/plugin-nf": "^0.1.1",
     "@webtui/theme-catppuccin": "^0.0.3",
     "@webtui/theme-everforest": "^0.0.3",
     "@webtui/theme-gruvbox": "^0.0.1",
     "@webtui/theme-nord": "^0.0.2",
-    "astro": "^5.9.0"
+    "astro": "^5.9.0",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

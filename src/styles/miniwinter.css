@@ -1,0 +1,266 @@
+/* palette= { */
+/*   bg_edge2='#000f15', */
+/*   bg_edge='#051a20', */
+/*   bg='#11262d', */
+/*   bg_mid='#2c4249', */
+/*   bg_mid2='#485f67', */
+/*   fg_edge2='#f4f0e9', */
+/*   fg_edge='#e6e2db', */
+/*   fg='#d8d4cd', */
+/*   fg_mid='#b8b4ad', */
+/*   fg_mid2='#98948e', */
+/**/
+/*   accent='#b3daf9', */
+/*   accent_bg='#00324f', */
+/**/
+/*   red='#fac5c7', */
+/*   red_bg='#410d14', */
+/*   orange='#f2ccad', */
+/*   orange_bg='#492600', */
+/*   yellow='#d9d8aa', */
+/*   yellow_bg='#3a3800', */
+/*   green='#b8e1c1', */
+/*   green_bg='#003415', */
+/*   cyan='#a6e1e2', */
+/*   cyan_bg='#004c4e', */
+/*   azure='#b3daf9', */
+/*   azure_bg='#00324f', */
+/*   blue='#d1cffb', */
+/*   blue_bg='#211a46', */
+/*   purple='#edc7e7', */
+/*   purple_bg='#371134', */
+/* } */
+
+
+
+@layer base {
+  [data-webtui-theme='miniwinter'] {
+    /* Polar Night */
+    --bg0: #11262d;
+    --bg1: #2c4249;
+    --bg2: #485f67;
+    --bg3: #004c4e;
+    --bg4: #051a20;
+
+    /* Snow Storm */
+    --fg2: #d8d4cd;
+    --fg1: #e6e2db;
+    --fg0: #f4f0e9;
+
+    /* Frost */
+    --teal: #a6e1e2;
+    --blue: #b3daf9;
+    --blue2: #00324f;
+
+    /* Aurora */
+    --red: #fac5c7;
+    --orange: #f2ccad;
+    --yellow: #d9d8aa;
+    --green: #b8e1c1;
+    --purple: #edc7e7;
+
+    --background0: var(--bg0);
+    --background1: var(--bg0);
+    --background2: var(--bg1);
+    --background3: var(--bg2);
+
+    --foreground0: var(--fg0);
+    --foreground1: var(--fg1);
+    --foreground2: var(--fg2);
+  }
+}
+
+
+@layer components {
+  [data-webtui-theme='miniwinter'] {
+    [is-~='badge'] {
+
+      /* nord0 - nord3 are the same as background0 - background3 */
+      &[variant-='bg0'] {
+        --badge-color: var(--background0);
+        --badge-text: var(--foreground0);
+      }
+
+      &[variant-='bg1'] {
+        --badge-color: var(--background1);
+        --badge-text: var(--foreground0);
+      }
+
+      &[variant-='bg2'] {
+        --badge-color: var(--background2);
+        --badge-text: var(--foreground0);
+      }
+
+      &[variant-='bg3'] {
+        --badge-color: var(--background3);
+        --badge-text: var(--foreground0);
+      }
+
+      /* nord6 - nord4 are the same as foreground0 - foreground2 */
+      &[variant-='fg0'] {
+        --badge-color: var(--foreground0);
+        --badge-text: var(--background0);
+      }
+
+      &[variant-='fg1'] {
+        --badge-color: var(--foreground1);
+        --badge-text: var(--background0);
+      }
+
+      &[variant-='fg2'] {
+        --badge-color: var(--foreground2);
+        --badge-text: var(--background0);
+      }
+
+      /* accent colors */
+      &[variant-='teal'] {
+        --badge-color: var(--teal);
+        --badge-text: var(--background0);
+      }
+
+      &[variant-='blue'] {
+        --badge-color: var(--blue);
+        --badge-text: var(--background0);
+      }
+
+      &[variant-='red'] {
+        --badge-color: var(--red);
+        --badge-text: var(--background0);
+      }
+
+      &[variant-='yellow'] {
+        --badge-color: var(--yellow);
+        --badge-text: var(--background0);
+      }
+
+      &[variant-='orange'] {
+        --badge-color: var(--orange);
+        --badge-text: var(--background0);
+      }
+
+      &[variant-='green'] {
+        --badge-color: var(--green);
+        --badge-text: var(--background0);
+      }
+
+      &[variant-='purple'] {
+        --badge-color: var(--purple);
+        --badge-text: var(--background0);
+      }
+
+    }
+  }
+}
+
+@layer components {
+  [data-webtui-theme='miniwinter'] {
+    button {
+
+      /* nord0 - nord3 are the same as background0 - background3 */
+      &[variant-='bg0'] {
+        --button-primary: var(--background0);
+        --button-secondary: var(--foreground0);
+      }
+
+      &[variant-='bg1'] {
+        --button-primary: var(--background1);
+        --button-secondary: var(--foreground0);
+      }
+
+      &[variant-='bg2'] {
+        --button-primary: var(--background2);
+        --button-secondary: var(--foreground0);
+      }
+
+      &[variant-='bg3'] {
+        --button-primary: var(--background3);
+        --button-secondary: var(--foreground0);
+      }
+
+      /* nord6 - nord4 are the same as foreground0 - foreground2 */
+      &[variant-='fg0'] {
+        --button-primary: var(--foreground0);
+        --button-secondary: var(--background0);
+      }
+
+      &[variant-='fg1'] {
+        --button-primary: var(--foreground1);
+        --button-secondary: var(--background0);
+      }
+
+      &[variant-='fg2'] {
+        --button-primary: var(--foreground2);
+        --button-secondary: var(--background0);
+      }
+
+      /* accent colors */
+      &[variant-='teal'] {
+        --button-primary: var(--teal);
+        --button-secondary: var(--background0);
+      }
+
+      &[variant-='blue'] {
+        --button-primary: var(--blue);
+        --button-secondary: var(--background0);
+      }
+
+      &[variant-='red'] {
+        --button-primary: var(--red);
+        --button-secondary: var(--background0);
+      }
+
+      &[variant-='orange'] {
+        --button-primary: var(--orange);
+        --button-secondary: var(--background0);
+      }
+
+      &[variant-='yellow'] {
+        --button-primary: var(--yellow);
+        --button-secondary: var(--background0);
+      }
+
+      &[variant-='green'] {
+        --button-primary: var(--green);
+        --button-secondary: var(--background0);
+      }
+
+      &[variant-='purple'] {
+        --button-primary: var(--purple);
+        --button-secondary: var(--background0);
+      }
+
+    }
+  }
+}
+
+@layer components {
+  [data-webtui-theme='miniwinter'] {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: var(--yellow);
+    }
+
+    p,
+    blockquote,
+    li,
+    [is-~='typography-block'] {
+      a {
+        color: var(--teal);
+        text-decoration: underline;
+
+        &:hover {
+          color: var(--yellow);
+        }
+      }
+
+      code {
+        color: var(--blue2);
+      }
+    }
+  }
+}
