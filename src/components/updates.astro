@@ -13,25 +13,18 @@ import "../styles/global.css";
           <span
             is-="badge"
             cap-="round"
-            variant-={
-              post.frontmatter.decorator == "post"
-                ? "foreground0"
-                : "background0"
-            }
+            style="background-color: transparent"
+            variant-={post.frontmatter.decorator == "post" ? "fg1" : "bg1"}
           >
-            {" "}
-            {post.frontmatter.date}{" "}
+            {post.frontmatter.decorator} {post.frontmatter.date}{" "}
           </span>
           <span>
             {post.frontmatter.link.map((link) => (
               <span
                 is-="badge"
                 cap-="round"
-                variant-={
-                  post.frontmatter.decorator == "post"
-                    ? "foreground0"
-                    : "background0"
-                }
+                style="background-color: transparent"
+                variant-={post.frontmatter.decorator == "post" ? "fg1" : "bg1"}
               >
                 <a href={link[0]}>{link[1]}</a>
               </span>
