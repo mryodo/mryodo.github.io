@@ -1,0 +1,43 @@
+---
+const { posts = "" } = Astro.props;
+import "../styles/global.css";
+import "../styles/news.css";
+---
+
+<div class="newslist">
+  {
+    posts.map((post) => (
+      <div box-="square" shear-="both" class={post.frontmatter.decorator}>
+        <div class="header">
+          <span
+            is-="badge"
+            cap-="round"
+            style="font-size: 15px"
+            variant-={post.frontmatter.decorator == "post" ? "fg2" : "blue"}
+          >
+            {" "}
+            {post.frontmatter.date}{" "}
+          </span>
+        </div>
+        <div class="mdtext" set:html={post.compiledContent()} />
+        <div class="header">
+          <span style="background-color: var(--bg0)">
+            {post.frontmatter.decorator == "post" ? "" : "~"}
+          </span>
+          <span>
+            {post.frontmatter.link.map((link) => (
+              <span
+                is-="badge"
+                cap-="round"
+                style="font-size: 15px"
+                variant-={post.frontmatter.decorator == "post" ? "fg2" : "blue"}
+              >
+                <a href={link[0]}>{link[1]}</a>
+              </span>
+            ))}
+          </span>
+        </div>
+      </div>
+    ))
+  }
+</div>

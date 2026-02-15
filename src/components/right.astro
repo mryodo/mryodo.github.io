@@ -1,37 +1,43 @@
-<div box-="square" shear-="bottom" class="my-box">
-  <img width="200px" src="/avatar.png" />
+<div
+  box-="square"
+  shear-="bottom"
+  style="text-align: center; margin-top:0rem !important;"
+>
+  <img
+    width="200px"
+    src="/avatar.png"
+    style="border-radius: 1rem; border: 3px solid var(--teal)"
+  />
   <p>
-    <span is-="badge" cap-="slant-bottom" variant-="nord2">
+    <span is-="badge" cap-="round" variant-="green">
       Applied Math Researcher</span
     >
   </p>
   <p>
-    <span is-="badge" cap-="slant-top" variant-="nord9"
-      >Network Science @ RWTH</span
-    >
+    <span is-="badge" cap-="round" variant-="bg3">Network Science @ RWTH</span>
   </p>
-  <p><strong>PostDoc</strong></p>
+  <p style="color: var(--yellow);"><strong>PostDoc</strong></p>
   <ul marker-="open tree">
     <li>
-      <button size-="small" variant-="foreground1"
+      <button size-="small" variant-="fg2"
         ><a href="https://github.com/mryodo">&#xf06cf; savostianov [at]</a
         ></button
       >
     </li>
     <li>
-      <button size-="small" variant-="foreground1"
+      <button size-="small" variant-="fg2"
         ><a href="https://github.com/mryodo">&#xe65b; Github</a></button
       >
     </li>
     <li>
-      <button size-="small" variant-="foreground1"
+      <button size-="small" variant-="fg2"
         ><a href="https://scholar.google.com/citations?user=E0nt-XYAAAAJ&hl=en"
           >&#xf1180; Scholar</a
         ></button
       >
     </li>
     <li>
-      <button size-="small" variant-="foreground1"
+      <button size-="small" variant-="fg2"
         ><a
           href="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf"
           >&#xedc2; ResearchGate</a
@@ -39,16 +45,42 @@
       >
     </li>
     <li>
-      <button size-="small" variant-="foreground1"
+      <button size-="small" variant-="fg2"
         ><a href="https://bsky.app/profile/antsav.me">&#xe28e; Bluesky</a
         ></button
       >
     </li>
   </ul>
   <br />
+  <br />
 
   <div class="header">
-    <span> &#xf1ce; </span>
-    <span is-="badge" cap-="triangle" variant-="nord7"> contact </span>
+    <span> </span>
+    <span is-="badge" cap-="round" variant-="blue"> contact </span>
   </div>
+
+  <style is:inline>
+    .card {
+      button a {
+        text-decoration: none;
+        color: inherit;
+      }
+      button a::before:hover {
+        content: "" !important;
+      }
+      ul {
+        display: inline-block;
+        text-align: left;
+      }
+      li {
+        background: var(--bg4);
+      }
+      [is-~="badge"] {
+        background-color: var(--bg4);
+      }
+      /* .header { */
+      /*   text-align: right; */
+      /* } */
+    }
+  </style>
 </div>

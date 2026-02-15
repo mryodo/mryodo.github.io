@@ -1,109 +1,28 @@
 ---
 import "../styles/global.css";
+import "../styles/navbar.css";
 const { title = "home" } = Astro.props;
 ---
 
+<!-- TODO: update the flex containers to modern CSS standard -->
 <nav>
   <div class="flex-container">
     <div class="flex-item-left">
-      <span is-="badge" cap-="ribbon" variant-="blue"
+      <span is-="badge" cap-="round square" variant-="blue"
         ><a href="/">&#xe83d; <span class="topname">tony</span></a></span
       >
-      <span is-="badge" cap-="ribbon" variant-="fg0">{title}</span>
+      <span is-="badge" cap-="square round" variant-="fg0">{title}</span>
     </div>
     <div class="flex-item-right">
-      <span is-="badge" variant-="nord8"><a href="/news">&#xf06b0;</a></span>
-      <span is-="badge" variant-="nord8"><a href="/research">&#xeeac;</a></span>
-      <span is-="badge" variant-="nord8"><a href="/papers">&#xf16c9;</a></span>
-      <span is-="badge" variant-="nord8"><a href="/teaching">&#xf19c;</a></span>
-      <span is-="badge" variant-="nord6">menu</span>
+      <span is-="badge" cap-="round square" variant-="orange"
+        ><a href="/news">&#xf06b0;</a></span
+      >
+      <span is-="badge" variant-="orange"><a href="/research">&#xeeac;</a></span
+      >
+      <span is-="badge" variant-="orange"><a href="/papers">&#xf16c9;</a></span>
+      <span is-="badge" variant-="orange"><a href="/teaching">&#xf19c;</a></span
+      >
+      <span is-="badge" cap-="square round" variant-="teal">menu</span>
     </div>
   </div>
 </nav>
-
-<style>
-  .topname {
-    background-color: inherit;
-    padding: 0;
-  }
-  .topname:hover {
-    background-color: inherit;
-  }
-  @media (max-width: 600px) {
-    .topname {
-      display: none;
-    }
-  }
-  nav {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-  [is-~="badge"] a {
-    text-decoration: none;
-    color: inherit;
-  }
-  nav {
-    [is-~="badge"] {
-      &[cap-="ribbon"] {
-        margin-right: -2.4rem;
-      }
-      &[cap-^="ribbon"] {
-        &:not([variant-]):hover {
-          --badge-color: var(--fg0) !important;
-          font-weight: 300;
-        }
-      }
-    }
-  }
-  nav {
-    .flex-item-right {
-      [is-~="badge"] {
-        &:not([variant-]) {
-          margin-left: -1.5rem;
-        }
-        &[variant-="nord8"] {
-          margin-left: -1.5rem;
-        }
-
-        @media (max-width: 600px) {
-          &:not([variant-]) {
-            margin-left: -1.75rem;
-          }
-          &:not([variant-])::before {
-            width: 0.6ch;
-          }
-        }
-        &[variant-="teal"] {
-          margin-left: -1.5rem;
-          font-weight: 300;
-        }
-        @media (max-width: 600px) {
-          &[variant-="teal"] {
-            margin-right: -1rem;
-          }
-          &[variant-="teal"]:before,
-          &[variant-="teal"]:after {
-            width: 0.5ch;
-          }
-        }
-      }
-    }
-  }
-  nav {
-    .flex-container {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    .flex-item-left {
-      flex: 40%;
-      color: var(--fg1);
-    }
-
-    .flex-item-right {
-      flex: 60%;
-      text-align: right;
-      padding-right: 0.5rem;
-    }
-  }
-</style>

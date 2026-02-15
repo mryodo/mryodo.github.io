@@ -1,0 +1,58 @@
+---
+import "../styles/papers.css";
+const { posts = "" } = Astro.props;
+import "../styles/global.css";
+---
+
+<div class="paperlist">
+  {
+    posts.map((post) => (
+      <div box-="square" shear-="both" class={post.frontmatter.type}>
+        <div class="header">
+          <span
+            is-="badge"
+            cap-="round"
+            style="font-size: 15px"
+            variant-={post.frontmatter.type == "preprint" ? "fg2" : "green"}
+          >
+            {" "}
+            {post.frontmatter.type}{" "}
+          </span>
+        </div>
+        <div class="wrapper">
+          <b>{post.frontmatter.title}</b>
+          <br />
+          <span
+            class="authors"
+            set:html={post.frontmatter.authors.join(", ")}
+          />
+          <br />
+          &nbsp;&nbsp;
+          {post.frontmatter.journal}({post.frontmatter.year})
+        </div>
+        <details class="abstract">
+          <summary class="abstractlabel">&nbsp;abstract</summary>
+          <div set:html={post.compiledContent()} />
+        </details>
+
+        <div class="header">
+          <span style="background-color: var(--bg0)">
+            {post.frontmatter.decorator == "post" ? "" : "~"}
+          </span>
+          <span>
+            {post.frontmatter.links.map((link) => (
+              <span
+                is-="badge"
+                cap-="round"
+                style="font-size: 15px"
+                variant-={post.frontmatter.type == "preprint" ? "fg2" : "green"}
+              >
+                <a href={link.url}>{link.name}</a>
+              </span>
+            ))}
+          </span>
+        </div>
+      </div>
+    ))
+  }
+</div>

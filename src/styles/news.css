@@ -1,0 +1,45 @@
+summary {
+  list-style-type: "\f0794";
+}
+
+details[open]>summary {
+  list-style-type: "\f0792";
+}
+
+.current {
+  font-weight: 700;
+  color: var(--orange);
+}
+
+.old {
+  font-weight: 700;
+  color: var(--fg2);
+}
+
+
+[box-~="square"].post {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+
+  [is-~="badge"]:hover {
+    font-weight: 800;
+  }
+}
+
+[box-~="square"].alert {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  --box-border-color: var(--blue) !important;
+
+  [is-~="badge"]:hover {
+    font-weight: 600;
+  }
+
+  strong {
+    color: var(--blue) !important;
+  }
+
+  mark {
+    background-color: var(--blue2) !important;
+  }
+}

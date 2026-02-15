@@ -74,6 +74,7 @@
 @layer components {
   [data-webtui-theme='miniwinter'] {
     [is-~='badge'] {
+      background-color: transparent;
 
       /* nord0 - nord3 are the same as background0 - background3 */
       &[variant-='bg0'] {
@@ -121,6 +122,11 @@
       &[variant-='blue'] {
         --badge-color: var(--blue);
         --badge-text: var(--background0);
+      }
+
+      &[variant-='blue2'] {
+        --badge-color: var(--blue2);
+        --badge-text: var(--foreground0);
       }
 
       &[variant-='red'] {
@@ -204,6 +210,11 @@
         --button-secondary: var(--background0);
       }
 
+      &[variant-='blue2'] {
+        --button-primary: var(--blue2);
+        --button-secondary: var(--background0);
+      }
+
       &[variant-='red'] {
         --button-primary: var(--red);
         --button-secondary: var(--background0);
@@ -242,7 +253,7 @@
     h4,
     h5,
     h6 {
-      color: var(--yellow);
+      color: var(--green);
     }
 
     p,
@@ -256,6 +267,15 @@
         &:hover {
           color: var(--yellow);
         }
+      }
+
+      a::before {
+        content: "~";
+        white-space: pre;
+      }
+
+      a:hover::before {
+        content: ">";
       }
 
       code {

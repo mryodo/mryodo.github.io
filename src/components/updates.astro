@@ -1,0 +1,45 @@
+---
+const { posts2 = "" } = Astro.props;
+import "../styles/updates.css";
+import "../styles/global.css";
+---
+
+<div class="updates">
+  <h3>last updates</h3>
+  {
+    posts2.map((post) => (
+      <div box-="square" shear-="top" class={post.frontmatter.decorator}>
+        <div class="header">
+          <span
+            is-="badge"
+            cap-="round"
+            variant-={
+              post.frontmatter.decorator == "post"
+                ? "foreground0"
+                : "background0"
+            }
+          >
+            {" "}
+            {post.frontmatter.date}{" "}
+          </span>
+          <span>
+            {post.frontmatter.link.map((link) => (
+              <span
+                is-="badge"
+                cap-="round"
+                variant-={
+                  post.frontmatter.decorator == "post"
+                    ? "foreground0"
+                    : "background0"
+                }
+              >
+                <a href={link[0]}>{link[1]}</a>
+              </span>
+            ))}
+          </span>
+        </div>
+        <div set:html={post.compiledContent()} />
+      </div>
+    ))
+  }
+</div>

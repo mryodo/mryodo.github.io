@@ -1,0 +1,93 @@
+.updates {
+  font-size: 13px;
+  background-color: var(--bg1);
+  padding: 0.5rem;
+}
+
+@layer utils {
+  [box-~="square"] .alert {
+    font-size: 13px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    --box-border-color: var(--background1);
+
+    [is-~="badge"] a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    [is-~="badge"]:hover {
+      --badge-color: var(--foreground0);
+      font-weight: 600;
+    }
+  }
+}
+
+p,
+blockquote,
+li,
+[is-~="typography-block"] {
+  strong {
+    color: var(--yellow) !important;
+  }
+}
+
+[is-~="badge"] a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  display: inline-block;
+  text-align: left;
+}
+
+button a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-item-left {
+  padding: 1rem;
+  padding-right: rem;
+  flex: 65%;
+  line-height: 90%;
+}
+
+.flex-container .flex-item-left p {
+  [is-~="badge"] {
+    &[variant-="nord10"] {
+      --badge-text: var(--nord4);
+      padding-left: 0.5ch;
+      margin-left: -1ch;
+      padding-right: 0.5ch;
+      margin-right: -1ch;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .flex-item-left {
+    flex: 100%;
+  }
+}
+
+.flex-item-right {
+  flex: 35%;
+  text-align: center;
+}
+
+.flex-item-right>.box-square {
+  padding-top: 1rem;
+}
+
+@media (max-width: 800px) {
+  .flex-item-right {
+    flex: 100%;
+  }
+}

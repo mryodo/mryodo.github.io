@@ -1,0 +1,76 @@
+summary {
+  list-style-type: "\f0794";
+}
+
+details[open]>summary {
+  list-style-type: "\f0792";
+}
+
+
+.authors {
+  color: var(--green);
+}
+
+.wrapper {
+  margin: 0.5rem;
+}
+
+.abstractlabel {
+  font-size: 14px;
+  line-height: 0.8;
+  font-weight: 600;
+  color: var(--yellow);
+}
+
+.abstract {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--bg1);
+}
+
+.current {
+  font-weight: 700;
+  color: var(--orange);
+}
+
+.old {
+  font-weight: 700;
+  color: var(--fg2);
+}
+
+
+[box-~="square"].preprint {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  --box-border-color: var(--bg2) !important;
+
+  [is-~="badge"]:hover {
+    font-weight: 800;
+  }
+
+  [is-~="badge"] {
+    margin-left: 0.25rem;
+  }
+}
+
+[box-~="square"].journal {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  --box-border-color: var(--green) !important;
+
+  [is-~="badge"]:hover {
+    font-weight: 600;
+  }
+
+  [is-~="badge"] {
+    margin-left: 0.25rem;
+  }
+
+  strong {
+    color: var(--blue) !important;
+  }
+
+  mark {
+    background-color: var(--blue2) !important;
+  }
+}
