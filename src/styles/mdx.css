@@ -1,0 +1,261 @@
+/* MDX content styling, consistent with ascii.cnlibs.com:
+ * mono type, one character-grid, small uppercase commented headings,
+ * soft body copy, and card-framed code. Spaces except for rules are
+ * 1lh vertical / text-sm horizontal, matching the component library. */
+
+.mdx {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  color: var(--ascii-text);
+  max-width: 80ch;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Headings ---------- */
+
+.mdx h1,
+.mdx h2,
+.mdx h3,
+.mdx h4,
+.mdx h5,
+.mdx h6 {
+  font-weight: var(--font-weight-heading);
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+}
+
+.mdx h1 {
+  margin: 0 0 1lh;
+  color: var(--ascii-primary);
+  letter-spacing: -0.02em;
+}
+
+.mdx h2 {
+  margin: 2lh 0 1lh;
+  scroll-margin-top: 1lh;
+  color: var(--ascii-comment);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.mdx h3 {
+  margin: 1lh 0 1lh;
+  color: var(--ascii-soft);
+}
+
+.mdx h4,
+.mdx h5,
+.mdx h6 {
+  margin: 1lh 0 1lh;
+  color: var(--ascii-comment);
+}
+
+/* ---------- Paragraphs & inline text ---------- */
+
+.mdx p {
+  margin: 0 0 0lh;
+  color: var(--ascii-soft);
+}
+
+.mdx strong {
+  color: var(--ascii-text);
+  font-weight: var(--font-weight-heading);
+}
+
+.mdx del,
+.mdx s {
+  color: var(--ascii-comment);
+}
+
+.mdx .dim {
+  color: var(--ascii-comment);
+}
+
+.mdx mark {
+  color: var(--ascii-text);
+  background: color-mix(in srgb, var(--ascii-primary) 18%, transparent);
+}
+
+.mdx u {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+/* ---------- Links ---------- */
+
+.mdx a:not([data-slot="badge"]) {
+  color: var(--ascii-soft);
+  text-decoration: underline;
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--ascii-primary) 40%,
+    transparent
+  );
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color 150ms ease;
+}
+
+.mdx a[data-slot="badge"] {
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.mdx a:hover,
+.mdx a:focus-visible {
+  color: var(--ascii-primary);
+}
+
+/* ---------- Inline code ---------- */
+
+.mdx :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--ascii-primary);
+  background: var(--card);
+  padding: 0 0.5ch;
+  border: 1px solid var(--ascii-dim);
+}
+
+/* ---------- Code blocks (Astro's shiki output, `.astro-code`) ---------- */
+
+.mdx .astro-code {
+  margin: 0 0 1lh;
+  padding: 1lh 1ch;
+  border: 1px solid color-mix(in srgb, var(--ascii-primary) 60%, transparent);
+  border-radius: 0;
+  overflow-x: auto;
+}
+
+.mdx .astro-code code {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+}
+
+/* ---------- Lists ---------- */
+
+.mdx ul,
+.mdx ol {
+  margin: 0 0 0lh;
+  color: var(--ascii-soft);
+}
+
+.mdx ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.mdx ul > li {
+  position: relative;
+  padding-left: 2ch;
+}
+
+.mdx ul > li::before {
+  content: "*";
+  position: absolute;
+  left: 0;
+  color: var(--ascii-primary);
+}
+
+.mdx ol {
+  padding-left: 3ch;
+}
+
+.mdx ol > li {
+  padding-left: 0.5ch;
+}
+
+.mdx ol > li::marker {
+  color: var(--ascii-comment);
+}
+
+.mdx li + li {
+  margin-top: 0lh;
+}
+
+.mdx ul ul,
+.mdx ul ol,
+.mdx ol ul,
+.mdx ol ol {
+  margin: 0.5lh 0 0 2ch;
+}
+
+/* Task list checkboxes — keep the native box but tune it to the grid. */
+.mdx input[type="checkbox"] {
+  accent-color: var(--ascii-primary);
+  margin-right: 1ch;
+}
+
+/* ---------- Blockquote ---------- */
+
+.mdx blockquote {
+  margin: 0 0 1lh;
+  padding: 0 2ch;
+  color: var(--ascii-soft);
+  background: var(--card);
+  border-left: 1ch solid var(--ascii-dim);
+}
+
+.mdx blockquote > *:last-child {
+  margin-bottom: 0;
+}
+
+.mdx blockquote blockquote {
+  margin: 0.5lh 0 0;
+}
+
+/* ---------- Tables ---------- */
+
+.mdx table {
+  width: max-content;
+  max-width: 100%;
+  margin: 0 0 1lh;
+  border-collapse: collapse;
+  background: var(--card);
+  color: var(--ascii-soft);
+  font-size: var(--text-sm);
+}
+
+.mdx th,
+.mdx td {
+  padding: 0.25lh 1ch;
+  border: 1px solid var(--ascii-dim);
+  text-align: left;
+}
+
+.mdx th {
+  color: var(--ascii-comment);
+  font-weight: var(--font-weight-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ---------- Horizontal rule ---------- */
+
+.mdx hr {
+  height: 1ch;
+  margin: 2lh 0;
+  border: none;
+  background: repeating-linear-gradient(
+    to right,
+    var(--ascii-dim) 0 1ch,
+    transparent 1ch 2ch
+  );
+}
+
+/* ---------- Inline icons (react-icons etc.) ---------- */
+.mdx svg {
+  display: inline;
+  vertical-align: text-bottom;
+}
+
+/* ---------- Media ---------- */
+
+.mdx img {
+  max-width: 100%;
+  height: auto;
+  margin: 0 0 1lh;
+  border: 1px solid var(--ascii-dim);
+}

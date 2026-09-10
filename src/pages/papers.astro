@@ -1,92 +1,103 @@
 ---
-import Layout from "../layouts/index.astro";
-import Right from "../components/right.astro";
-import Papers from "../components/paperlist.astro";
-import "../styles/papers.css";
-const posts = Object.values(import.meta.glob("./papers/*.md", { eager: true }));
-posts.sort(
-  (a, b) => Date.parse(b.frontmatter.sort) - Date.parse(a.frontmatter.sort),
+import "../styles/global.css";
+import "../styles/mdx.css";
+import Layout from "../layout";
+import { PapersGroup } from "@/components/content/papers-group";
+import { Paper } from "@/components/content/paper";
+import { getPapers } from "@/lib/papers";
+
+const papers = await getPapers();
+
+const groups = papers.reduce<{ year: number; items: typeof papers }[]>(
+  (acc, item) => {
+    const last = acc[acc.length - 1];
+    if (last && last.year === item.year) {
+      last.items.push(item);
+    } else {
+      acc.push({ year: item.year, items: [item] });
+    }
+    return acc;
+  },
+  [],
 );
-const posts2025 = posts.filter((post) => post.frontmatter.year == "2025");
-const posts2024 = posts.filter((post) => post.frontmatter.year == "2024");
-const posts2023 = posts.filter((post) => post.frontmatter.year == "2023");
-const posts2020 = posts.filter((post) => post.frontmatter.year == "2020");
-const posts2017 = posts.filter((post) => post.frontmatter.year == "2017");
+
+const title = "papers";
+const pageDescription =
+  "Publications — list of papers with abstracts and links.";
 ---
 
-<Layout title="tony>papers">
-  <div slot="index">
-    <div box-="square" shear-="top">
-      <!-- NOTE: heeader -->
-      <div class="header">
-        <span> <h1>Papers</h1> </span>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={pageDescription} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Layout client:idle>
+      <div class="mdx">
+        <h1>Papers</h1>
+
+        <p>
+          Here is the list of my publications. In case you are interested in my
+          conferences talks, please search the{" "}
+          <a href="/news">archive</a> page.
+        </p>
+
+        <br />
+        <p>
+          You can also consult my pages in the indexing systems:{" "}
+          <a href="https://scholar.google.it/citations?user=E0nt-XYAAAAJ&hl=en"
+            >Google Scholar</a
+          >,{" "}
+          <a href="https://orcid.org/0000-0003-0126-3059">OrCiD</a>,{" "}
+          <a
+            href="https://www.semanticscholar.org/author/Anton-Savostianov/2281743377"
+            >Semantic Scholar</a
+          >{" "}
+          and{" "}
+          <a
+            href="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf"
+            >ResearchGate</a
+          >.
+        </p>
+
+        <br />
+
+        <p>
+          <mark>Nota Bene</mark>: if you are searching for articles about PDEs
+          with my name, you are probably looking for the work of my{" "}
+          <a href="http://www.antonsavostianov.com/">namesake</a> from Uppsala! I
+          claim authorship only for the articles listed on this page, and sorry for
+          the confusion!
+        </p>
+
+        <br />
+
+        {
+          groups.map((group, i) => (
+            <PapersGroup
+              year={String(group.year)}
+              count={group.items.length}
+              defaultOpen={i === 0}
+            >
+              {group.items.map((paper) => (
+                <Paper
+                  status={paper.status}
+                  title={paper.title}
+                  authors={paper.authors}
+                  venue={paper.venue}
+                  abstract={paper.abstract}
+                  links={paper.links}
+                />
+              ))}
+            </PapersGroup>
+          ))
+        }
       </div>
-      <!-- NOTE: two column setup -->
-      <div class="container">
-        <article class="card">
-          <div class="left-content">
-            <p>
-              Here is the list of my publications. In case you are interested in
-              my conferences talks, please search the archive page.
-            </p>
-
-            <br />
-
-            <p>
-              You can also consult my pages in the indexing systems: <a
-                href="https://scholar.google.it/citations?user=E0nt-XYAAAAJ&hl=en"
-                >Google Scholar</a
-              >, <a href="https://orcid.org/0000-0003-0126-3059">OrCiD</a>, <a
-                href="https://www.semanticscholar.org/author/Anton-Savostianov/2281743377"
-                >Semantic Scholar</a
-              > and <a
-                href="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6ImhvbWUiLCJwYWdlIjoiaG9tZSIsInBvc2l0aW9uIjoiZ2xvYmFsSGVhZGVyIn19"
-                >ResearchGate</a
-              >.
-            </p>
-
-            <br />
-
-            <p>
-              <mark>Nota Bene</mark>: if you are searching for articles about
-              PDEs with my name, you are probably looking for the work of my <a
-                href="http://www.antonsavostianov.com/">namesake</a
-              > from Upsalla! I claim authorship only for the articles listed on this
-              page, and sorry for the confusion!
-            </p>
-
-            <br />
-
-            <details open>
-              <summary class="current"> ## 2025 ({posts2025.length})</summary>
-              <Papers posts={posts2025} />
-            </details>
-
-            <details>
-              <summary class="old"> ## 2024 ({posts2024.length})</summary>
-              <Papers posts={posts2024} />
-            </details>
-
-            <details>
-              <summary class="old"> ## 2023 ({posts2023.length})</summary>
-              <Papers posts={posts2023} />
-            </details>
-
-            <details>
-              <summary class="old"> ## 2020 ({posts2020.length})</summary>
-              <Papers posts={posts2020} />
-            </details>
-
-            <details>
-              <summary class="old"> ## 2017 ({posts2017.length})</summary>
-              <Papers posts={posts2017} />
-            </details>
-          </div>
-          <div class="card-content">
-            <Right />
-          </div>
-        </article>
-      </div>
-    </div>
-  </div>
-</Layout>
+    </Layout>
+  </body>
+</html>

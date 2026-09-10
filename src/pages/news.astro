@@ -1,71 +1,86 @@
 ---
-import Layout from "../layouts/index.astro";
-import Right from "../components/right.astro";
-import "../styles/news.css";
-import NewsList from "../components/news.astro";
-const posts = Object.values(import.meta.glob("./news/*.md", { eager: true }));
-posts.sort(
-  (a, b) => Date.parse(b.frontmatter.sort) - Date.parse(a.frontmatter.sort),
+import "../styles/global.css";
+import "../styles/mdx.css";
+import Layout from "../layout";
+import { AsciiBox, AsciiRule } from "@/components/ascii/ascii-box";
+import { NewsGroup } from "@/components/content/news-group";
+import { NewsItem } from "@/components/content/news-item";
+import { getNews } from "@/lib/news";
+
+const news = await getNews();
+
+const groups = news.reduce<{ year: string; items: typeof news }[]>(
+  (acc, item) => {
+    const last = acc[acc.length - 1];
+    if (last && last.year === item.year) {
+      last.items.push(item);
+    } else {
+      acc.push({ year: item.year, items: [item] });
+    }
+    return acc;
+  },
+  [],
 );
-const posts2025 = posts.filter((post) => post.frontmatter.year == "2025");
-const posts2024 = posts.filter((post) => post.frontmatter.year == "2024");
-const posts2023 = posts.filter((post) => post.frontmatter.year == "2023");
-const posts2022 = posts.filter((post) => post.frontmatter.year == "2022");
+
+const title = "news";
+const pageDescription =
+  "Quick updates — published work, planned talks, and travelling.";
 ---
 
-<Layout title="tony>news">
-  <div slot="index">
-    <div box-="square" shear-="top">
-      <!-- NOTE: heeader -->
-      <div class="header">
-        <span> <h1>Updates</h1> </span>
-      </div>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={pageDescription} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Layout client:idle>
+      <div class="mdx">
+        <h1>Updates</h1>
 
-      <!-- NOTE: two column setup -->
-      <div class="container">
-        <article class="card">
-          <div class="left-content">
-            <p>Here you can find a quick lists of updates on my work. Enjoy!</p>
+        <p>Here you can find a quick list of updates on my work. Enjoy!</p>
 
-            <br />
+        <br />
 
-            <p>
-              This list consists of quick, typically one-line, updates on the
-              published work, planned talks, and travelling. More detailed
-              descriptions of the published papers can be found <a
-                href="/papers">here</a
-              >.
-            </p>
+        <p>
+          This list consists of quick, typically one-line, updates on the
+          published work, planned talks, and travelling. More detailed
+          descriptions of the published papers can be found{" "}
+          <a href="/papers">here</a>.
+        </p>
 
-            <br />
+        <br />
 
-            <details open>
-              <summary class="current"> ## 2025 ({posts2025.length})</summary>
-              <NewsList posts={posts2025} />
-            </details>
-
-            <br />
-
-            <details>
-              <summary class="old"> ### 2024 ({posts2024.length}) </summary>
-              <NewsList posts={posts2024} />
-            </details>
-
-            <details>
-              <summary class="old"> ### 2023 ({posts2023.length})</summary>
-              <NewsList posts={posts2023} />
-            </details>
-
-            <details>
-              <summary class="old"> ### 2022 ({posts2022.length})</summary>
-              <NewsList posts={posts2022} />
-            </details>
+        <AsciiBox fluid bg="bg-card" className="w-full" title="updates">
+          <div className="flex flex-col">
+            {
+              groups.map((group, i) => (
+                <>
+                  {i > 0 && <AsciiRule className="my-[0.5lh] opacity-50" />}
+                  <NewsGroup
+                    label={group.year}
+                    count={group.items.length}
+                    defaultOpen={i === 0}
+                  >
+                    {group.items.map((item) => (
+                      <NewsItem
+                        date={item.date}
+                        danger={item.decorator === "alert"}
+                        links={item.link}
+                        html={item.bodyHtml}
+                      />
+                    ))}
+                  </NewsGroup>
+                </>
+              ))
+            }
           </div>
-          <div class="card-content">
-            <Right />
-          </div>
-        </article>
+        </AsciiBox>
       </div>
-    </div>
-  </div>
-</Layout>
+    </Layout>
+  </body>
+</html>

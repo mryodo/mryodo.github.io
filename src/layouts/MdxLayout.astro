@@ -1,0 +1,34 @@
+---
+import "../styles/global.css";
+import "../styles/mdx.css";
+import Layout from "../layout";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props.frontmatter;
+const headings = Astro.props.headings ?? [];
+const pageTitle = title ?? "Astro";
+const pageDescription = description;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    {pageDescription && <meta name="description" content={pageDescription} />}
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Layout headings={headings} client:idle>
+      <div class="mdx">
+        <slot />
+      </div>
+    </Layout>
+  </body>
+</html>
