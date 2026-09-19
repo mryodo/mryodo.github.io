@@ -60,10 +60,13 @@ function Navbar({ headings }: { headings?: Heading[] }) {
   return (
     <header className="flex w-full flex-col">
       <div className="flex flex-wrap items-center gap-x-[2ch] gap-y-[1lh] px-[2ch] pt-[1lh] pb-[0.5lh]">
-        <span className="flex min-w-0 items-center gap-[1ch] whitespace-nowrap text-primary">
+        <a
+          href="/"
+          className="flex min-w-0 items-center gap-[1ch] whitespace-nowrap text-primary"
+        >
           <span aria-hidden>#</span>
           <span className="font-bold tracking-tight">tony.savostianov</span>
-        </span>
+        </a>
         {toc.length > 0 && (
           <Drawer>
             <DrawerTrigger
@@ -106,7 +109,7 @@ function Navbar({ headings }: { headings?: Heading[] }) {
               <AsciiBoxRow key={link.label} className="px-[2ch] hover:bg-card">
                 <a
                   href={link.href}
-                  className="flex items-center justify-between py-[1lh] uppercase text-ascii-soft hover:text-primary"
+                  className="nav-link flex items-center justify-between py-[1lh] uppercase text-ascii-soft hover:text-primary"
                 >
                   {link.label}
                 </a>
@@ -119,7 +122,7 @@ function Navbar({ headings }: { headings?: Heading[] }) {
             <a
               key={link.label}
               href={link.href}
-              className="text-ascii-soft transition-colors hover:text-primary"
+              className="nav-link text-ascii-soft transition-colors hover:text-primary"
             >
               {link.label}
             </a>

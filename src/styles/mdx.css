@@ -97,6 +97,16 @@
   transition: color 150ms ease;
 }
 
+.mdx a:not([data-slot="badge"])::before {
+  content: "# ";
+  text-decoration: none;
+}
+
+.mdx a:not([data-slot="badge"]):hover::before,
+.mdx a:not([data-slot="badge"]):focus-visible::before {
+  content: "> ";
+}
+
 .mdx a[data-slot="badge"] {
   text-decoration: none;
   transition: color 150ms ease;

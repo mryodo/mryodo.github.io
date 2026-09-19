@@ -204,3 +204,13 @@
     display: none;
   }
 }
+
+@utility nav-link {
+  &::before {
+    content: "# ";
+  }
+  &:hover::before,
+  &:focus-visible::before {
+    content: "> ";
+  }
+}
