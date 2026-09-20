@@ -59,7 +59,7 @@ export function Paper({
           <span aria-hidden className="text-ascii-comment">
             {" \u00b7 "}
           </span>
-          <span className="font-bold text-foreground">{title}</span>
+          <span className="font-medium text-foreground">{title}</span>
         </CardTitle>
         <CardDescription>
           <span className="text-primary">{authors}</span>
