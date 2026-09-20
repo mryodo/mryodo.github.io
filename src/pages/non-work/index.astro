@@ -1,0 +1,173 @@
+---
+import "../../styles/global.css";
+import "../../styles/mdx.css";
+import Layout from "../../layout";
+import {
+  AsciiBox,
+  AsciiBoxDivider,
+  AsciiBoxRow,
+} from "@/components/ascii/ascii-box";
+import { RiMenuSearchLine } from "react-icons/ri";
+
+interface PostFrontmatter {
+  title: string;
+  description?: string;
+  date?: string | Date;
+  tags?: string[];
+}
+
+interface PostModule {
+  url?: string;
+  frontmatter: PostFrontmatter;
+}
+
+function formatDate(date?: string | Date): string | undefined {
+  if (!date) return undefined;
+  const d = new Date(date);
+  return Number.isNaN(d.getTime()) ? undefined : d.toISOString().slice(0, 10);
+}
+
+const modules = import.meta.glob<PostModule>("./*.mdx", { eager: true });
+
+const posts = Object.values(modules)
+  .filter((post): post is PostModule & { url: string } => Boolean(post.url))
+  .map((post) => ({ ...post, date: formatDate(post.frontmatter.date) }))
+  .sort((a, b) => {
+    const da = a.frontmatter.date ? new Date(a.frontmatter.date).getTime() : 0;
+    const db = b.frontmatter.date ? new Date(b.frontmatter.date).getTime() : 0;
+    if (da !== db) return db - da;
+    return a.frontmatter.title.localeCompare(b.frontmatter.title);
+  });
+
+const title = "non-work";
+const pageDescription =
+  "Non-work — a running list of everything that isn't research.";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={pageDescription} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Layout client:idle>
+      <div class="mdx">
+        <h1>Non-work</h1>
+
+        <p>A running list of things unrelated to research — mostly for fun.</p>
+
+        <br />
+
+        <p
+          data-tag-filter-indicator
+          hidden
+          class="pl-[2ch] text-ascii-comment text-sm"
+        >
+          <span class="font-bold">
+            <RiMenuSearchLine /> Showing posts tagged</span
+          >{" "}
+          [<span data-tag-filter-label class="text-primary"></span>]
+          {" — "}
+          <a
+            href="?"
+            data-slot="control-link"
+            class="text-ascii-soft text-destructive hover:text-destructive"
+          >
+            clear
+          </a>
+        </p>
+
+        <AsciiBox fluid bg="bg-card" className="w-full" title="blog">
+          <div class="flex flex-col">
+            {
+              posts.length === 0 ? (
+                <p class="py-[1lh] text-ascii-soft text-sm">
+                  Nothing here yet.
+                </p>
+              ) : (
+                posts.map((post, i) => (
+                  <div
+                    data-post-item
+                    data-tags={(post.frontmatter.tags ?? [])
+                      .map((tag) => tag.toLowerCase())
+                      .join(",")}
+                  >
+                    {i > 0 && <AsciiBoxDivider pad={false} />}
+                    <AsciiBoxRow className="hover:bg-secondary">
+                      <div class="flex min-w-0 flex-col gap-[0.15lh] py-[0.25lh] sm:flex-row sm:items-start sm:justify-between sm:gap-[2ch]">
+                        <a
+                          href={post.url}
+                          data-slot="row-link"
+                          class="flex min-w-0 flex-1 flex-col gap-[0.1lh] text-ascii-soft hover:text-primary"
+                        >
+                          <span class="flex min-w-0 items-baseline gap-[1ch]">
+                            <span class="w-[10ch] shrink-0 text-primary text-[10pt]">
+                              {post.date}
+                            </span>
+                            <span class="min-w-[15ch] overflow-hidden text-ellipsis whitespace-nowrap font-medium text-foreground">
+                              {post.frontmatter.title}
+                            </span>
+                          </span>
+                          {post.frontmatter.description && (
+                            <span class="pl-[13ch] my-[-0.25lh] text-ascii-comment text-[9pt] leading-[0.8]">
+                              {post.frontmatter.description}
+                            </span>
+                          )}
+                        </a>
+                        {post.frontmatter.tags &&
+                          post.frontmatter.tags.length > 0 && (
+                            <div class="flex min-w-0 items-center justify-end gap-[1ch] sm:flex-wrap sm:pt-[0.1lh]">
+                              {post.frontmatter.tags.map((tag) => (
+                                <a
+                                  href={`?tag=${encodeURIComponent(tag.toLowerCase())}`}
+                                  data-tag-link={tag.toLowerCase()}
+                                  data-slot="control-link"
+                                  class="whitespace-nowrap text-[9pt] text-muted-foreground uppercase tracking-[0.04em] hover:text-destructive hover:underline"
+                                >
+                                  [{tag}]
+                                </a>
+                              ))}
+                            </div>
+                          )}
+                      </div>
+                    </AsciiBoxRow>
+                  </div>
+                ))
+              )
+            }
+          </div>
+        </AsciiBox>
+      </div>
+    </Layout>
+  </body>
+
+  <script>
+    function applyTagFilter() {
+      const tag = new URLSearchParams(window.location.search).get("tag");
+      const indicator = document.querySelector<HTMLElement>(
+        "[data-tag-filter-indicator]",
+      );
+      const label = document.querySelector<HTMLElement>(
+        "[data-tag-filter-label]",
+      );
+      const items = document.querySelectorAll<HTMLElement>("[data-post-item]");
+
+      if (indicator) indicator.hidden = !tag;
+      if (label && tag) label.textContent = tag;
+
+      items.forEach((item) => {
+        const tags = (item.dataset.tags ?? "").split(",").filter(Boolean);
+        item.hidden = tag !== null && !tags.includes(tag);
+      });
+    }
+
+    applyTagFilter();
+    window.addEventListener("popstate", applyTagFilter);
+    document.addEventListener("astro:page-load", applyTagFilter);
+  </script>
+</html>

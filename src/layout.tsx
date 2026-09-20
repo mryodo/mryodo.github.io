@@ -32,6 +32,7 @@ const NAV_LINKS = [
   { label: "research", href: "/research" },
   { label: "papers", href: "/papers" },
   { label: "teaching", href: "/teaching" },
+  { label: "non-work", href: "/non-work" },
 ];
 
 const SIDEBAR_LINKS = [

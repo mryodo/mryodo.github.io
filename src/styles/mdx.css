@@ -84,7 +84,10 @@
 
 /* ---------- Links ---------- */
 
-.mdx a:not([data-slot="badge"]) {
+.mdx
+  a:not([data-slot="badge"]):not([data-slot="row-link"]):not(
+    [data-slot="control-link"]
+  ) {
   color: var(--ascii-soft);
   text-decoration: underline;
   text-decoration-color: color-mix(
@@ -97,13 +100,22 @@
   transition: color 150ms ease;
 }
 
-.mdx a:not([data-slot="badge"])::before {
+.mdx
+  a:not([data-slot="badge"]):not([data-slot="row-link"]):not(
+    [data-slot="control-link"]
+  )::before {
   content: "#";
   text-decoration: none;
 }
 
-.mdx a:not([data-slot="badge"]):hover::before,
-.mdx a:not([data-slot="badge"]):focus-visible::before {
+.mdx
+  a:not([data-slot="badge"]):not([data-slot="row-link"]):not(
+    [data-slot="control-link"]
+  ):hover::before,
+.mdx
+  a:not([data-slot="badge"]):not([data-slot="row-link"]):not(
+    [data-slot="control-link"]
+  ):focus-visible::before {
   content: ">";
 }
 
