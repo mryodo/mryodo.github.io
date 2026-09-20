@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -48,8 +49,8 @@
   --text-sm: 16px;
   --text-sm--line-height: 22px;
   --font-mono: var(--font-ascii);
-  --font-weight-heading: 700;
-  --font-weight-base: 400;
+  --font-weight-heading: 500;
+  --font-weight-base: 300;
   --color-ascii-comment: var(--ascii-comment);
   --color-ascii-soft: var(--ascii-soft);
   --animate-skeleton: skeleton 2s steps(1, end) infinite;
