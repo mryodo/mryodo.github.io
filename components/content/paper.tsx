@@ -62,7 +62,7 @@ export function Paper({
           <span className="font-bold text-foreground">{title}</span>
         </CardTitle>
         <CardDescription>
-          {authors}
+          <span className="text-primary">{authors}</span>
           <br />
           <span className="italic">{venue}</span>
         </CardDescription>
@@ -77,7 +77,7 @@ export function Paper({
             abstract
           </summary>
           <div
-            className="m-0 pt-[0.5lh] text-sm text-ascii-soft"
+            className="m-0 pt-[0.5lh] text-sm text-ascii-soft leading-[1.2]"
             dangerouslySetInnerHTML={{ __html: abstract }}
           />
         </details>

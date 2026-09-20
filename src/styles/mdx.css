@@ -98,13 +98,13 @@
 }
 
 .mdx a:not([data-slot="badge"])::before {
-  content: "# ";
+  content: "#";
   text-decoration: none;
 }
 
 .mdx a:not([data-slot="badge"]):hover::before,
 .mdx a:not([data-slot="badge"]):focus-visible::before {
-  content: "> ";
+  content: ">";
 }
 
 .mdx a[data-slot="badge"] {

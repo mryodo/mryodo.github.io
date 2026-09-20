@@ -5,6 +5,7 @@ export interface Heading {
   slug: string;
   text: string;
 }
+import { AsciiCharsProvider } from "@/components/ascii/ascii-chars";
 
 import {
   AsciiBox,
@@ -180,7 +181,7 @@ function Sidebar({ headings }: { headings?: Heading[] }) {
         <AsciiBoxDivider pad={false} />
         <nav className="flex flex-col py-[1lh]">
           {SIDEBAR_LINKS.map((link, i) => (
-            <AsciiBoxRow key={link.label} className="hover:bg-card">
+            <AsciiBoxRow key={link.label} className="hover:bg-secondary">
               <a
                 href={link.href}
                 className="flex items-center justify-between gap-[1ch] text-ascii-soft hover:text-primary"
