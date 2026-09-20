@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from "astro:content";
-import type { PaperLink } from "@/components/content/paper";
+import type { PaperImage, PaperLink } from "@/components/content/paper";
 import { renderMarkdown } from "./markdown";
 
 type PapersData = CollectionEntry<"papers">["data"];
@@ -13,6 +13,7 @@ export interface PaperEntry {
   venue: string;
   abstract: string;
   links: PaperLink[];
+  image?: PaperImage;
   sort: string;
 }
 
@@ -32,6 +33,7 @@ export async function getPapers(): Promise<PaperEntry[]> {
         label: link.name,
         href: link.url,
       })),
+      image: entry.data.image ? { src: entry.data.image } : undefined,
       sort: entry.data.sort,
     }))
     .sort((a, b) => stamp(b.sort) - stamp(a.sort));

@@ -26,6 +26,7 @@ const papers = defineCollection({
     citation: z.string().optional(),
     doi: z.string().optional(),
     pdf: z.string().optional(),
+    image: z.string().optional(),
     links: z
       .array(z.object({ name: z.string(), url: z.string() }))
       .default([]),

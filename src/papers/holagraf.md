@@ -5,7 +5,7 @@ year: 2023
 sort: "2023-02-01"
 type: journal
 journal: Journal of Scientific Computing
-# image: racc_model.svg
+# image: /papers/test-image.svg
 # A bibtex (or any other format) citation that people can copy directly from the website.
 citation: |
   @article{guglielmi2023quantifying,

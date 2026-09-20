@@ -88,6 +88,7 @@ export function Paper({
             key={link.label}
             variant={badgeVariant(link.href, link.label)}
             render={<a href={link.href} />}
+            className="hover:font-medium"
             style={{ fontSize: "10pt" }}
           >
             {link.label}
