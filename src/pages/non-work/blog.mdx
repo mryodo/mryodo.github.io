@@ -6,44 +6,30 @@ tags: ["neovim", "colorscheme"]
 layout: ../../layouts/MdxLayout.astro
 ---
 
+import { ScreenshotCarousel } from "@/components/content/screenshot-carousel";
+
+export const slides = [
+  { title: "Syntax — Dark", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/syntax-dark.png?raw=true" },
+  { title: "Syntax — Light", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/syntax-light.png?raw=true" },
+  { title: "mini-start — Dark", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/start-dark.png?raw=true" },
+  { title: "mini-start — Light", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/start-light.png?raw=true" },
+  { title: "mini-files — Dark", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/files-dark.png?raw=true" },
+  { title: "mini-files — Light", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/files-light.png?raw=true" },
+  { title: "telescope — Dark", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/telescope-dark.png?raw=true" },
+  { title: "telescope — Light", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/telescope-light.png?raw=true" },
+  { title: "Active Pmenu — Dark", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/completion-dark.png?raw=true" },
+  { title: "Active Pmenu — Light", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/completion-light.png?raw=true" },
+];
 
 ## `neovim` theme using RWTH colors
-<div align="center">
-  <p>Based on stellar <a href="https://github.com/oskarnurm/koda.nvim">Koda.nvim</a> using official <a href = "https://github.com/ifs-rwth-aachen/RWTH-Colors" >RWTH colors</a> </p>
-    <p>A minimalist(-ish) theme for <a href="https://github.com/neovim/neovim">Neovim</a>, written in Lua</p>
-</div>
 
-|            | Dark Theme                                                                                                          | Light Theme                                                                                                          |
-| ---------- | ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| **Syntax** | <img src="https://github.com/mryodo/rwth.nvim/blob/main/assets/syntax-dark.png?raw=true" width="600" alt="rwth"  /> | <img src="https://github.com/mryodo/rwth.nvim/blob/main/assets/syntax-light.png?raw=true" width="600" alt="rwth"  /> |
+<p>It turns out I need a hobby, so I thought that official <a href = "https://github.com/ifs-rwth-aachen/RWTH-Colors" >RWTH colors</a> would work quite nicely for a minimalist(-ish) theme for <a href="https://github.com/neovim/neovim">Neovim</a>, similar to a stellar <a href="https://github.com/oskarnurm/koda.nvim">Koda.nvim</a>. </p>
 
-mini-start
+<br/>
 
-|              | Dark Theme                                      | Light Theme                                       |
-| ------------ | ----------------------------------------------- | ------------------------------------------------- |
-| `mini-start` | ![https://github.com/mryodo/rwth.nvim/blob/main/assets/start-dark.png?raw=true](https://github.com/mryodo/rwth.nvim/blob/main/assets/start-dark.png?raw=true) | ![https://github.com/mryodo/rwth.nvim/blob/main/assets/start-light.png?raw=true](https://github.com/mryodo/rwth.nvim/blob/main/assets/start-light.png?raw=true) |
+<p>The whole theme is written in `Lua`; have a look at the screenshots below! Light `extras` and `lualine-nvim` theme are on the way.</p>
 
-
-mini-files
-
-|              | Dark Theme                                                                                                         | Light Theme                                                                                                         |
-| ------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| `mini-files` | <img src="https://github.com/mryodo/rwth.nvim/blob/main/assets/files-dark.png?raw=true" width="600" alt="rwth"  /> | <img src="https://github.com/mryodo/rwth.nvim/blob/main/assets/files-light.png?raw=true" width="600" alt="rwth"  /> |
-
-
-telescope
-
-|             | Dark Theme                                                                                                             | Light Theme                                                                                                             |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `telescope` | <img src="https://github.com/mryodo/rwth.nvim/blob/main/assets/telescope-dark.png?raw=true" width="600" alt="rwth"  /> | <img src="https://github.com/mryodo/rwth.nvim/blob/main/assets/telescope-light.png?raw=true" width="600" alt="rwth"  /> |
-
-
-Active Pmenu
-
-|                    | Dark Theme                                                                                                              | Light Theme                                                                                                              |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| **Active `Pmenu`** | <img src="https://github.com/mryodo/rwth.nvim/blob/main/assets/completion-dark.png?raw=true" width="600" alt="rwth"  /> | <img src="https://github.com/mryodo/rwth.nvim/blob/main/assets/completion-light.png?raw=true" width="600" alt="rwth"  /> |
-
+<ScreenshotCarousel slides={slides} />
 
 ## Installation
 
@@ -72,8 +58,7 @@ to reload the colorscheme again.
 ## Features
 
 The theme based its architecture entirely on the incredible [koda.nvim](https://github.com/oskarnurm/koda.nvim/tree/main). **Please support @oskarnurm !**
-
-Theme was built for personal use on top on the [MiniMax config](https://github.com/nvim-mini/MiniMax). **Please support @echasnowski !**
+`rwth.nvim` was built for personal use on top on the [MiniMax config](https://github.com/nvim-mini/MiniMax). **Please support @echasnowski !**
 
 - light (`rwth-light`) and dark (`rwth-dark`) colorschemes based on the RWTH colors;
 - plugin support inherited from [koda.nvim](https://github.com/oskarnurm/koda.nvim/tree/main#supported-plugins);
@@ -83,6 +68,7 @@ Theme was built for personal use on top on the [MiniMax config](https://github.c
   - `mini.files` at the bottom with contrasting background;
 - additional styling for `telescope.nvim`.
 
+<br/>
 I am also using a keymap for light/dark switch:
 
 ```lua
