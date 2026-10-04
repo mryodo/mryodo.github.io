@@ -92,7 +92,7 @@
   text-decoration: underline;
   text-decoration-color: color-mix(
     in srgb,
-    var(--ascii-primary) 40%,
+    var(--ascii-link-underline) 40%,
     transparent
   );
   text-decoration-thickness: 1px;

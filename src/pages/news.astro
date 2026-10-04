@@ -55,7 +55,13 @@ const pageDescription =
 
         <br />
 
-        <AsciiBox fluid bg="bg-card" className="w-full" title="updates">
+        <AsciiBox
+          fluid
+          bg="bg-card"
+          className="w-full"
+          title="updates"
+          titleClassName="bg-primary text-primary-foreground"
+        >
           <div className="flex flex-col">
             {
               groups.map((group, i) => (

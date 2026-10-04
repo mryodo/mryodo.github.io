@@ -50,8 +50,8 @@ export function Paper({
         <CardTitle>
           <span
             className={cn(
-              "uppercase tracking-[0.08em]",
-              status === "journal" ? "text-ascii-primary" : "text-ascii-comment"
+              "px-[1ch] uppercase tracking-[0.08em] text-white",
+              status === "journal" ? "bg-ascii-primary" : "bg-ascii-dim"
             )}
           >
             {status}

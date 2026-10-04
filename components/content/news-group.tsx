@@ -1,12 +1,17 @@
 import type { ReactNode } from "react";
 
+import { cn } from "@/lib/utils";
+
 function NewsGroup({
   label,
+  labelClassName,
   count,
   defaultOpen,
   children,
 }: {
   label: string;
+  /** Extra classes for the label only (e.g. a highlight background). */
+  labelClassName?: string;
   count: number;
   defaultOpen?: boolean;
   children: ReactNode;
@@ -18,7 +23,7 @@ function NewsGroup({
           <span className="group-open/news-group:hidden">&gt;</span>
           <span className="hidden group-open/news-group:inline">v</span>
         </span>
-        {label}
+        <span className={cn(labelClassName)}>{label}</span>
         <span className="text-ascii-soft">· {count} updates</span>
       </summary>
       <div className="pt-[0.25lh] text-sm">{children}</div>

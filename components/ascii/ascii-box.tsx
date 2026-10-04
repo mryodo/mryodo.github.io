@@ -20,11 +20,11 @@ type Tone = "primary" | "soft" | "danger";
 /** Which line of the glyph set a rule draws with. */
 type AsciiLine = keyof Omit<AsciiChars, "junction">;
 
-/* Every ASCII frame in the app shares one border color (matching the
- * inputs' and menus' rest-state frames). The tone axis is kept as API
- * so emphasis can be reintroduced without touching call sites. */
+/* Most ASCII frames share one muted border color (matching the inputs'
+ * and menus' rest-state frames); "primary" opts a frame into a fully
+ * opaque border for emphasis without touching other call sites. */
 const toneClass: Record<Tone, string> = {
-  primary: "text-primary/60",
+  primary: "text-primary",
   soft: "text-primary/60",
   danger: "text-ascii-primary",
 };
@@ -151,6 +151,9 @@ function AsciiPad({
 type AsciiBoxProps = Omit<React.ComponentProps<"div">, "title"> & {
   width: number;
   title?: string;
+  /** Extra classes for the title label only (e.g. a highlight background),
+   * layered over the border's tone color. */
+  titleClassName?: string;
   tone?: Tone;
   contentClassName?: string;
   /** Empty text rows rendered above and below the content. */
@@ -168,6 +171,7 @@ type AsciiBoxProps = Omit<React.ComponentProps<"div">, "title"> & {
 function AsciiBox({
   width,
   title,
+  titleClassName,
   tone = "soft",
   bg = "bg-card",
   className,
@@ -203,7 +207,7 @@ function AsciiBox({
                   tone={tone}
                   className="w-[2ch] shrink-0 text-inherit"
                 />
-                <span className="shrink-0">{` ${title} `}</span>
+                <span className={cn("shrink-0", titleClassName)}>{` ${title} `}</span>
               </>
             ) : null}
             <AsciiRule
@@ -216,9 +220,23 @@ function AsciiBox({
         ) : (
           <div
             aria-hidden
-            className={cn("select-none whitespace-pre", toneClass[tone])}
+            className={cn("flex select-none whitespace-pre", toneClass[tone])}
           >
-            {topBorder(width, title, chars)}
+            {title ? (
+              <>
+                <span className="shrink-0">
+                  {junctionGlyph(chars)}
+                  {fill(2, chars.top)}
+                </span>
+                <span className={cn("shrink-0", titleClassName)}>{` ${title} `}</span>
+                <span className="shrink-0">
+                  {fill(Math.max(width - 2 - 2 - (title.length + 2), 1), chars.top)}
+                  {junctionGlyph(chars)}
+                </span>
+              </>
+            ) : (
+              <span className="shrink-0">{topBorder(width, title, chars)}</span>
+            )}
           </div>
         )}
         <div className="relative">
@@ -371,7 +389,7 @@ function AsciiHBorder({
   );
 }
 
-export type { AsciiLine };
+export type { AsciiLine, Tone };
 export {
   AsciiBox,
   AsciiBoxContext,

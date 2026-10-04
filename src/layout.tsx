@@ -13,6 +13,7 @@ import {
   AsciiBoxRow,
   AsciiHBorder,
   AsciiVRule,
+  type Tone,
 } from "@/components/ascii/ascii-box";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -108,10 +109,10 @@ function Navbar({ headings }: { headings?: Heading[] }) {
               <DrawerTitle>nav</DrawerTitle>
             </DrawerHeader>
             {NAV_LINKS.map((link) => (
-              <AsciiBoxRow key={link.label} className="px-[2ch] hover:bg-card">
+              <AsciiBoxRow key={link.label} className="px-[2ch]">
                 <a
                   href={link.href}
-                  className="nav-link flex items-center justify-between py-[1lh] uppercase text-ascii-soft hover:text-primary"
+                  className="nav-link flex items-center justify-between bg-primary px-[1ch] py-[1lh] text-primary-foreground uppercase transition-colors hover:bg-primary-foreground hover:text-primary"
                 >
                   {link.label}
                 </a>
@@ -124,7 +125,7 @@ function Navbar({ headings }: { headings?: Heading[] }) {
             <a
               key={link.label}
               href={link.href}
-              className="nav-link text-ascii-soft transition-colors hover:text-primary"
+              className="nav-link bg-primary px-[1ch] text-primary-foreground transition-colors hover:bg-primary-foreground hover:text-primary"
             >
               {link.label}
             </a>
@@ -139,9 +140,9 @@ function Navbar({ headings }: { headings?: Heading[] }) {
   );
 }
 
-function TocNav({ toc }: { toc: Heading[] }) {
+function TocNav({ toc, tone = "soft" }: { toc: Heading[]; tone?: Tone }) {
   return (
-    <AsciiBox width={30} title="toc" contentClassName="flex flex-col">
+    <AsciiBox width={30} title="toc" tone={tone} contentClassName="flex flex-col">
       <nav className="flex flex-col py-[1lh]" aria-label="table of contents">
         {toc.map((h) => (
           <AsciiBoxRow
@@ -170,14 +171,20 @@ function Sidebar({ headings }: { headings?: Heading[] }) {
   const toc = headings?.filter((h) => h.depth > 1) ?? [];
   return (
     <aside className="mx-auto flex w-full max-w-[30ch] shrink-0 flex-col self-stretch gap-[1lh] md:mx-0">
-      <AsciiBox width={30} title="nav" contentClassName="flex flex-col">
+      <AsciiBox
+        width={30}
+        title="nav"
+        titleClassName="bg-primary text-primary-foreground"
+        tone="primary"
+        contentClassName="flex flex-col"
+      >
 <Avatar width={26} aspect={892 / 926}>
     <AvatarImage src="/1.svg" alt="User avatar" keepMounted />
     <AvatarFallback>TS</AvatarFallback>
   </Avatar>
         <div className="flex flex-col gap-[1lh] py-[1lh] text-ascii-comment text-sm">
-          <p>status: postdoc</p>
-          <p>group: netsci @ rwth</p>
+          <p>status: <span className="text-destructive">postdoc</span></p>
+          <p>group: <span className="text-destructive">netsci @ rwth</span></p>
         </div>
         <AsciiBoxDivider pad={false} />
         <nav className="flex flex-col py-[1lh]">
@@ -201,7 +208,7 @@ function Sidebar({ headings }: { headings?: Heading[] }) {
 
       {toc.length > 0 ? (
         <div className="sticky top-[1lh] hidden md:block">
-          <TocNav toc={toc} />
+          <TocNav toc={toc} tone="primary" />
         </div>
       ) : null}
     </aside>
@@ -244,7 +251,7 @@ export default function Layout({
         {/* fluid side frame on the left keeps the grid honest */}
         <div className="hidden w-full max-w-[3ch] shrink-0 self-stretch md:block">
           <div className="relative h-full w-[0ch]">
-            <AsciiVRule side="left" className="absolute inset-y-0 left-0" />
+          {/*<AsciiVRule side="left" className="absolute inset-y-0 left-0" />*/}
           </div>
         </div>
 
