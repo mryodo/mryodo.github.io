@@ -112,7 +112,7 @@ function Navbar({ headings }: { headings?: Heading[] }) {
               <AsciiBoxRow key={link.label} className="px-[2ch]">
                 <a
                   href={link.href}
-                  className="nav-link flex items-center justify-between bg-primary px-[1ch] py-[1lh] text-primary-foreground uppercase transition-colors hover:bg-primary-foreground hover:text-primary"
+                  className="nav-link inline-block bg-primary px-[0.ech] py-[0.5lh] text-sm text-primary-foreground normal-case transition-colors hover:bg-primary-foreground hover:text-primary"
                 >
                   {link.label}
                 </a>
