@@ -82,7 +82,7 @@ export function Paper({
           />
         </details>
       </CardContent>
-      <CardFooter className="gap-[1ch]">
+      <CardFooter className="gap-[0.5ch]">
         {links.map((link) => (
           <Badge
             key={link.label}
