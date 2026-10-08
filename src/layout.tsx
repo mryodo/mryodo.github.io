@@ -72,10 +72,10 @@ function Navbar({ headings }: { headings?: Heading[] }) {
   const pendingSlug = useRef<string | null>(null);
   return (
     <header className="@container flex w-full flex-col">
-      <div className="flex flex-wrap items-center gap-x-[2ch] gap-y-[1lh] px-[2ch] pt-[1lh] pb-[0.5lh]">
+      <div className="flex flex-wrap items-center gap-x-[1ch] gap-y-[1lh] px-[2ch] md:gap-x-[2ch] pt-[1lh] pb-[0.5lh]">
         <a
           href="/"
-          className="flex min-w-0 items-center gap-[1ch] whitespace-nowrap text-primary"
+          className="flex min-w-0 items-center whitespace-nowrap text-primary"
         >
           <span aria-hidden>#</span>
           <span className="font-bold tracking-tight">tony.savostianov</span>
