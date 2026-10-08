@@ -6,13 +6,88 @@ layout: ../layouts/MdxLayout.astro
 
 import { LinkButton } from "@/components/content/link-button";
 
-# Research
+## My Research Topics
 
-For now probably just contact me, why not?
+<img
+  src="/research/scheme.svg"
+  alt="Pipeline: graph, simplicial complex with a hole, its Hodge Laplacian, and the spectrum whose zero eigenvalue marks the hole"
+  style={{ border: "none" }}
+/>
+
+On the high level, I work on <mark>Numerical Methods for Data Science</mark>; in the recent years I focus specifically on the intersection of **numerical (randomized) linear algebra** and **network science**: I design efficient and provable algorithms for the matrices associated with graphs and their higher-order generalizations, such as simplicial complexes (using Hodge Laplacian operators), and operators used for in **graph signal processing** (graph filters). I am currently part of the [Computational Network Science](https://netsci.rwth-aachen.de) group of **Michael Schaub** at _RWTH Aachen_.
+
+##### Higher-order networks
+
+Simplicial complexes allow to model polyadic interactions, but the Hodge Laplacians that describe them are large, ill-conditioned and expensive to work with. My PhD thesis, <mark>_Topological Instability and Preconditioning of Higher-Order Laplacian Operators on Simplicial Complexes_</mark>, tackled this from two sides. The first question was how stable the topology is: I suggested to reduce the problem of searching for the **smallest perturbation that changes a homology group** as a spectral matrix nearness problem and solved it with a bilevel gradient-flow method (_J. Sci. Comput._, 2023). The second part addressed quicker linear system solutions with these operators: I built a **Cholesky-like preconditioner** from a heavy collapsible subcomplex (_SIMAX_, 2024). This work brought me to the notion of **sparsification of simplicial complexes** using local densities of states (_SIMODS_, 2026) which allows to reduce simplicial complex to a sparser, more computationally efficient one at any order with great computational complexity.
+
+<figure>
+  <img
+    src="/research/homology-holes.png"
+    alt="Cycles around holes vs. contractible cycles on a simplicial complex"
+    loading="lazy"
+  />
+  <figcaption>
+    Homology counts holes: cycles around a hole (A, B) cannot be filled, others
+    contract by sweeping over triangles (C.1–C.4). From my{" "}
+    <a href="/docs/thesis.pdf">PhD thesis</a>.
+  </figcaption>
+</figure>
+
+<figure>
+  <img
+    src="/research/sparsification.png"
+    alt="Sparsifying a dense simplicial complex by sampling triangles"
+    loading="lazy"
+  />
+  <figcaption>
+    Spectral sparsification: keep the nodes and edges, sample far fewer
+    triangles, stay spectrally close. From{" "}
+    <a href="https://arxiv.org/abs/2502.07558">arXiv:2502.07558</a>.
+  </figcaption>
+</figure>
+
+##### Learning Algorithms through the Computational Lense
+
+I aim to bring similar matrix-analytic tools to machine learning. This includes exploiting contractivity of **neural ODEs** as an eigenvalue optimization problem (_Math. Comp._, 2025) for stabilisation, **convergence of gradient descent/flow** for linear GNNs (preprint, 2025), and **Riemannian interpolation of low-rank graph filters** on the Grassmann manifold for parametric graph families (preprint, 2025).
+
+<figure>
+  <img
+    src="/research/grassmann-interpolation.png"
+    alt="Riemannian interpolation of subspaces on the Grassmann manifold"
+    loading="lazy"
+    width="70%"
+  />
+  <figcaption>
+    Interpolating graph filters on the Grassmann manifold: map to a tangent
+    space, interpolate, map back. From{" "}
+    <a href="https://arxiv.org/abs/2510.23235">arXiv:2510.23235</a>.
+  </figcaption>
+</figure>
+
+##### Coupled oscillators
+
+Earlier, I worked on inverse problems for Kuramoto and Van der Pol models of **coupled oscillators**, with applications to synchronization in **solar activity** (_Physica D_ 2020, 2024; _CNSNS_ 2020; _Entropy_ 2020).
+
+Going forward, I want to make linear algebra for higher-order and evolving networks scalable and structure-aware. That means exploiting topology to build faster solvers, sparsifiers and filters, and connecting them to learning on relational data.
+
+If any of this overlaps with your work, get in touch!
 
 <div class="flex flex-wrap gap-[1ch]">
   <LinkButton href="https://github.com/mryodo">github</LinkButton>
-  <LinkButton href="https://scholar.google.com/citations?user=E0nt-XYAAAAJ&hl=en" variant="outline">scholar</LinkButton>
-  <LinkButton href="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf" variant="outline">researchgate</LinkButton>
-  <LinkButton href="https://bsky.app/profile/antsav.me" variant="outline">bluesky</LinkButton>
+  <LinkButton
+    href="https://scholar.google.com/citations?user=E0nt-XYAAAAJ&hl=en"
+    variant="outline"
+  >
+    scholar
+  </LinkButton> 
+  <LinkButton
+    href="https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf"
+    variant="outline"
+  >
+    researchgate
+  </LinkButton>
+
+  <LinkButton href="https://bsky.app/profile/antsav.me" variant="outline">
+    bluesky
+  </LinkButton>
 </div>

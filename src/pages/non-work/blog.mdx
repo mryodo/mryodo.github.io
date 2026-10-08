@@ -9,25 +9,64 @@ layout: ../../layouts/MdxLayout.astro
 import { ScreenshotCarousel } from "@/components/content/screenshot-carousel";
 
 export const slides = [
-  { title: "Syntax — Dark", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/syntax-dark.png?raw=true" },
-  { title: "Syntax — Light", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/syntax-light.png?raw=true" },
-  { title: "mini-start — Dark", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/start-dark.png?raw=true" },
-  { title: "mini-start — Light", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/start-light.png?raw=true" },
-  { title: "mini-files — Dark", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/files-dark.png?raw=true" },
-  { title: "mini-files — Light", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/files-light.png?raw=true" },
-  { title: "telescope — Dark", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/telescope-dark.png?raw=true" },
-  { title: "telescope — Light", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/telescope-light.png?raw=true" },
-  { title: "Active Pmenu — Dark", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/completion-dark.png?raw=true" },
-  { title: "Active Pmenu — Light", src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/completion-light.png?raw=true" },
+  {
+    title: "Syntax — Dark",
+    src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/syntax-dark.png?raw=true",
+  },
+  {
+    title: "Syntax — Light",
+    src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/syntax-light.png?raw=true",
+  },
+  {
+    title: "mini-start — Dark",
+    src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/start-dark.png?raw=true",
+  },
+  {
+    title: "mini-start — Light",
+    src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/start-light.png?raw=true",
+  },
+  {
+    title: "mini-files — Dark",
+    src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/files-dark.png?raw=true",
+  },
+  {
+    title: "mini-files — Light",
+    src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/files-light.png?raw=true",
+  },
+  {
+    title: "telescope — Dark",
+    src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/telescope-dark.png?raw=true",
+  },
+  {
+    title: "telescope — Light",
+    src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/telescope-light.png?raw=true",
+  },
+  {
+    title: "Active Pmenu — Dark",
+    src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/completion-dark.png?raw=true",
+  },
+  {
+    title: "Active Pmenu — Light",
+    src: "https://github.com/mryodo/rwth.nvim/blob/main/assets/completion-light.png?raw=true",
+  },
 ];
 
 ## `neovim` theme using RWTH colors
 
-<p>It turns out I need a hobby, so I thought that official <a href = "https://github.com/ifs-rwth-aachen/RWTH-Colors" >RWTH colors</a> would work quite nicely for a minimalist(-ish) theme for <a href="https://github.com/neovim/neovim">Neovim</a>, similar to a stellar <a href="https://github.com/oskarnurm/koda.nvim">Koda.nvim</a>. </p>
+<p>
+  It turns out I need a hobby, so I thought that official{" "}
+  <a href="https://github.com/ifs-rwth-aachen/RWTH-Colors">RWTH colors</a> would
+  work quite nicely for a minimalist(-ish) theme for{" "}
+  <a href="https://github.com/neovim/neovim">Neovim</a>, similar to a stellar{" "}
+  <a href="https://github.com/oskarnurm/koda.nvim">Koda.nvim</a>.{" "}
+</p>
 
-<br/>
+<br />
 
-<p>The whole theme is written in `Lua`; have a look at the screenshots below! Light `extras` and `lualine-nvim` theme are on the way.</p>
+<p>
+  The whole theme is written in `Lua`; have a look at the screenshots below!
+  Light `extras` and `lualine-nvim` theme are on the way.
+</p>
 
 <ScreenshotCarousel slides={slides} />
 
@@ -68,8 +107,7 @@ The theme based its architecture entirely on the incredible [koda.nvim](https://
   - `mini.files` at the bottom with contrasting background;
 - additional styling for `telescope.nvim`.
 
-<br/>
-I am also using a keymap for light/dark switch:
+<br />I am also using a keymap for light/dark switch:
 
 ```lua
   vim.keymap.set(

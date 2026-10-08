@@ -45,16 +45,24 @@
 }
 
 .mdx h4,
-.mdx h5,
 .mdx h6 {
   margin: 1lh 0 1lh;
   color: var(--ascii-comment);
 }
 
+/* run-in heading: sits on the first line of the following paragraph */
+.mdx h5 {
+  float: left;
+  margin: 0 1ch 0 0;
+  scroll-margin-top: 1lh;
+  font-weight: bold;
+  color: var(--ascii-primary);
+}
+
 /* ---------- Paragraphs & inline text ---------- */
 
 .mdx p {
-  margin: 0 0 0lh;
+  margin: 0 0 1lh;
   color: var(--ascii-soft);
 }
 
@@ -280,4 +288,32 @@
   height: auto;
   margin: 0 0 1lh;
   border: 1px solid var(--ascii-dim);
+}
+
+.mdx figure {
+  margin: 0 0 1lh;
+}
+
+.mdx figure img {
+  display: block;
+  margin: 0 auto;
+}
+
+.mdx figcaption {
+  max-width: 60ch;
+  margin: 0.5lh auto 0;
+  text-align: center;
+  font-size: var(--text-xs, 0.75rem);
+  line-height: var(--text-xs--line-height, 1.4);
+  color: var(--ascii-dim);
+}
+
+/* MDX wraps multi-line JSX children in <p>; don't space those inside buttons */
+.mdx [data-slot="label"] p {
+  margin: 0;
+}
+
+/* tighten gap between news text and its tags */
+.mdx .news-body p:last-child {
+  margin-bottom: 0;
 }

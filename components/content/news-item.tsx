@@ -28,7 +28,7 @@ export function NewsItem({
           {date}
         </span>
         <span
-          className="text-ascii-soft min-w-0 text-[11pt] leading-[1.2] [&_a]:text-foreground [&_a]:underline [&_a]:decoration-primary/40 [&_a]:underline-offset-2 [&_strong]:text-foreground"
+          className="news-body text-ascii-soft min-w-0 text-[11pt] leading-[1.2] [&_a]:text-foreground [&_a]:underline [&_a]:decoration-primary/40 [&_a]:underline-offset-2 [&_strong]:text-foreground"
           {...(html !== undefined
             ? { dangerouslySetInnerHTML: { __html: html } }
             : {})}

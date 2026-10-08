@@ -153,11 +153,11 @@ function TocNav({ toc, tone = "soft" }: { toc: Heading[]; tone?: Tone }) {
             <a
               href={`#${h.slug}`}
               className={cn(
-                "block overflow-hidden text-ellipsis whitespace-nowrap text-ascii-soft uppercase hover:text-primary",
-                h.depth >= 3 && "pl-[2ch] text-ascii-comment",
-                h.depth >= 4 && "pl-[4ch]"
+                "block overflow-hidden text-ellipsis whitespace-nowrap text-ascii-soft hover:text-primary",
+                h.depth >= 3 && "text-ascii-comment"
               )}
             >
+              <span className="text-ascii-dim">{".".repeat(h.depth - 2)}</span>
               {h.text}
             </a>
           </AsciiBoxRow>
