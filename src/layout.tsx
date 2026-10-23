@@ -7,7 +7,7 @@ export interface Heading {
 }
 import { AsciiCharsProvider } from "@/components/ascii/ascii-chars";
 
-import { AsciiBoxRow, AsciiHBorder } from "@/components/ascii/ascii-box";
+import { AsciiHBorder } from "@/components/ascii/ascii-box";
 import { Badge } from "@/components/ui/badge";
 import {
   Drawer,
@@ -20,13 +20,21 @@ import { cn } from "@/lib/utils";
 import { Caps } from "@/components/content/thread";
 
 const NAV_LINKS = [
-  { label: "home", href: "/" },
-  { label: "news", href: "/news" },
-  { label: "research", href: "/research" },
-  { label: "papers", href: "/papers" },
-  { label: "teach", href: "/teaching" },
-  { label: "non-work", short: "nw", href: "/non-work" },
+  { label: "home", href: "/", icon: "\uf015" },
+  { label: "news", href: "/news", icon: "\uf1ea" },
+  { label: "research", href: "/research", icon: "\uf0c3" },
+  { label: "papers", href: "/papers", icon: "\uf02d" },
+  { label: "teach", href: "/teaching", icon: "\uf19d" },
+  { label: "non-work", short: "nw", href: "/non-work", icon: "\uf1b0" },
 ];
+
+/* threader's round top-bar buttons, for the mobile toc / menu triggers */
+const roundButton =
+  "flex size-[36px] items-center justify-center rounded-full border border-border bg-[var(--ascii-surface)] text-[15px] text-foreground shadow-[0_2px_8px_rgb(0_0_0/0.08)] transition-colors hover:text-primary";
+
+/* a row in the mobile bottom sheets */
+const sheetRow =
+  "flex min-w-0 items-center gap-[1ch] rounded-full px-[12px] py-[6px] text-[15px] transition-colors hover:bg-[var(--sunk)]";
 
 const SIDEBAR_LINKS = [
   { label: "github", href: "https://github.com/mryodo", icon: <FaGithubAlt /> },
@@ -62,19 +70,20 @@ import { SiCodeberg } from "react-icons/si";
 
 function Navbar({ headings, path = "/" }: { headings?: Heading[]; path?: string }) {
   const toc = headings?.filter((h) => h.depth > 1) ?? [];
+  const top = Math.min(...toc.map((h) => h.depth));
   const [tocOpen, setTocOpen] = useState(false);
   // jump only after the drawer closes, so its scroll-lock restore doesn't undo it
   const pendingSlug = useRef<string | null>(null);
   return (
     <header className="@container flex w-full flex-col">
-      <div className="flex flex-wrap items-center gap-x-[1ch] gap-y-[1lh] px-[2ch] md:gap-x-[2ch] pt-[1lh] pb-[0.5lh]">
+      <div className="flex items-center gap-x-[1ch] px-[2ch] md:flex-wrap md:gap-x-[2ch] pt-[1lh] pb-[0.5lh]">
         <a
           href="/"
           className="flex min-w-0 items-center whitespace-nowrap text-primary"
         >
-          <span className="font-heading font-bold text-[18px]">tony.savostianov</span>
+          <span className="truncate font-heading font-bold text-[18px]">tony.savostianov</span>
         </a>
-        <div className="ml-auto flex gap-[1ch] md:hidden">
+        <div className="ml-auto flex shrink-0 gap-[8px] md:hidden">
           {toc.length > 0 && (
             <Drawer
               open={tocOpen}
@@ -88,22 +97,16 @@ function Navbar({ headings, path = "/" }: { headings?: Heading[]; path?: string 
             >
               <DrawerTrigger
                 render={
-                  <button className="nav-link bg-primary px-[1ch] text-primary-foreground transition-colors hover:bg-primary-foreground hover:text-primary">
-                    toc
+                  <button aria-label="table of contents" className={roundButton}>
+                    {"\uf03a"}
                   </button>
                 }
               />
-              <DrawerContent
-                side="bottom"
-                className="mx-auto w-full max-w-[1000px]"
-              >
+              <DrawerContent side="bottom" className="mx-auto w-full max-w-[1000px]">
                 <DrawerHeader>
-                  <DrawerTitle>table of contents</DrawerTitle>
+                  <DrawerTitle>{"\uf03a"} on this page</DrawerTitle>
                 </DrawerHeader>
-                <nav
-                  className="flex flex-col px-[2ch] pb-[1lh]"
-                  aria-label="table of contents"
-                >
+                <nav className="flex flex-col px-[1ch] pb-[1lh]" aria-label="table of contents">
                   {toc.map((h) => (
                     <a
                       key={h.slug}
@@ -113,15 +116,10 @@ function Navbar({ headings, path = "/" }: { headings?: Heading[]; path?: string 
                         pendingSlug.current = h.slug;
                         setTocOpen(false);
                       }}
-                      className={cn(
-                        "text-ascii-soft hover:text-primary",
-                        h.depth >= 3 && "text-ascii-comment",
-                      )}
+                      className={cn(sheetRow, h.depth === top ? "text-foreground" : "text-ascii-comment")}
+                      style={{ paddingLeft: `calc(12px + ${(h.depth - top) * 2}ch)` }}
                     >
-                      <span className="text-ascii-dim">
-                        {h.depth === 2 ? "• " : ".".repeat(h.depth - 2)}
-                      </span>
-                      {h.text}
+                      <span className="truncate">{h.text}</span>
                     </a>
                   ))}
                 </nav>
@@ -131,28 +129,28 @@ function Navbar({ headings, path = "/" }: { headings?: Heading[]; path?: string 
           <Drawer>
             <DrawerTrigger
               render={
-                <button className="nav-link bg-primary px-[1ch] text-primary-foreground transition-colors hover:bg-primary-foreground hover:text-primary">
-                  menu
+                <button aria-label="menu" className={roundButton}>
+                  {"\uf0c9"}
                 </button>
               }
             />
-            <DrawerContent
-              side="bottom"
-              className="mx-auto w-full max-w-[1000px]"
-            >
+            <DrawerContent side="bottom" className="mx-auto w-full max-w-[1000px]">
               <DrawerHeader>
-                <DrawerTitle>nav</DrawerTitle>
+                <DrawerTitle>{"\uf0c9"} menu</DrawerTitle>
               </DrawerHeader>
-              {NAV_LINKS.map((link) => (
-                <AsciiBoxRow key={link.label} className="px-[2ch]">
+              <nav className="flex flex-col px-[1ch] pb-[1lh]">
+                {NAV_LINKS.map((link) => (
                   <a
+                    key={link.label}
                     href={link.href}
-                    className="nav-link inline-block bg-primary px-[0.ech] py-[0.5lh] text-sm text-primary-foreground normal-case transition-colors hover:bg-primary-foreground hover:text-primary"
+                    aria-current={isActive(link.href, path) ? "page" : undefined}
+                    className={cn(sheetRow, "text-foreground aria-[current=page]:bg-primary aria-[current=page]:text-white")}
                   >
+                    <span className="w-[18px] shrink-0 text-center">{link.icon}</span>
                     {link.label}
                   </a>
-                </AsciiBoxRow>
-              ))}
+                ))}
+              </nav>
             </DrawerContent>
           </Drawer>
         </div>

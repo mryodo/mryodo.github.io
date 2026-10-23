@@ -3,7 +3,6 @@
 import { Drawer as DrawerPrimitive } from "@base-ui/react/drawer";
 import * as React from "react";
 
-import { AsciiRule, AsciiVRule } from "@/components/ascii/ascii-box";
 import { cn } from "@/lib/utils";
 
 function Drawer({ ...props }: DrawerPrimitive.Root.Props) {
@@ -54,8 +53,8 @@ function DrawerContent({
         <DrawerPrimitive.Popup
           data-slot="drawer-content"
           className={cn(
-            "group fixed z-50 flex flex-col bg-popover bg-clip-padding font-mono text-sm text-popover-foreground shadow-lg",
-            "data-[swipe-direction=down]:inset-x-0 data-[swipe-direction=down]:bottom-0 data-[swipe-direction=down]:h-auto",
+            "group fixed z-50 flex flex-col bg-[var(--ascii-surface)] outline-none font-mono text-sm text-popover-foreground shadow-[0_-8px_28px_rgb(0_0_0/0.12)]",
+            "data-[swipe-direction=down]:inset-x-0 data-[swipe-direction=down]:bottom-0 data-[swipe-direction=down]:h-auto data-[swipe-direction=down]:max-h-[80vh] data-[swipe-direction=down]:overflow-y-auto data-[swipe-direction=down]:rounded-t-[24px]",
             "data-[swipe-direction=up]:inset-x-0 data-[swipe-direction=up]:top-0 data-[swipe-direction=up]:h-auto",
             "data-[swipe-direction=left]:inset-y-0 data-[swipe-direction=left]:left-0 data-[swipe-direction=left]:h-full data-[swipe-direction=left]:w-3/4 data-[swipe-direction=left]:sm:max-w-sm",
             "data-[swipe-direction=right]:inset-y-0 data-[swipe-direction=right]:right-0 data-[swipe-direction=right]:h-full data-[swipe-direction=right]:w-3/4 data-[swipe-direction=right]:sm:max-w-sm",
@@ -63,24 +62,15 @@ function DrawerContent({
           )}
           {...props}
         >
-          <AsciiRule
-            orientation="horizontal"
-            className="pointer-events-none absolute inset-x-0 top-0 hidden group-data-[swipe-direction=down]:block"
-          />
-          <AsciiRule
-            orientation="horizontal"
-            className="pointer-events-none absolute inset-x-0 bottom-0 hidden group-data-[swipe-direction=up]:block"
-          />
-          <AsciiVRule className="pointer-events-none absolute inset-y-0 right-0 hidden group-data-[swipe-direction=left]:block" />
-          <AsciiVRule className="pointer-events-none absolute inset-y-0 left-0 hidden group-data-[swipe-direction=right]:block" />
+          <div aria-hidden className="mx-auto mt-[10px] h-[4px] w-[40px] shrink-0 rounded-full bg-[var(--line)] group-data-[swipe-direction=down]:block hidden" />
           {children}
           {showCloseButton && (
             <DrawerPrimitive.Close
               data-slot="drawer-close"
               aria-label="Close"
-              className="absolute top-[1lh] right-[2ch] font-mono text-muted-foreground outline-none select-none hover:text-foreground focus-visible:text-foreground"
+              className="absolute top-[18px] right-[16px] flex size-[30px] items-center justify-center rounded-full bg-[var(--sunk)] text-muted-foreground outline-none select-none hover:text-foreground focus-visible:text-foreground"
             >
-              [x]
+              {"\uf00d"}
             </DrawerPrimitive.Close>
           )}
         </DrawerPrimitive.Popup>
@@ -93,7 +83,7 @@ function DrawerHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="drawer-header"
-      className={cn("flex flex-col px-[2ch] py-[1lh]", className)}
+      className={cn("flex flex-col px-[22px] pt-[0.6lh] pb-[0.4lh]", className)}
       {...props}
     />
   );
@@ -113,7 +103,7 @@ function DrawerTitle({ className, ...props }: DrawerPrimitive.Title.Props) {
   return (
     <DrawerPrimitive.Title
       data-slot="drawer-title"
-      className={cn("font-heading text-sm text-foreground", className)}
+      className={cn("text-[11px] font-semibold uppercase tracking-[0.14em] text-ascii-comment", className)}
       {...props}
     />
   );

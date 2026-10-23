@@ -1,5 +1,6 @@
+@import "@fontsource/maple-mono/300.css";
+@import "@fontsource/maple-mono/300-italic.css";
 @import "@fontsource/maple-mono/400.css";
-@import "@fontsource/maple-mono/400-italic.css";
 @import "@fontsource/maple-mono/600.css";
 @import "@fontsource/maple-mono/700.css";
 @import "tailwindcss";
@@ -60,11 +61,11 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
   --text-sm: 16px;
-  --text-sm--line-height: 27px;
+  --text-sm--line-height: 22px;
   --font-mono: var(--font-ascii);
   --font-code: var(--font-ascii);
   --font-weight-heading: 700;
-  --font-weight-base: 400;
+  --font-weight-base: 300;
   --color-ascii-comment: var(--ascii-comment);
   --color-ascii-soft: var(--ascii-soft);
   --animate-skeleton: skeleton 2s steps(1, end) infinite;

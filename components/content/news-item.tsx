@@ -19,7 +19,7 @@ export function NewsItem({
   return (
     <Note stamp={date} tone={danger ? "danger" : "default"}>
       <div
-        className="news-body text-ascii-soft min-w-0 text-[15px] leading-[1.6] [&_a]:text-foreground [&_a]:underline [&_a]:decoration-primary/40 [&_a]:underline-offset-2 [&_strong]:text-foreground"
+        className="news-body text-ascii-soft min-w-0 text-[15px] leading-[1.35] [&_a]:text-foreground [&_a]:underline [&_a]:decoration-primary/40 [&_a]:underline-offset-2 [&_strong]:text-foreground"
         {...(html !== undefined
           ? { dangerouslySetInnerHTML: { __html: html } }
           : {})}
