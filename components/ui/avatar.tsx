@@ -42,7 +42,7 @@ function Avatar({
           side="left"
           className="absolute inset-y-0 left-0"
         />
-        <span className="absolute inset-x-[1ch] inset-y-0 flex items-center justify-center overflow-hidden uppercase isolate">
+        <span className="absolute inset-x-[1ch] inset-y-0 flex items-center justify-center overflow-hidden rounded-[var(--radius)] bg-card uppercase isolate">
           {children}
         </span>
         <AsciiVRule

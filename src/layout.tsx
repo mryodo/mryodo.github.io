@@ -7,14 +7,7 @@ export interface Heading {
 }
 import { AsciiCharsProvider } from "@/components/ascii/ascii-chars";
 
-import {
-  AsciiBox,
-  AsciiBoxDivider,
-  AsciiBoxRow,
-  AsciiHBorder,
-  AsciiVRule,
-  type Tone,
-} from "@/components/ascii/ascii-box";
+import { AsciiBoxRow, AsciiHBorder } from "@/components/ascii/ascii-box";
 import { Badge } from "@/components/ui/badge";
 import {
   Drawer,
@@ -24,7 +17,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { cn } from "@/lib/utils";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Caps } from "@/components/content/thread";
 
 const NAV_LINKS = [
   { label: "home", href: "/" },
@@ -36,17 +29,19 @@ const NAV_LINKS = [
 ];
 
 const SIDEBAR_LINKS = [
-  { label: "github", href: "https://github.com/mryodo" },
-  { label: "codeberg", href: "https://codeberg.org/mryodo" },
+  { label: "github", href: "https://github.com/mryodo", icon: <FaGithubAlt /> },
+  { label: "codeberg", href: "https://codeberg.org/mryodo", icon: <SiCodeberg /> },
   {
     label: "scholar",
     href: "https://scholar.google.com/citations?user=E0nt-XYAAAAJ&hl=en",
+    icon: <FaGoogleScholar />,
   },
   {
     label: "researchgate",
     href: "https://www.researchgate.net/profile/Anton-Savostianov-3?ev=hdr_xprf",
+    icon: <FaResearchgate />,
   },
-  { label: "bluesky", href: "https://bsky.app/profile/antsav.me" },
+  { label: "bluesky", href: "https://bsky.app/profile/antsav.me", icon: <FaBluesky />, },
 ];
 
 const CONTACT_LINKS = [
@@ -65,7 +60,7 @@ import { FaBluesky } from "react-icons/fa6";
 import { FaGoogleScholar } from "react-icons/fa6";
 import { SiCodeberg } from "react-icons/si";
 
-function Navbar({ headings }: { headings?: Heading[] }) {
+function Navbar({ headings, path = "/" }: { headings?: Heading[]; path?: string }) {
   const toc = headings?.filter((h) => h.depth > 1) ?? [];
   const [tocOpen, setTocOpen] = useState(false);
   // jump only after the drawer closes, so its scroll-lock restore doesn't undo it
@@ -77,8 +72,7 @@ function Navbar({ headings }: { headings?: Heading[] }) {
           href="/"
           className="flex min-w-0 items-center whitespace-nowrap text-primary"
         >
-          <span aria-hidden>#</span>
-          <span className="font-bold tracking-tight">tony.savostianov</span>
+          <span className="font-heading font-bold text-[18px]">tony.savostianov</span>
         </a>
         <div className="ml-auto flex gap-[1ch] md:hidden">
           {toc.length > 0 && (
@@ -162,12 +156,13 @@ function Navbar({ headings }: { headings?: Heading[] }) {
             </DrawerContent>
           </Drawer>
         </div>
-        <nav className="ml-auto hidden items-center gap-[2ch] md:flex">
+        <nav className="ml-auto hidden items-baseline gap-[1.2ch] md:flex">
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="nav-link bg-primary px-[1ch] text-primary-foreground transition-colors hover:bg-primary-foreground hover:text-primary"
+              aria-current={isActive(link.href, path) ? "page" : undefined}
+              className="font-heading font-bold text-[20px] leading-none text-[var(--ascii-text)]/25 transition-colors hover:text-[var(--ascii-text)]/50 aria-[current=page]:text-[var(--ascii-text)]"
             >
               {/* 96ch = header padding + logo + full nav; below it the nav wraps */}
               {link.short ? (
@@ -190,105 +185,77 @@ function Navbar({ headings }: { headings?: Heading[] }) {
   );
 }
 
-function TocNav({ toc, tone = "soft" }: { toc: Heading[]; tone?: Tone }) {
+/* sections of the sidebar are split by a hairline, no labels */
+function SideRule() {
+  return <div aria-hidden className="mx-[10px] my-[0.4lh] h-px bg-white/15" />;
+}
+
+const sideRow =
+  "flex min-w-0 items-center gap-[1ch] rounded-full px-[10px] py-[2px] text-[14px] text-white transition-colors hover:bg-white/10 hover:text-[var(--amber)]";
+
+function SideIcon({ className, children }: { className?: string; children: ReactNode }) {
   return (
-    <AsciiBox
-      width={30}
-      title="toc"
-      tone={tone}
-      contentClassName="flex flex-col"
-    >
-      <nav className="flex flex-col py-[1lh]" aria-label="table of contents">
-        {toc.map((h) => (
-          <AsciiBoxRow
-            key={h.slug}
-            className="hover:bg-card"
-            contentClassName={cn("pr-[1ch]")}
-          >
-            <a
-              href={`#${h.slug}`}
-              className={cn(
-                "block overflow-hidden text-ellipsis whitespace-nowrap text-ascii-soft hover:text-primary",
-                h.depth >= 3 && "text-ascii-comment",
-              )}
-            >
-              <span className="text-ascii-dim">{".".repeat(h.depth - 2)}</span>
-              {h.text}
-            </a>
-          </AsciiBoxRow>
-        ))}
-      </nav>
-    </AsciiBox>
+    <span className={cn("w-[18px] shrink-0 text-center text-[var(--amber)]", className)}>{children}</span>
   );
 }
 
+const panel =
+  "flex flex-col rounded-[var(--radius)] bg-primary p-[12px] shadow-[0_8px_28px_rgb(0_0_0/0.10)]";
+
 function Sidebar({ headings }: { headings?: Heading[] }) {
   const toc = headings?.filter((h) => h.depth > 1) ?? [];
+  const top = Math.min(...toc.map((h) => h.depth));
   return (
-    <aside className="mx-auto flex w-full max-w-[30ch] shrink-0 flex-col self-stretch gap-[1lh] md:mx-0">
-      <AsciiBox
-        width={30}
-        title="nav"
-        titleClassName="bg-primary text-primary-foreground"
-        tone="primary"
-        contentClassName="flex flex-col"
-      >
-        <Avatar width={26} aspect={892 / 926}>
-          <AvatarImage src="/1.svg" alt="User avatar" keepMounted />
-          <AvatarFallback>TS</AvatarFallback>
-        </Avatar>
-        <div className="flex flex-col gap-[1lh] py-[1lh] text-ascii-comment text-sm">
-          <p>
-            status: <span className="text-destructive">postdoc</span>
-          </p>
-          <p>
-            group: <span className="text-destructive">netsci @ rwth</span>
-          </p>
+    <aside className="mx-auto flex w-full max-w-[300px] shrink-0 flex-col self-stretch gap-[0.75lh] md:mx-0">
+      <div className={panel}>
+        <div className="flex items-center gap-[1ch] px-[10px] pb-[0.4lh]">
+          <span className="text-[var(--amber)]">{"\uf2bd"}</span>
+          <span className="flex-1 font-bold text-white">Tony Savostianov</span>
+          <Caps className="text-white/60">{"\uf041"} aachen</Caps>
         </div>
-        <AsciiBoxDivider pad={false} />
-        <nav className="flex flex-col py-[1lh]">
-          {SIDEBAR_LINKS.map((link, i) => (
-            <AsciiBoxRow key={link.label} className="hover:bg-secondary">
-              <a
-                href={link.href}
-                className="flex items-center justify-between gap-[1ch] text-ascii-soft hover:text-primary"
-              >
-                <span>{link.label}</span>
-                {i === 0 ? (
-                  <Badge variant="secondary">
-                    <FaGithubAlt />
-                  </Badge>
-                ) : null}
-                {i === 1 ? (
-                  <Badge variant="secondary">
-                    <SiCodeberg />
-                  </Badge>
-                ) : null}
-                {i === 2 ? (
-                  <Badge variant="secondary">
-                    <FaGoogleScholar />
-                  </Badge>
-                ) : null}
-                {i === 3 ? (
-                  <Badge variant="secondary">
-                    <FaResearchgate />
-                  </Badge>
-                ) : null}
-                {i === 4 ? (
-                  <Badge variant="secondary">
-                    <FaBluesky />
-                  </Badge>
-                ) : null}
-              </a>
-            </AsciiBoxRow>
+        <img src="/1.svg" alt="User avatar" className="mx-auto w-[200px] rounded-[18px] bg-white" />
+        <div className="h-[0.4lh]" />
+        <div className={sideRow}>
+          <SideIcon className="text-destructive">{"\uf19d"}</SideIcon>
+          <span>postdoc</span>
+        </div>
+        <div className={sideRow}>
+          <SideIcon className="text-destructive">{"\uf0c0"}</SideIcon>
+          <span>netsci @ rwth</span>
+        </div>
+        <SideRule />
+        <nav className="flex flex-col">
+          {SIDEBAR_LINKS.map((link) => (
+            <a key={link.label} href={link.href} className={sideRow}>
+              <SideIcon>{link.icon}</SideIcon>
+              <span className="flex-1">{link.label}</span>
+              <span className="text-[12px] text-white/40">{"\uf08e"}</span>
+            </a>
           ))}
         </nav>
-      </AsciiBox>
+      </div>
 
       {toc.length > 0 ? (
-        <div className="sticky top-[1lh] hidden md:block">
-          <TocNav toc={toc} tone="primary" />
-        </div>
+        <nav
+          className="sticky top-[1lh] hidden flex-col rounded-[var(--radius)] bg-[var(--ascii-surface)] p-[12px] shadow-[0_8px_28px_rgb(0_0_0/0.10)] md:flex"
+          aria-label="table of contents"
+        >
+          <Caps className="block px-[10px] pt-[0.6lh] pb-[0.1lh] text-ascii-comment">{"\uf03a"} on this page</Caps>
+          {toc.map((h) => (
+            <a
+              key={h.slug}
+              href={`#${h.slug}`}
+              className={cn(
+                "flex min-w-0 items-center rounded-full px-[10px] py-[2px] text-[14px] transition-colors hover:bg-[var(--sunk)] hover:text-primary",
+                h.depth === top ? "text-foreground" : "text-ascii-comment",
+              )}
+              // indent by depth below the shallowest heading on the page
+              style={{ paddingLeft: `calc(10px + ${(h.depth - top) * 2}ch)` }}
+            >
+              <span className="truncate">{h.text}</span>
+            </a>
+          ))}
+        </nav>
       ) : null}
     </aside>
   );
@@ -298,7 +265,7 @@ function Footer() {
   return (
     <footer className="flex w-full flex-col">
       <AsciiHBorder className="text-primary/60" />
-      <div className="flex flex-wrap items-center gap-x-[4ch] gap-y-[1lh] px-[2ch] py-[1lh] text-ascii-soft text-sm">
+      <div className="flex flex-wrap items-center gap-x-[4ch] gap-y-[1lh] px-[2ch] py-[0.5lh] text-ascii-soft text-sm">
         <span className="flex items-center gap-[1ch]">
           <Badge variant="secondary">
             <a href="https://github.com/mryodo/mryodo.github.io">CODE</a>
@@ -319,18 +286,24 @@ function Footer() {
   );
 }
 
+function isActive(href: string, path: string) {
+  return href === "/" ? path === "/" : path.startsWith(href);
+}
+
 export default function Layout({
   children,
   headings,
+  path,
 }: {
   children: ReactNode;
   headings?: Heading[];
+  path?: string;
 }) {
   return (
     <div className="mx-auto flex w-full max-w-[1000px] flex-col px-[2ch] sm:px-[2ch] md:px-0">
-      <Navbar headings={headings} />
+      <Navbar headings={headings} path={path} />
 
-      <div className="flex flex-col items-start gap-[2ch] px-[2ch] pt-[0.25lh] pb-[1lh] md:flex-row">
+      <div className="flex flex-col items-start gap-[2ch] px-[2ch] pt-[0.75lh] pb-[1lh] md:flex-row">
         {/* fluid side frame on the left keeps the grid honest */}
         <div className="hidden w-full max-w-[3ch] shrink-0 self-stretch md:block">
           <div className="relative h-full w-[0ch]">

@@ -1,14 +1,6 @@
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Note } from "@/components/content/thread";
 import { badgeVariant } from "@/lib/badge";
-import { cn } from "@/lib/utils";
 
 export interface PaperLink {
   label: string;
@@ -38,63 +30,46 @@ export function Paper({
   image?: PaperImage;
 }) {
   return (
-    <Card fluid className="w-full" danger={status === "journal"}>
-      <CardHeader>
-        {image && (
-          <img
-            src={image.src}
-            alt={image.alt ?? ""}
-            className="mb-[1lh] block max-h-[36lh] w-auto rounded border border-primary/30 object-contain"
-          />
-        )}
-        <CardTitle>
-          <span
-            className={cn(
-              "px-[1ch] uppercase tracking-[0.08em] text-white",
-              status === "journal" ? "bg-ascii-primary" : "bg-ascii-dim"
-            )}
-          >
-            {status}
+    <Note stamp={status} tone={status === "journal" ? "primary" : "default"}>
+      {image && (
+        <img
+          src={image.src}
+          alt={image.alt ?? ""}
+          className="my-[0.3lh] block max-h-[36lh] w-auto rounded-[14px] object-contain"
+        />
+      )}
+      <span className="font-bold text-foreground">{title}</span>
+      <span className="text-sm text-ascii-soft">
+        <span className="text-primary">{authors}</span>
+        <br />
+        <span className="italic">{venue}</span>
+      </span>
+      <details className="group/abstract flex flex-col">
+        <summary className="flex cursor-pointer list-none items-center gap-[1ch] select-none text-left text-sm text-foreground outline-none hover:text-primary [&::-webkit-details-marker]:hidden">
+          <span aria-hidden className="shrink-0 text-primary select-none">
+            <span className="group-open/abstract:hidden">{"\uf054"}</span>
+            <span className="hidden group-open/abstract:inline">{"\uf078"}</span>
           </span>
-          <span aria-hidden className="text-ascii-comment">
-            {" \u00b7 "}
-          </span>
-          <span className="font-medium text-foreground">{title}</span>
-        </CardTitle>
-        <CardDescription>
-          <span className="text-primary">{authors}</span>
-          <br />
-          <span className="italic">{venue}</span>
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <details className="group/abstract flex flex-col">
-          <summary className="flex cursor-pointer list-none items-center gap-[1ch] select-none text-left text-sm text-foreground outline-none hover:text-primary">
-            <span aria-hidden className="shrink-0 text-primary select-none">
-              <span className="group-open/abstract:hidden">&gt;</span>
-              <span className="hidden group-open/abstract:inline">v</span>
-            </span>
-            abstract
-          </summary>
-          <div
-            className="m-0 pt-[0.5lh] text-sm text-ascii-soft leading-[1.2]"
-            dangerouslySetInnerHTML={{ __html: abstract }}
-          />
-        </details>
-      </CardContent>
-      <CardFooter className="gap-[0.5ch]">
-        {links.map((link) => (
-          <Badge
-            key={link.label}
-            variant={badgeVariant(link.href, link.label)}
-            render={<a href={link.href} />}
-            className="hover:font-medium"
-            style={{ fontSize: "10pt" }}
-          >
-            {link.label}
-          </Badge>
-        ))}
-      </CardFooter>
-    </Card>
+          abstract
+        </summary>
+        <div
+          className="m-0 pt-[0.3lh] text-sm text-ascii-soft leading-[1.35]"
+          dangerouslySetInnerHTML={{ __html: abstract }}
+        />
+      </details>
+      {links.length > 0 && (
+        <div className="-mt-[0.15lh] flex flex-wrap justify-end gap-[1ch]">
+          {links.map((link) => (
+            <Badge
+              key={link.label}
+              variant={badgeVariant(link.href, link.label)}
+              render={<a href={link.href} />}
+            >
+              {link.label}
+            </Badge>
+          ))}
+        </div>
+      )}
+    </Note>
   );
 }

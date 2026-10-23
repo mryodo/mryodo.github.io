@@ -2,17 +2,7 @@
 
 import * as React from "react";
 
-import { useAsciiChars } from "@/components/ascii/ascii-chars";
-import {
-  type AsciiChars,
-  bottomBorder,
-  dividerBorder,
-  fill,
-  junctionGlyph,
-  topBorder,
-  vColumn,
-  vGlyph,
-} from "@/lib/ascii";
+import type { AsciiChars } from "@/lib/ascii";
 import { cn } from "@/lib/utils";
 
 type Tone = "primary" | "soft" | "danger";
@@ -27,6 +17,12 @@ const toneClass: Record<Tone, string> = {
   primary: "text-primary",
   soft: "text-primary/60",
   danger: "text-ascii-primary",
+};
+
+const borderClass: Record<Tone, string> = {
+  primary: "border-border",
+  soft: "border-border",
+  danger: "border-destructive/60",
 };
 
 const AsciiBoxContext = React.createContext<{
@@ -51,12 +47,7 @@ function AsciiJunction({
   className,
   ...props
 }: Omit<React.ComponentProps<"span">, "children">) {
-  const chars = useAsciiChars();
-  return (
-    <span aria-hidden className={cn("select-none", className)} {...props}>
-      {junctionGlyph(chars)}
-    </span>
-  );
+  return null;
 }
 
 /** One glyph of a vertical edge — for single-row frames (inputs,
@@ -70,12 +61,7 @@ function AsciiSide({
   side?: "left" | "right";
   row?: number;
 }) {
-  const chars = useAsciiChars();
-  return (
-    <span aria-hidden className={cn("select-none", className)} {...props}>
-      {vGlyph(chars[side], row)}
-    </span>
-  );
+  return null;
 }
 
 /** A fixed-width "+----+" edge row for frames sized in characters —
@@ -92,18 +78,7 @@ function AsciiEdge({
   width: number;
   title?: string;
 }) {
-  const chars = useAsciiChars();
-  return (
-    <span
-      aria-hidden
-      className={cn("block select-none whitespace-pre", className)}
-      {...props}
-    >
-      {edge === "top"
-        ? topBorder(width, title, chars)
-        : bottomBorder(width, chars)}
-    </span>
-  );
+  return null;
 }
 
 /** A column of side glyphs that stretches to match its sibling's
@@ -117,19 +92,7 @@ function AsciiVRule({
   side?: "left" | "right";
   className?: string;
 }) {
-  const chars = useAsciiChars();
-  return (
-    <div
-      aria-hidden
-      className={cn(
-        "w-[1ch] shrink-0 select-none overflow-hidden",
-        toneClass[tone],
-        className
-      )}
-    >
-      <pre className="m-0 font-mono">{vColumn(200, chars[side])}</pre>
-    </div>
-  );
+  return null;
 }
 
 /** One or more literal empty text rows — vertical padding that stays
@@ -181,91 +144,34 @@ function AsciiBox({
   children,
   ...props
 }: AsciiBoxProps) {
-  const chars = useAsciiChars();
   return (
     <AsciiBoxContext.Provider value={{ width, tone, bg, fluid }}>
       <div
         data-slot="ascii-box"
         className={cn(
-          "inline-flex flex-col font-mono text-card-foreground text-sm",
+          "inline-flex flex-col rounded-[var(--radius)] border py-[0.8lh] text-card-foreground text-sm shadow-[0_8px_28px_rgb(0_0_0/0.10)]",
+          borderClass[tone],
           bg,
           className
         )}
         style={fluid ? undefined : { width: `${width}ch` }}
         {...props}
       >
-        {fluid ? (
-          <div
-            aria-hidden
-            className={cn("flex select-none whitespace-pre", toneClass[tone])}
-          >
-            <AsciiJunction className="shrink-0" />
-            {title ? (
-              <>
-                <AsciiRule
-                  line="top"
-                  tone={tone}
-                  className="w-[2ch] shrink-0 text-inherit"
-                />
-                <span className={cn("shrink-0", titleClassName)}>{` ${title} `}</span>
-              </>
-            ) : null}
-            <AsciiRule
-              line="top"
-              tone={tone}
-              className="min-w-0 flex-1 text-inherit"
-            />
-            <AsciiJunction className="shrink-0" />
-          </div>
-        ) : (
-          <div
-            aria-hidden
-            className={cn("flex select-none whitespace-pre", toneClass[tone])}
-          >
-            {title ? (
-              <>
-                <span className="shrink-0">
-                  {junctionGlyph(chars)}
-                  {fill(2, chars.top)}
-                </span>
-                <span className={cn("shrink-0", titleClassName)}>{` ${title} `}</span>
-                <span className="shrink-0">
-                  {fill(Math.max(width - 2 - 2 - (title.length + 2), 1), chars.top)}
-                  {junctionGlyph(chars)}
-                </span>
-              </>
-            ) : (
-              <span className="shrink-0">{topBorder(width, title, chars)}</span>
+        {title ? (
+          <span
+            className={cn(
+              "mx-[2ch] mb-[0.4lh] self-start rounded-full text-[11px] font-semibold uppercase tracking-[0.14em]",
+              titleClassName ? cn("px-[1ch]", titleClassName) : "text-ascii-comment"
             )}
-          </div>
-        )}
-        <div className="relative">
-          <AsciiVRule
-            tone={tone}
-            side="left"
-            className="absolute inset-y-0 left-0"
-          />
-          {padY > 0 && <AsciiPad rows={padY} />}
-          <div className={cn("min-w-0 px-[2ch]", contentClassName)}>
-            {children}
-          </div>
-          {padY > 0 && <AsciiPad rows={padY} />}
-          <AsciiVRule
-            tone={tone}
-            side="right"
-            className="absolute inset-y-0 right-0"
-          />
-        </div>
-        {fluid ? (
-          <AsciiHBorder line="bottom" tone={tone} />
-        ) : (
-          <div
-            aria-hidden
-            className={cn("select-none whitespace-pre", toneClass[tone])}
           >
-            {bottomBorder(width, chars)}
-          </div>
-        )}
+            {title}
+          </span>
+        ) : null}
+        {padY > 0 && <AsciiPad rows={padY} />}
+        <div className={cn("min-w-0 px-[2ch] [&>:last-child]:mb-0", contentClassName)}>
+          {children}
+        </div>
+        {padY > 0 && <AsciiPad rows={padY} />}
       </div>
     </AsciiBoxContext.Provider>
   );
@@ -281,27 +187,10 @@ function AsciiBoxDivider({
   className?: string;
   pad?: boolean;
 }) {
-  const { width, tone, bg, fluid } = React.useContext(AsciiBoxContext);
-  const chars = useAsciiChars();
   return (
-    <div
-      aria-hidden
-      className={cn(
-        "-mx-[2ch] select-none whitespace-pre",
-        toneClass[tone],
-        className
-      )}
-    >
+    <div aria-hidden className={cn("-mx-[2ch] select-none", className)}>
       {pad && <div> </div>}
-      {/* Positioned above the box's absolute side rules and repainting
-       * the surface, so the intersection cells show only junctions. */}
-      <div className={cn("relative z-10", bg)}>
-        {fluid ? (
-          <AsciiHBorder line="divider" tone={tone} />
-        ) : (
-          <span>{dividerBorder(width, chars)}</span>
-        )}
-      </div>
+      <div className="border-t border-current opacity-20" />
       {pad && <div> </div>}
     </div>
   );
@@ -315,14 +204,11 @@ function AsciiBoxRow({
   children,
   ...props
 }: React.ComponentProps<"div"> & { contentClassName?: string }) {
-  const { tone } = React.useContext(AsciiBoxContext);
   return (
     <div className={cn("-mx-[2ch] flex items-center", className)} {...props}>
-      <AsciiSide side="left" className={cn("shrink-0", toneClass[tone])} />
-      <div className={cn("min-w-0 flex-1 px-[1ch]", contentClassName)}>
+      <div className={cn("min-w-0 flex-1 px-[2ch]", contentClassName)}>
         {children}
       </div>
-      <AsciiSide side="right" className={cn("shrink-0", toneClass[tone])} />
     </div>
   );
 }
@@ -347,20 +233,16 @@ function AsciiRule({
   tone?: Tone;
   orientation?: "horizontal" | "vertical";
 }) {
-  const chars = useAsciiChars();
-  const vertical = orientation === "vertical";
-  const seq = char ?? chars[line ?? (vertical ? "left" : "divider")];
   return (
     <div
       aria-hidden
       className={cn(
-        "select-none overflow-hidden whitespace-pre text-nowrap",
+        "select-none opacity-40",
+        orientation === "vertical" ? "w-px self-stretch bg-current" : "h-px w-full bg-current",
         toneClass[tone],
         className
       )}
-    >
-      {vertical ? vColumn(200, seq) : fill(400, seq)}
-    </div>
+    />
   );
 }
 
@@ -382,9 +264,7 @@ function AsciiHBorder({
       className={cn("flex select-none", toneClass[tone], className)}
       {...props}
     >
-      <AsciiJunction className="shrink-0" />
       <AsciiRule line={line} tone={tone} className="min-w-0 flex-1" />
-      <AsciiJunction className="shrink-0" />
     </div>
   );
 }

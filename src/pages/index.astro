@@ -3,7 +3,7 @@ import "../styles/global.css";
 import "../styles/mdx.css";
 import Layout from "../layout";
 import { AsciiBox } from "@/components/ascii/ascii-box";
-import { NewsGroup } from "@/components/content/news-group";
+import { Thread } from "@/components/content/thread";
 import { NewsItem } from "@/components/content/news-item";
 import { getNews } from "@/lib/news";
 import { GrSolaris } from "react-icons/gr";
@@ -28,7 +28,7 @@ const pageDescription =
     <title>{title}</title>
   </head>
   <body>
-    <Layout client:idle>
+    <Layout path={Astro.url.pathname} client:idle>
       <div class="mdx">
         <h2>Hi!</h2>
 
@@ -72,30 +72,19 @@ const pageDescription =
           </ul>
         </AsciiBox>
 
-        <br />
-        <br />
 
-        <AsciiBox fluid bg="bg-card" className="w-full">
-          <div>
-            <NewsGroup
-              label="last updates"
-              labelClassName="bg-primary px-[1ch] text-primary-foreground"
-              count={latestNews.length}
-              defaultOpen
-            >
-              {
-                latestNews.map((item) => (
-                  <NewsItem
-                    date={item.date}
-                    danger={item.decorator === "alert"}
-                    links={item.link}
-                    html={item.bodyHtml}
-                  />
-                ))
-              }
-            </NewsGroup>
-          </div>
-        </AsciiBox>
+        <Thread title="last updates" count={latestNews.length} noun="update" defaultOpen>
+          {
+            latestNews.map((item) => (
+              <NewsItem
+                date={item.date}
+                danger={item.decorator === "alert"}
+                links={item.link}
+                html={item.bodyHtml}
+              />
+            ))
+          }
+        </Thread>
       </div>
     </Layout>
   </body>

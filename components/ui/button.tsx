@@ -1,11 +1,6 @@
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
 
-import {
-  AsciiJunction,
-  AsciiRule,
-  AsciiSide,
-} from "@/components/ascii/ascii-box";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
@@ -37,25 +32,6 @@ const buttonVariants = cva(
   }
 );
 
-/** A "+----+" border row pinned to the button's top or bottom edge —
- * absolutely positioned so its dash filler can't widen the button. */
-function ButtonBorder({ edge }: { edge: "top" | "bottom" }) {
-  return (
-    <span
-      aria-hidden
-      data-slot="frame"
-      className={cn(
-        "absolute inset-x-0 flex",
-        edge === "top" ? "top-0" : "bottom-0"
-      )}
-    >
-      <AsciiJunction />
-      <AsciiRule line={edge} className="min-w-0 flex-1 text-inherit" />
-      <AsciiJunction />
-    </span>
-  );
-}
-
 function Button({
   className,
   variant = "default",
@@ -71,7 +47,7 @@ function Button({
       className={cn(
         buttonVariants({ variant, size }),
         boxed
-          ? "relative inline-flex items-center py-[1lh]"
+          ? "relative inline-flex items-center rounded-full bg-[var(--sunk)] leading-[26px] transition-colors hover:bg-[var(--line)]"
           : "inline-flex items-center gap-[1ch]",
         className
       )}
@@ -79,16 +55,12 @@ function Button({
     >
       {boxed ? (
         <>
-          <ButtonBorder edge="top" />
-          <AsciiSide side="left" data-slot="frame" />
           <span
             data-slot="label"
             className="flex min-w-0 flex-1 items-center justify-center gap-[1ch]"
           >
             {children}
           </span>
-          <AsciiSide side="right" data-slot="frame" />
-          <ButtonBorder edge="bottom" />
         </>
       ) : (
         <>

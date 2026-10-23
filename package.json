@@ -12,9 +12,11 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "^0.4.0",
     "@astrojs/mdx": "^7.0.8",
     "@astrojs/react": "^6.0.5",
     "@base-ui/react": "^1.8.0",
+    "@fontsource/maple-mono": "^5.3.0",
     "@netlify/blobs": "^10.7.13",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.2.18",

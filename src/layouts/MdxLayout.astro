@@ -25,7 +25,7 @@ const pageDescription = description;
     <title>{pageTitle}</title>
   </head>
   <body>
-    <Layout headings={headings} client:idle>
+    <Layout headings={headings} path={Astro.url.pathname} client:idle>
       <div class="mdx">
         <slot />
       </div>

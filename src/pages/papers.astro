@@ -2,7 +2,7 @@
 import "../styles/global.css";
 import "../styles/mdx.css";
 import Layout from "../layout";
-import { PapersGroup } from "@/components/content/papers-group";
+import { Thread } from "@/components/content/thread";
 import { Paper } from "@/components/content/paper";
 import { getPapers } from "@/lib/papers";
 
@@ -37,7 +37,7 @@ const pageDescription =
     <title>{title}</title>
   </head>
   <body>
-    <Layout client:idle>
+    <Layout path={Astro.url.pathname} client:idle>
       <div class="mdx">
         <h2>Papers</h2>
 
@@ -72,13 +72,13 @@ const pageDescription =
           the confusion!
         </p>
 
-        <br />
 
         {
           groups.map((group, i) => (
-            <PapersGroup
-              year={String(group.year)}
+            <Thread
+              title={String(group.year)}
               count={group.items.length}
+              noun="paper"
               defaultOpen={i === 0}
             >
               {group.items.map((paper) => (
@@ -92,7 +92,7 @@ const pageDescription =
                   image={paper.image}
                 />
               ))}
-            </PapersGroup>
+            </Thread>
           ))
         }
       </div>

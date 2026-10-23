@@ -28,7 +28,7 @@ export function ScreenshotCarousel({
               width={40}
               tone="primary"
               title={slide.title}
-              className="w-full"
+              className="w-full shadow-none"
             >
               <img src={slide.src} alt={slide.title} className="h-auto w-full" />
             </AsciiBox>

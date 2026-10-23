@@ -4,7 +4,7 @@
  * 1lh vertical / text-sm horizontal, matching the component library. */
 
 .mdx {
-  font-family: var(--font-mono);
+  font-family: var(--font-ascii);
   font-size: var(--text-sm);
   line-height: var(--text-sm--line-height);
   color: var(--ascii-text);
@@ -26,34 +26,67 @@
 }
 
 .mdx h1 {
-  margin: 0 0 1lh;
-  color: var(--ascii-primary);
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.6lh;
+  color: var(--ascii-text);
 }
 
-.mdx h2 {
-  margin: 2lh 0 1lh;
-  scroll-margin-top: 1lh;
-  color: var(--ascii-comment);
+/* a leading h2 is the page title, set like h1 */
+.mdx > h2:first-child {
+  margin: 0 0 0.5lh;
+  padding: 0;
+  border: 0;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
+}
+
+/* section header: bold mono over a hairline, as threader's headings */
+.mdx h2 {
+  margin: 1.25lh 0 0.5lh;
+  padding-bottom: 0.3em;
+  scroll-margin-top: 1lh;
+  border-bottom: 1px solid var(--line);
+  color: var(--ascii-text);
+  font-weight: 700;
 }
 
 .mdx h3 {
-  margin: 1lh 0 1lh;
-  color: var(--ascii-soft);
+  margin: 0.75lh 0 0.4lh;
+  font-weight: 700;
+  color: var(--ascii-text);
+}
+
+/* Nerd Font icon per heading level, as markview draws them in nvim */
+.mdx h1::before,
+.mdx > h2:first-child::before {
+  content: "\f0f6  "; /* file-text-o */
+  color: var(--ascii-primary);
+}
+.mdx h2:not(:first-child)::before,
+.mdx h5::before {
+  content: "\f292  "; /* hashtag */
+  color: var(--bullet);
+}
+.mdx h3::before {
+  content: "\f105  "; /* angle-right */
+  color: var(--bullet);
+}
+.mdx h4::before,
+.mdx h6::before {
+  content: "\f101  "; /* angle-double-right */
 }
 
 .mdx h4,
 .mdx h6 {
-  margin: 1lh 0 1lh;
+  margin: 0.75lh 0 0.4lh;
   color: var(--ascii-comment);
 }
 
-/* run-in heading: sits on the first line of the following paragraph */
 .mdx h5 {
-  float: left;
-  margin: 0 1ch 0 0;
+  margin: 0.75lh 0 0.3lh;
   scroll-margin-top: 1lh;
   font-weight: bold;
   color: var(--ascii-primary);
@@ -62,13 +95,13 @@
 /* ---------- Paragraphs & inline text ---------- */
 
 .mdx p {
-  margin: 0 0 1lh;
+  margin: 0 0 0.6lh;
   color: var(--ascii-soft);
 }
 
 .mdx strong {
   color: var(--ascii-text);
-  font-weight: var(--font-weight-heading);
+  font-weight: 700;
 }
 
 .mdx del,
@@ -140,26 +173,25 @@
 /* ---------- Inline code ---------- */
 
 .mdx :not(pre) > code {
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
+  font-family: var(--font-code);
+  font-size: 0.95em; /* follows the surrounding text, headings included */
   color: var(--ascii-primary);
-  background: var(--card);
+  background: var(--sunk);
   padding: 0 0.5ch;
-  border: 1px solid var(--ascii-dim);
+  border-radius: 6px;
 }
 
 /* ---------- Code blocks (Astro's shiki output, `.astro-code`) ---------- */
 
 .mdx .astro-code {
-  margin: 0 0 1lh;
-  padding: 1lh 1ch;
-  border: 1px solid color-mix(in srgb, var(--ascii-primary) 60%, transparent);
-  border-radius: 0;
+  margin: 0 0 0.6lh;
+  padding: 0.6lh 2ch;
+  border-radius: 14px;
   overflow-x: auto;
 }
 
 .mdx .astro-code code {
-  font-family: var(--font-mono);
+  font-family: var(--font-code);
   font-size: var(--text-sm);
   line-height: var(--text-sm--line-height);
 }
@@ -183,10 +215,10 @@
 }
 
 .mdx ul > li::before {
-  content: "*";
+  content: "•";
   position: absolute;
-  left: 0;
-  color: var(--ascii-primary);
+  left: 0.5ch;
+  color: var(--bullet);
 }
 
 .mdx ol {
@@ -198,7 +230,8 @@
 }
 
 .mdx ol > li::marker {
-  color: var(--ascii-comment);
+  color: var(--bullet);
+  font-weight: 700;
 }
 
 .mdx li + li {
@@ -221,11 +254,12 @@
 /* ---------- Blockquote ---------- */
 
 .mdx blockquote {
-  margin: 0 0 1lh;
+  margin: 0 0 0.6lh;
   padding: 0 2ch;
-  color: var(--ascii-soft);
-  background: var(--card);
-  border-left: 1ch solid var(--ascii-dim);
+  color: var(--ascii-comment);
+  font-style: italic;
+  border-left: 3px solid var(--ascii-comment);
+  border-radius: 2px;
 }
 
 .mdx blockquote > *:last-child {
@@ -236,14 +270,77 @@
   margin: 0.5lh 0 0;
 }
 
+/* ---------- Callouts: > [!TYPE] title (lib/callouts.mjs) ---------- */
+/* threader's callouts: a tinted panel, a bar on the left, a caps title
+ * with an icon; colour and icon per group, as in markview's table */
+
+.mdx blockquote.callout {
+  --c: var(--ascii-primary);
+  --icon: "\f05a"; /* info-circle */
+  position: relative;
+  padding: 0.4lh 2ch 0.4lh 3ch;
+  color: var(--ascii-soft);
+  font-style: normal;
+  background: color-mix(in srgb, var(--c) 10%, transparent);
+  border: 0;
+  border-radius: 14px;
+}
+
+.mdx blockquote.callout::before {
+  content: "";
+  position: absolute;
+  inset: 10px auto 10px 8px;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--c);
+}
+
+.mdx .callout-title {
+  margin: 0 0 0.2lh;
+  color: var(--c);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.mdx .callout-title::before {
+  content: var(--icon) "  ";
+  font-size: 13px;
+}
+
+.mdx .callout:is([data-callout="tip"], [data-callout="hint"], [data-callout="success"],
+  [data-callout="check"], [data-callout="done"]) {
+  --c: var(--teal);
+  --icon: "\f0eb"; /* lightbulb-o */
+}
+
+.mdx .callout:is([data-callout="warning"], [data-callout="attention"], [data-callout="important"],
+  [data-callout="example"], [data-callout="question"], [data-callout="help"], [data-callout="faq"]) {
+  --c: var(--bullet);
+  --icon: "\f071"; /* warning */
+}
+
+.mdx .callout:is([data-callout="caution"], [data-callout="danger"], [data-callout="error"],
+  [data-callout="bug"], [data-callout="fail"], [data-callout="failure"], [data-callout="missing"]) {
+  --c: var(--destructive);
+  --icon: "\f06a"; /* exclamation-circle */
+}
+
+.mdx .callout:is([data-callout="quote"], [data-callout="cite"]) {
+  --c: var(--ascii-comment);
+  --icon: "\f10d"; /* quote-left */
+}
+
 /* ---------- Tables ---------- */
 
 .mdx table {
   width: max-content;
   max-width: 100%;
-  margin: 0 0 1lh;
+  margin: 0 0 0.6lh;
   border-collapse: collapse;
   background: var(--card);
+  border-radius: 14px;
   color: var(--ascii-soft);
   font-size: var(--text-sm);
 }
@@ -251,28 +348,24 @@
 .mdx th,
 .mdx td {
   padding: 0.25lh 1ch;
-  border: 1px solid var(--ascii-dim);
+  border: 1px solid var(--line);
   text-align: left;
 }
 
 .mdx th {
   color: var(--ascii-comment);
-  font-weight: var(--font-weight-heading);
+  font-size: 11px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
 }
 
 /* ---------- Horizontal rule ---------- */
 
 .mdx hr {
-  height: 1ch;
-  margin: 2lh 0;
+  margin: 1lh 0;
   border: none;
-  background: repeating-linear-gradient(
-    to right,
-    var(--ascii-dim) 0 1ch,
-    transparent 1ch 2ch
-  );
+  border-top: 1px solid var(--line);
 }
 
 /* ---------- Inline icons (react-icons etc.) ---------- */
@@ -286,12 +379,12 @@
 .mdx img {
   max-width: 100%;
   height: auto;
-  margin: 0 0 1lh;
-  border: 1px solid var(--ascii-dim);
+  margin: 0 0 0.6lh;
+  border-radius: 14px;
 }
 
 .mdx figure {
-  margin: 0 0 1lh;
+  margin: 0 0 0.6lh;
 }
 
 .mdx figure img {
@@ -316,4 +409,9 @@
 /* tighten gap between news text and its tags */
 .mdx .news-body p:last-child {
   margin-bottom: 0;
+}
+
+/* cards placed directly in page copy get paragraph rhythm */
+.mdx > [data-slot="ascii-box"] {
+  margin-bottom: 0.6lh;
 }

@@ -57,7 +57,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-description"
-      className={cn("mt-[1lh] text-ascii-comment", className)}
+      className={cn("mt-[0.3lh] text-ascii-comment", className)}
       {...props}
     />
   );

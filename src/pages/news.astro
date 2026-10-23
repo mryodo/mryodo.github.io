@@ -2,8 +2,7 @@
 import "../styles/global.css";
 import "../styles/mdx.css";
 import Layout from "../layout";
-import { AsciiBox, AsciiRule } from "@/components/ascii/ascii-box";
-import { NewsGroup } from "@/components/content/news-group";
+import { Thread } from "@/components/content/thread";
 import { NewsItem } from "@/components/content/news-item";
 import { getNews } from "@/lib/news";
 
@@ -38,13 +37,12 @@ const pageDescription =
     <title>{title}</title>
   </head>
   <body>
-    <Layout client:idle>
+    <Layout path={Astro.url.pathname} client:idle>
       <div class="mdx">
         <h2>Updates</h2>
 
         <p>Here you can find a quick list of updates on my work. Enjoy!</p>
 
-        <br />
 
         <p>
           This list consists of quick, typically one-line, updates on the
@@ -53,39 +51,26 @@ const pageDescription =
           <a href="/papers">here</a>.
         </p>
 
-        <br />
 
-        <AsciiBox
-          fluid
-          bg="bg-card"
-          className="w-full"
-          title="updates"
-          titleClassName="bg-primary text-primary-foreground"
-        >
-          <div className="flex flex-col">
-            {
-              groups.map((group, i) => (
-                <>
-                  {i > 0 && <AsciiRule className="my-[0.5lh] opacity-50" />}
-                  <NewsGroup
-                    label={group.year}
-                    count={group.items.length}
-                    defaultOpen={i === 0}
-                  >
-                    {group.items.map((item) => (
-                      <NewsItem
-                        date={item.date}
-                        danger={item.decorator === "alert"}
-                        links={item.link}
-                        html={item.bodyHtml}
-                      />
-                    ))}
-                  </NewsGroup>
-                </>
-              ))
-            }
-          </div>
-        </AsciiBox>
+        {
+            groups.map((group, i) => (
+              <Thread
+                title={group.year}
+                count={group.items.length}
+                noun="update"
+                defaultOpen={i === 0}
+              >
+                {group.items.map((item) => (
+                  <NewsItem
+                    date={item.date}
+                    danger={item.decorator === "alert"}
+                    links={item.link}
+                    html={item.bodyHtml}
+                  />
+                ))}
+              </Thread>
+            ))
+        }
       </div>
     </Layout>
   </body>

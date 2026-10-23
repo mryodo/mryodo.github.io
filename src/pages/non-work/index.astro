@@ -55,13 +55,12 @@ const pageDescription =
     <title>{title}</title>
   </head>
   <body>
-    <Layout client:idle>
+    <Layout path={Astro.url.pathname} client:idle>
       <div class="mdx">
         <h2>Non-work</h2>
 
         <p>A running list of things unrelated to research — mostly for fun.</p>
 
-        <br />
 
         <p
           data-tag-filter-indicator
@@ -86,7 +85,7 @@ const pageDescription =
           <div class="flex flex-col">
             {
               posts.length === 0 ? (
-                <p class="py-[1lh] text-ascii-soft text-sm">
+                <p class="py-[0.5lh] text-ascii-soft text-sm">
                   Nothing here yet.
                 </p>
               ) : (

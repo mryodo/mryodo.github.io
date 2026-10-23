@@ -1,68 +1,25 @@
+@import "@fontsource/maple-mono/400.css";
+@import "@fontsource/maple-mono/400-italic.css";
+@import "@fontsource/maple-mono/600.css";
+@import "@fontsource/maple-mono/700.css";
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+
+/* Nerd Font icons (the Font Awesome range, from Maple Mono NF): falls in
+ * behind Maple Mono, so any U+F000–F2FF glyph in text renders as an icon */
 @font-face {
-  font-family: "Zed Mono";
-  src: url("/fonts/zed-mono/zed-mono-300-normal.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Zed Mono";
-  src: url("/fonts/zed-mono/zed-mono-300-italic.woff2") format("woff2");
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Zed Mono";
-  src: url("/fonts/zed-mono/zed-mono-400-normal.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Zed Mono";
-  src: url("/fonts/zed-mono/zed-mono-400-italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Zed Mono";
-  src: url("/fonts/zed-mono/zed-mono-500-normal.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Zed Mono";
-  src: url("/fonts/zed-mono/zed-mono-500-italic.woff2") format("woff2");
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Zed Mono";
-  src: url("/fonts/zed-mono/zed-mono-700-normal.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Zed Mono";
-  src: url("/fonts/zed-mono/zed-mono-700-italic.woff2") format("woff2");
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
+  font-family: "NF Icons";
+  src: url("/fonts/nf-icons.woff") format("woff");
+  unicode-range: U+F000-F2FF;
+  font-display: block;
 }
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-display);
   --font-sans: var(--font-ascii);
   --color-sidebar-ring: var(--ring);
   --color-sidebar-border: var(--border);
@@ -103,14 +60,15 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
   --text-sm: 16px;
-  --text-sm--line-height: 22px;
+  --text-sm--line-height: 27px;
   --font-mono: var(--font-ascii);
-  --font-weight-heading: 500;
-  --font-weight-base: 300;
+  --font-code: var(--font-ascii);
+  --font-weight-heading: 700;
+  --font-weight-base: 400;
   --color-ascii-comment: var(--ascii-comment);
   --color-ascii-soft: var(--ascii-soft);
   --animate-skeleton: skeleton 2s steps(1, end) infinite;
-  --radius-*: initial;
+  
   --ascii-glow: var(--ascii-glow);
   --font-ascii: var(--font-ascii);
   --ring: var(--ring);
@@ -145,7 +103,7 @@
 }
 
 :root {
-  --background: #f5f7fb;
+  --background: #d4d4d4; /* sw1comm normal */
   --foreground: var(--ascii-text);
   --card: var(--ascii-surface);
   --card-foreground: var(--ascii-text);
@@ -153,22 +111,22 @@
   --popover-foreground: var(--ascii-text);
   --primary: var(--ascii-primary);
   --primary-foreground: #ffffff;
-  --secondary: #c2c2c2;
+  --secondary: #c6c6c6;
   --secondary-foreground: var(--ascii-soft);
   --muted: #c6c6c6;
-  --muted-foreground: #747583;
+  --muted-foreground: #5f6078;
   --accent: #c6c6c6;
   --accent-foreground: var(--ascii-text);
   --destructive: #d00000;
-  --border: var(--ascii-dim);
-  --input: var(--ascii-dim);
+  --border: #b4b4bc;
+  --input: #b4b4bc;
   --ring: var(--ascii-primary);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  --radius: 24px;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -177,14 +135,21 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --ascii-primary: #0048c8;
+  --ascii-primary: #0000a0; /* important */
   --ascii-link-underline: #0000a0;
-  --ascii-soft: #55576e;
-  --ascii-text: #202020;
-  --ascii-comment: #5f6078;
-  --ascii-surface: #ffffff;
-  --ascii-dim: #777777;
-  --font-ascii: var(--font-zed-mono, "Zed Mono", ui-monospace, monospace);
+  --ascii-soft: #303038; /* between ink and comment for body copy */
+  --ascii-text: #202020; /* ink */
+  --ascii-comment: #5f6078; /* comment */
+  --ascii-surface: #e2e2e2; /* raised */
+  --ascii-dim: #8e8e9a;
+  --font-ascii: "Maple Mono", "NF Icons", ui-monospace, "SF Mono", monospace;
+  --font-display: var(--font-ascii);
+  --on-cobalt: #ffffff;
+  --sunk: #c6c6c6; /* normal_embed */
+  --line: #b4b4bc;
+  --amber: #a5c6f2; /* card accent */
+  --bullet: #0048c8; /* constant */
+  --teal: #45763c;
   --ascii-glow: 0 0 8px
     color-mix(in srgb, var(--ascii-primary) 35%, transparent);
 }
@@ -231,6 +196,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
     font-weight: var(--font-weight-base);
     background-color: var(--background);
     color: var(--foreground);
