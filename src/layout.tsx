@@ -76,7 +76,7 @@ function Navbar({ headings, path = "/" }: { headings?: Heading[]; path?: string 
   const pendingSlug = useRef<string | null>(null);
   return (
     <header className="@container flex w-full flex-col">
-      <div className="flex items-center gap-x-[1ch] px-[2ch] md:flex-wrap md:gap-x-[2ch] pt-[1lh] pb-[0.5lh]">
+      <div className="flex items-center gap-x-[1ch] px-[2ch] md:flex-wrap md:gap-x-[2ch] pt-[1.4lh] pb-[0.5lh]">
         <a
           href="/"
           className="flex min-w-0 items-center whitespace-nowrap text-primary"
@@ -178,7 +178,7 @@ function Navbar({ headings, path = "/" }: { headings?: Heading[]; path?: string 
           login
         </Button> */}
       </div>
-      <AsciiHBorder className="text-primary/60" />
+      <AsciiHBorder className="mb-[0.5lh] text-primary/60" />
     </header>
   );
 }
@@ -213,13 +213,13 @@ function Sidebar({ headings }: { headings?: Heading[] }) {
         </div>
         <img src="/1.svg" alt="User avatar" className="mx-auto w-[200px] rounded-[18px] bg-white" />
         <div className="h-[0.4lh]" />
-        <div className={sideRow}>
-          <SideIcon className="text-destructive">{"\uf19d"}</SideIcon>
-          <span>postdoc</span>
-        </div>
-        <div className={sideRow}>
-          <SideIcon className="text-destructive">{"\uf0c0"}</SideIcon>
-          <span>netsci @ rwth</span>
+        <div className="flex flex-wrap justify-center gap-[1ch] px-[10px]">
+          <Badge className="bg-white text-primary hover:bg-white/90">
+            <span className="mr-[0.5ch] text-destructive">{"\uf19d"}</span> postdoc
+          </Badge>
+          <Badge className="bg-white text-primary hover:bg-white/90">
+            <span className="mr-[0.5ch] text-destructive">{"\uf0c0"}</span> netsci@rwth
+          </Badge>
         </div>
         <SideRule />
         <nav className="flex flex-col">

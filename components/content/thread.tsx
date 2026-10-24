@@ -43,8 +43,10 @@ function Thread({
   );
 }
 
-const dotClass = { default: "bg-[var(--bullet)]", primary: "bg-primary", danger: "bg-destructive" };
-const stampClass = { default: "text-ascii-comment", primary: "text-primary", danger: "text-destructive" };
+const dotClass = { default: "bg-[var(--bullet)]", primary: "bg-primary", danger: "bg-destructive", muted: "bg-ascii-comment" };
+const stampClass = { default: "text-ascii-comment", primary: "text-primary", danger: "text-destructive", muted: "text-ascii-comment" };
+/* journals sit on a light card, like the AsciiBox on the title page */
+const bodyClass = { default: "hover:bg-primary/[0.06]", primary: "my-[0.2lh] border border-border bg-card text-card-foreground shadow-[0_8px_28px_rgb(0_0_0/0.10)]", danger: "hover:bg-primary/[0.06]", muted: "hover:bg-ascii-comment/[0.08]" };
 
 /** Note is one post on a thread's timeline: the rail with its dot, a caps
  * stamp, then the body. Must be a direct child of Thread's note list so
@@ -61,7 +63,7 @@ function Note({
   return (
     <div className="group/note flex gap-[14px]">
       <div aria-hidden className="relative w-[22px] shrink-0">
-        <div className="absolute inset-y-0 left-1/2 w-[2px] -translate-x-1/2 bg-[var(--line)] group-last/note:bottom-auto group-last/note:h-[30px]" />
+        <div className="absolute inset-y-0 left-1/2 w-[2px] -translate-x-1/2 bg-[var(--line)] group-first/note:-top-[0.3lh] group-last/note:bottom-auto group-last/note:h-[30px] group-first/note:group-last/note:h-[calc(30px+0.3lh)]" />
         <div
           className={cn(
             "absolute top-[18px] left-1/2 size-[11px] -translate-x-1/2 rounded-full ring-2 ring-background",
@@ -69,7 +71,12 @@ function Note({
           )}
         />
       </div>
-      <div className="flex min-w-0 flex-1 flex-col gap-[0.2lh] rounded-[16px] px-[14px] py-[10px] transition-colors hover:bg-primary/[0.06]">
+      <div
+        className={cn(
+          "flex min-w-0 flex-1 flex-col gap-[0.2lh] rounded-[16px] px-[14px] py-[10px] transition-colors",
+          bodyClass[tone],
+        )}
+      >
         <Caps className={stampClass[tone]}>{stamp}</Caps>
         {children}
       </div>

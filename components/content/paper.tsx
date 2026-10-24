@@ -30,7 +30,7 @@ export function Paper({
   image?: PaperImage;
 }) {
   return (
-    <Note stamp={status} tone={status === "journal" ? "primary" : "default"}>
+    <Note stamp={status} tone={status === "journal" ? "primary" : "muted"}>
       {image && (
         <img
           src={image.src}
