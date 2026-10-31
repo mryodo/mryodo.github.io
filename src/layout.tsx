@@ -83,11 +83,12 @@ function Navbar({ headings, path = "/" }: { headings?: Heading[]; path?: string 
       <div className="flex items-center gap-x-[1ch] px-[2ch] md:flex-wrap md:gap-x-[2ch] pt-[1.4lh] pb-[0.5lh]">
         <a
           href="/"
-          className="flex min-w-0 items-center whitespace-nowrap text-primary"
+          className="flex min-h-[36px] min-w-0 items-center whitespace-nowrap text-primary"
         >
           <span className="truncate font-heading font-bold text-[18px]">tony.savostianov</span>
         </a>
-        <div className="ml-auto flex shrink-0 gap-[8px] md:hidden">
+        {/* pinned where the header puts them, so they float over the page once scrolled */}
+        <div className="fixed top-[1.4lh] right-[4ch] z-40 flex shrink-0 gap-[8px] md:hidden">
           {toc.length > 0 && (
             <Drawer
               open={tocOpen}
