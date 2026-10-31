@@ -64,6 +64,9 @@ const body = fixAccents(html.match(/<body>(.*)<\/body>/s)?.[1] ?? "")
       .typst-paper :is(.eq > math, p, figure, .abstract) { min-width: 0; max-width: 100%; overflow-x: auto; }
       /* undo the site's reset/light weight, which the paper CSS assumes are browser defaults */
       .typst-paper { font-weight: 400; }
+      /* the paper's body padding stacks on top of the layout's own gutters;
+         article.* beats the @scope'd :scope rule (scoped wins ties) */
+      article.typst-paper { padding-inline: 0; }
       .typst-paper :is(h1, h2, h3, h4) { font-weight: 700; }
       .typst-paper .thm { border-radius: 18px; }
       .typst-paper .thm > .pill { border-width: 1.6pt; border-radius: 16px; }
