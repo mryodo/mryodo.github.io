@@ -104,7 +104,7 @@
 }
 
 :root {
-  --background: #d4d4d4; /* sw1comm normal */
+  --background: #eceded; /* RWTH black 10 */
   --foreground: var(--ascii-text);
   --card: var(--ascii-surface);
   --card-foreground: var(--ascii-text);
@@ -112,15 +112,15 @@
   --popover-foreground: var(--ascii-text);
   --primary: var(--ascii-primary);
   --primary-foreground: #ffffff;
-  --secondary: #c6c6c6;
+  --secondary: #cfd1d2;
   --secondary-foreground: var(--ascii-soft);
-  --muted: #c6c6c6;
-  --muted-foreground: #5f6078;
-  --accent: #c6c6c6;
+  --muted: #cfd1d2;
+  --muted-foreground: #646567;
+  --accent: #cfd1d2;
   --accent-foreground: var(--ascii-text);
-  --destructive: #d00000;
-  --border: #b4b4bc;
-  --input: #b4b4bc;
+  --destructive: #e30066; /* RWTH magenta */
+  --border: #9c9e9f;
+  --input: #9c9e9f;
   --ring: var(--ascii-primary);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
@@ -136,21 +136,21 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --ascii-primary: #0000a0; /* important */
-  --ascii-link-underline: #0000a0;
-  --ascii-soft: #303038; /* between ink and comment for body copy */
-  --ascii-text: #202020; /* ink */
-  --ascii-comment: #5f6078; /* comment */
-  --ascii-surface: #e2e2e2; /* raised */
-  --ascii-dim: #8e8e9a;
+  --ascii-primary: #00549f; /* RWTH blue */
+  --ascii-link-underline: #00549f;
+  --ascii-soft: #323233; /* between ink and comment for body copy */
+  --ascii-text: #000000; /* RWTH black */
+  --ascii-comment: #646567; /* RWTH black 75 */
+  --ascii-surface: #ffffff; /* raised */
+  --ascii-dim: #9c9e9f; /* RWTH black 50 */
   --font-ascii: "Maple Mono", "NF Icons", ui-monospace, "SF Mono", monospace;
   --font-display: var(--font-ascii);
   --on-cobalt: #ffffff;
-  --sunk: #c6c6c6; /* normal_embed */
-  --line: #b4b4bc;
-  --amber: #a5c6f2; /* card accent */
-  --bullet: #0048c8; /* constant */
-  --teal: #45763c;
+  --sunk: #cfd1d2; /* RWTH black 25 */
+  --line: #9c9e9f;
+  --amber: #c7ddf2; /* card accent, RWTH blue 25 */
+  --bullet: #407fb7; /* RWTH blue 75 */
+  --teal: #006165; /* RWTH petrol */
   --ascii-glow: 0 0 8px
     color-mix(in srgb, var(--ascii-primary) 35%, transparent);
 }

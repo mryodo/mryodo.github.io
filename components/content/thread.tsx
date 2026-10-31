@@ -30,7 +30,7 @@ function Thread({
   const n = `${count} ${noun}${count === 1 ? "" : "s"}`;
   return (
     <details open={defaultOpen} className="group/thread [&+details]:mt-[22px]">
-      <summary className="flex cursor-pointer list-none items-center gap-[1.5ch] rounded-[var(--radius)] bg-[#303038] px-[22px] py-[14px] text-white shadow-[0_8px_28px_rgb(0_0_0/0.10)] select-none [&::-webkit-details-marker]:hidden">
+      <summary className="flex cursor-pointer list-none items-center gap-[1.5ch] rounded-[var(--radius)] bg-[var(--ascii-soft)] px-[22px] py-[14px] text-white shadow-[0_8px_28px_rgb(0_0_0/0.10)] select-none [&::-webkit-details-marker]:hidden">
         <Caps className="shrink-0 text-white/60">{"\uf0e5"} {n}</Caps>
         <span className="min-w-0 flex-1 truncate font-bold text-[var(--amber)]">{title}</span>
         <span className="shrink-0 rounded-full bg-white/15 px-[1.5ch] text-[13px] leading-[26px] transition-colors hover:bg-white/25">
