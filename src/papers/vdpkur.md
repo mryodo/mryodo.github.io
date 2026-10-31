@@ -18,8 +18,6 @@ citation: |
     year={2024},
     publisher={SIAM}
   }
-doi: https://doi.org/10.1137/23M1626396
-pdf: https://arxiv.org/abs/2401.15492
 # A list of link that will appear as badges at the bottom of the publication.
 #     - name: Poster
 #       url: "https://hoppe.io/racc-poster.pdf"

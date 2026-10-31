@@ -68,6 +68,10 @@ import { FaBluesky } from "react-icons/fa6";
 import { FaGoogleScholar } from "react-icons/fa6";
 import { SiCodeberg } from "react-icons/si";
 
+// long TOCs (papers) get a "back to top" link
+const LONG_TOC = 12;
+const toTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
 function Navbar({ headings, path = "/" }: { headings?: Heading[]; path?: string }) {
   const toc = headings?.filter((h) => h.depth > 1) ?? [];
   const top = Math.min(...toc.map((h) => h.depth));
@@ -89,8 +93,9 @@ function Navbar({ headings, path = "/" }: { headings?: Heading[]; path?: string 
               open={tocOpen}
               onOpenChange={setTocOpen}
               onOpenChangeComplete={(open) => {
-                if (!open && pendingSlug.current) {
-                  location.hash = pendingSlug.current;
+                if (!open && pendingSlug.current !== null) {
+                  if (pendingSlug.current) location.hash = pendingSlug.current;
+                  else toTop();
                   pendingSlug.current = null;
                 }
               }}
@@ -107,6 +112,19 @@ function Navbar({ headings, path = "/" }: { headings?: Heading[]; path?: string 
                   <DrawerTitle>{"\uf03a"} on this page</DrawerTitle>
                 </DrawerHeader>
                 <nav className="flex flex-col px-[1ch] pb-[1lh]" aria-label="table of contents">
+                  {toc.length >= LONG_TOC && (
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        pendingSlug.current = "";
+                        setTocOpen(false);
+                      }}
+                      className={cn(sheetRow, "text-primary")}
+                    >
+                      {"\uf062"} top
+                    </a>
+                  )}
                   {toc.map((h) => (
                     <a
                       key={h.slug}
@@ -235,10 +253,24 @@ function Sidebar({ headings }: { headings?: Heading[] }) {
 
       {toc.length > 0 ? (
         <nav
-          className="sticky top-[1lh] hidden flex-col rounded-[var(--radius)] bg-[var(--ascii-surface)] p-[12px] shadow-[0_8px_28px_rgb(0_0_0/0.10)] md:flex"
+          className="sticky top-[1lh] hidden max-h-[calc(100vh-2lh)] flex-col overflow-y-auto rounded-[var(--radius)] bg-[var(--ascii-surface)] p-[12px] shadow-[0_8px_28px_rgb(0_0_0/0.10)] md:flex"
           aria-label="table of contents"
         >
-          <Caps className="block px-[10px] pt-[0.6lh] pb-[0.1lh] text-ascii-comment">{"\uf03a"} on this page</Caps>
+          <div className="flex items-center justify-between px-[10px] pt-[0.6lh] pb-[0.1lh]">
+            <Caps className="text-ascii-comment">{"\uf03a"} on this page</Caps>
+            {toc.length >= LONG_TOC && (
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  toTop();
+                }}
+                className="rounded-full px-[8px] text-[13px] text-primary transition-colors hover:bg-[var(--sunk)]"
+              >
+                {"\uf062"} top
+              </a>
+            )}
+          </div>
           {toc.map((h) => (
             <a
               key={h.slug}

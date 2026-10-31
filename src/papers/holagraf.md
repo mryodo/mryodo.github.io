@@ -18,13 +18,15 @@ citation: |
       year={2023},
       publisher={Springer}
       }
-pdf: https://arxiv.org/pdf/2502.07558
+pdf: https://arxiv.org/pdf/2301.03627
 # A list of link that will appear as badges at the bottom of the publication.
 links:
   - name: doi
     url: "https://link.springer.com/article/10.1007/s10915-023-02314-2"
   - name: arxiv
     url: "https://arxiv.org/abs/2301.03627"
+  - name: html
+    url: /papers/holagraf/
   - name: github
     url: "https://github.com/COMPiLELab/HOLaGraF"
 #     - name: PyPI

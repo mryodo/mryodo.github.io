@@ -30,6 +30,8 @@ links:
     url: "https://doi.org/10.1137/23M1626396"
   - name: arxiv
     url: "https://arxiv.org/abs/2401.15492"
+  - name: html
+    url: /papers/hecs/
   - name: github
     url: "https://github.com/COMPiLELab/HeCS"
 ---

@@ -1,0 +1,87 @@
+---
+import "@fontsource/libertinus-serif/400.css";
+import "@fontsource/libertinus-serif/400-italic.css";
+import "@fontsource/libertinus-serif/700.css";
+import "@fontsource/libertinus-serif/700-italic.css";
+import "../../styles/global.css";
+import Layout from "../../layout";
+
+// HTML exports from typst (`typst compile main.typ --features html --format html`),
+// dropped into src/typst/<slug>.html. The paper's own CSS is scoped to .typst-paper
+// so it neither leaks into the site nor gets its body/:root rules lost.
+export function getStaticPaths() {
+  const files = import.meta.glob<string>("../../typst/*.html", { query: "?raw", import: "default", eager: true });
+  return Object.entries(files).map(([path, html]) => ({
+    params: { slug: path.split("/").pop()!.replace(/\.html$/, "") },
+    props: { html },
+  }));
+}
+
+const { html } = Astro.props;
+const title = html.match(/<title>(.*?)<\/title>/s)?.[1] ?? "paper";
+const css = [...html.matchAll(/<style>(.*?)<\/style>/gs)]
+  .map((m) => m[1].replace(/(^|[\s,}])(body|:root)(?=[\s,{])/g, "$1:scope"))
+  .join("\n");
+// typst emits combining accents (U+0303 etc.), which every engine places
+// badly; these replacements were picked by eye in Chrome, Firefox and Safari.
+// Innermost first, repeated, so nested accents (a dot over a tilde) pair up right.
+const ACCENTS: Record<string, string> = {
+  "\u0302": '<mo stretchy="false">^</mo>',
+  "\u0303": '<mo stretchy="false">~</mo>',
+  "\u0304": "<mo>\u00AF</mo>",
+  "\u0305": "<mo>\u00AF</mo>",
+  "\u0307": '<mo stretchy="false">.</mo>',
+};
+const ACCENT_RE = /<mover accent="true">((?:<mover>(?:(?!<\/?mover[ >]).)*?<\/mover>|(?!<\/?mover[ >]).)*?)<mo>([\u0302\u0303\u0304\u0305\u0307])<\/mo><\/mover>/gs;
+function fixAccents(s: string): string {
+  for (let prev = ""; prev !== s; ) {
+    prev = s;
+    s = s.replace(ACCENT_RE, (_, base, c) => `<mover>${base}${ACCENTS[c]}</mover>`);
+  }
+  return s;
+}
+// section headings feed the sidebar TOC; typst only gives ids to labelled ones
+const headings: { depth: number; slug: string; text: string }[] = [];
+const body = fixAccents(html.match(/<body>(.*)<\/body>/s)?.[1] ?? "")
+  .replace(/<style>.*?<\/style>/gs, "")
+  .replace(/<h([23])([^>]*)>(.*?)<\/h\1>/gs, (_, d, attrs, inner) => {
+    const slug = attrs.match(/id="([^"]+)"/)?.[1] ?? `sec-${headings.length}`;
+    headings.push({ depth: +d, slug, text: inner.replace(/<[^>]+>/g, "") });
+    return `<h${d}${attrs.includes("id=") ? attrs : ` id="${slug}"${attrs}`}>${inner}</h${d}>`;
+  });
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <style is:inline set:html={`@scope (.typst-paper) {\n${css}\n}`} />
+    <style is:global>
+      /* wide formulas scroll on their own instead of widening the page on mobile */
+      .typst-paper :is(.eq > math, p, figure, .abstract) { min-width: 0; max-width: 100%; overflow-x: auto; }
+      /* undo the site's reset/light weight, which the paper CSS assumes are browser defaults */
+      .typst-paper { font-weight: 400; }
+      .typst-paper :is(h1, h2, h3, h4) { font-weight: 700; }
+      .typst-paper .thm { border-radius: 18px; }
+      .typst-paper .thm > .pill { border-width: 1.6pt; border-radius: 16px; }
+      .typst-paper ul { list-style: disc; }
+      .typst-paper ol { list-style: decimal; padding-left: 1.4em; }
+      /* full OTF with its MATH table (fontsource strips it), so accents and
+         scripts are placed by the font rather than each browser's default */
+      @font-face {
+        font-family: "Libertinus Math";
+        src: url("/fonts/libertinus-math/LibertinusMath-Regular.woff") format("woff");
+        font-display: swap;
+      }
+      .typst-paper math { font-family: "Libertinus Math", math; }
+    </style>
+  </head>
+  <body>
+    <Layout headings={headings} path={Astro.url.pathname} client:idle>
+      <article class="typst-paper" set:html={body} />
+    </Layout>
+  </body>
+</html>

@@ -20,6 +20,8 @@ pdf: https://arxiv.org/pdf/2502.07558
 links:
   - name: arxiv
     url: https://arxiv.org/pdf/2502.07558
+  - name: html
+    url: /papers/kid/
   - name: poster
     url: "/slides/netsci_2025_poster.pdf"
   - name: github

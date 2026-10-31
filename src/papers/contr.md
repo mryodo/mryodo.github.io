@@ -14,8 +14,8 @@ citation: |
       journal={Mathematics of Computation},
       year={2025}
       }
-doi: https://doi.org/10.1137/23M1626396
-pdf: https://arxiv.org/abs/2401.15492
+doi: https://doi.org/10.1090/mcom/4059
+pdf: https://arxiv.org/pdf/2402.13092
 # A list of link that will appear as badges at the bottom of the publication.
 #     - name: Poster
 #       url: "https://hoppe.io/racc-poster.pdf"
@@ -26,6 +26,8 @@ links:
     url: "https://doi.org/10.1090/mcom/4059"
   - name: arxiv
     url: "https://arxiv.org/pdf/2402.13092"
+  - name: html
+    url: /papers/contr/
 ---
 
 <small>We propose a novel methodology to solve a key eigenvalue optimization problem which arises in the contractivity analysis of neural ordinary differential equations (ODEs). When looking at contractivity properties of a one-layer weight-tied neural ODE

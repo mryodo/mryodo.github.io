@@ -21,6 +21,8 @@ pdf: https://arxiv.org/pdf/2501.14440
 links:
   - name: arxiv
     url: "https://arxiv.org/pdf/2501.14440"
+  - name: html
+    url: /papers/lingnn/
 #     - name: Github
 #       url: "https://github.com/josefhoppe/random-abstract-cell-complexes"
 #     - name: PyPI
