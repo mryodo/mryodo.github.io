@@ -1,8 +1,4 @@
 ---
-import "@fontsource/libertinus-serif/400.css";
-import "@fontsource/libertinus-serif/400-italic.css";
-import "@fontsource/libertinus-serif/700.css";
-import "@fontsource/libertinus-serif/700-italic.css";
 import "../../styles/global.css";
 import Layout from "../../layout";
 
@@ -66,7 +62,7 @@ const body = fixAccents(html.match(/<body>(.*)<\/body>/s)?.[1] ?? "")
       .typst-paper { font-weight: 400; }
       /* the paper's body padding stacks on top of the layout's own gutters;
          article.* beats the @scope'd :scope rule (scoped wins ties) */
-      article.typst-paper { padding-inline: 0; overflow-x: clip; }
+      article.typst-paper { padding-inline: 0; overflow-x: clip; font-family: var(--font-ascii); font-size: 15px; }
       .typst-paper :is(h1, h2, h3, h4) { font-weight: 700; }
       .typst-paper .thm { border-radius: 18px; }
       .typst-paper .thm > .pill { border-width: 1.6pt; border-radius: 16px; }
@@ -75,11 +71,11 @@ const body = fixAccents(html.match(/<body>(.*)<\/body>/s)?.[1] ?? "")
       /* full OTF with its MATH table (fontsource strips it), so accents and
          scripts are placed by the font rather than each browser's default */
       @font-face {
-        font-family: "Libertinus Math";
-        src: url("/fonts/libertinus-math/LibertinusMath-Regular.woff") format("woff");
+        font-family: "Fira Math";
+        src: url("/fonts/fira-math/FiraMath-Regular.woff") format("woff");
         font-display: swap;
       }
-      .typst-paper math { font-family: "Libertinus Math", math; }
+      .typst-paper math { font-family: "Fira Math", math; }
     </style>
   </head>
   <body>
