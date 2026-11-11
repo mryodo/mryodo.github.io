@@ -30,5 +30,22 @@ const pageDescription = description;
         <slot />
       </div>
     </Layout>
+    <script>
+      // copy button on every code block; wrapped so it stays put when the block scrolls sideways
+      for (const pre of document.querySelectorAll<HTMLElement>(".mdx pre.astro-code")) {
+        const wrap = document.createElement("div");
+        wrap.className = "code-wrap";
+        pre.replaceWith(wrap);
+        const btn = document.createElement("button");
+        btn.className = "code-copy";
+        btn.textContent = "copy";
+        btn.onclick = async () => {
+          await navigator.clipboard.writeText(pre.innerText);
+          btn.textContent = "copied";
+          setTimeout(() => (btn.textContent = "copy"), 1500);
+        };
+        wrap.append(pre, btn);
+      }
+    </script>
   </body>
 </html>

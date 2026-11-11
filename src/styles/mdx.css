@@ -196,6 +196,24 @@
   line-height: var(--text-sm--line-height);
 }
 
+.mdx .code-wrap {
+  position: relative;
+}
+
+.mdx .code-copy {
+  position: absolute;
+  top: 0.4lh;
+  right: 1ch;
+  font-family: var(--font-code);
+  font-size: var(--text-sm);
+  color: var(--ascii-dim);
+  cursor: pointer;
+}
+
+.mdx .code-copy:hover {
+  color: var(--ascii-text);
+}
+
 /* ---------- Lists ---------- */
 
 .mdx ul,
